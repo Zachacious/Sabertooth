@@ -1,0 +1,38 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+
+  "source":{
+    "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+  },
+
+  "opts": {
+    "destination": "./docs",
+    "recurse": true,
+    "verbose": true,
+    "private": false,
+    "encoding": "utf8",
+    "lenient": true
+  },
+
+  "plugins": [
+    "plugins/markdown",
+    "./scripts/fixJsdoc.js"
+  ],
+
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    },
+
+    "path": "ink-docstrap",
+    "theme": "cerulean",
+    "navType": "vertical",
+    "linenums": true,
+    "dateFormat": "MMMM Do YYYY, h:mm:ss a"
+  }
+}

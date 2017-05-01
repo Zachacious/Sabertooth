@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <script src="../UI.js"></script>
+    <!-- <script src="drawcount.js"></script> -->
+    <script src="../themes/greyToadTheme.js"></script>
+    <!-- <script src="../themes/darkGreyJoyTheme.js"></script> -->
+</head>
+<body>
+    <script>
+
+    //test if everything is working
+
+    let myApp = new UI.App('First Demo App', {autoResize: true});
+    // let dgjThm = new UI.Theme(darkGreyJoyTheme);
+    // dgjThm.setCurrent();
+    let thm = new UI.Theme(greyToadTheme);
+    // myApp.theme = thm;
+    myApp.root.name = 'root';
+
+    let myPanel = new UI.Widgets.Panel(myApp.root, {width: 500, height: 800});
+    myPanel.layout = new UI.Layouts.VBoxLayout(myPanel);
+    myPanel.position.set(100,100);
+    myPanel.layout.alignment.hAlign = UI.Alignment.left;
+    myPanel.layout.alignment.vAlign = UI.Alignment.top;
+    myPanel.name = 'myPanel';
+
+    let p2 = new UI.Widgets.Panel(myPanel, {/*theme: thm,*/
+        width: 200, height: 200});
+        p2.name = 'p2';
+
+    let myLabel = new UI.Widgets.Label(p2, 'Zach Moore');
+    myLabel.name = 'myLabel';
+
+    p2.width = myLabel.width + 8;
+    p2.height = myLabel.height + 8;
+    //myLabel.position.set(100,100);
+
+    let b1 = new UI.Widgets.TextButton(myPanel, 'Button 1',
+    {width: 100, height: 30, x:200, y: 200});
+    b1.pointertap = ()=>{console.log('clicked b1')};
+    b1.name = 'b1';
+    b1.max.height = 100;
+
+    b1.vPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b1, UI.VERTICAL);
+    b1.hPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b1, UI.HORIZONTAL);
+
+    let b2 = new UI.Widgets.Button(myPanel, {width: 100, height: 30,
+        x:200, y: 200});
+    b2.pointertap = ()=>{console.log('clicked b2')};
+    b2.name = 'b2';
+    // b2.sizeManager.vPolicy =
+    // new UI.SizePolicies.SharedExpandingPolicy(b2, UI.VERTICAL);
+    b2.hPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b2, UI.HORIZONTAL);
+
+    let b3 = new UI.Widgets.Button(myPanel, {width: 100, height: 30,
+        x:200, y: 200});
+    b3.max.height = 100;
+    b3.pointertap = ()=>{console.log('clicked b3')};
+    b3.vPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b3, UI.VERTICAL);
+    b3.hPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b3, UI.HORIZONTAL);
+
+    let b4 = new UI.Widgets.TextButton(myPanel, 'button 4',
+    {width: 100, height: 30, x:200, y: 200});
+    b4.pointertap = ()=>{console.log('clicked b4')};
+    // b4.sizeManager.vPolicy =
+    // new UI.SizePolicies.SharedExpandingPolicy(b4, UI.VERTICAL);
+    // b4.sizeManager.hPolicy =
+    // new UI.SizePolicies.SharedExpandingPolicy(b4, UI.HORIZONTAL);
+
+    let b5 = new UI.Widgets.Button(myPanel, {width: 100, height: 30,
+        x:200, y: 200});
+    b5.on('click', ()=>{console.log('clicked b5')});
+    b5.vPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b5, UI.VERTICAL);
+    b5.hPolicy =
+    new UI.SizePolicies.SharedExpandingPolicy(b5, UI.HORIZONTAL);
+
+    let s1 = new UI.Widgets.Slider(myPanel, UI.HORIZONTAL,
+        {width: 300, height: 100});
+    s1.hPolicy =
+        new UI.SizePolicies.SharedExpandingPolicy(s1, UI.HORIZONTAL);
+
+    s1.minValue = 0;
+    s1.maxValue = 500;
+    s1.value = 20;
+    s1.valueCB = (val)=>{
+        return Math.round(val);
+    }
+
+    let sl1 = new UI.Widgets.Label(myPanel, 20);
+    s1.on('changed', ()=>{
+        sl1.beginBypassUpdate();
+        sl1.text = s1.value;
+        sl1.endBypassUpdate();
+        // sl1.text = Math.round(s1.value/2)*2;
+        // sl1.text = Math.ceil(s1.value/2)*2;
+    });
+
+    ///////////////////////////
+    ///////////////////////////
+    ///////////////////////////
+
+    let pp1 = new UI.Widgets.Panel(myApp.root, {width: 100, height: 300});
+    pp1.layout = new UI.Layouts.HBoxLayout(pp1);
+    pp1.layout.alignment.hAlign = UI.Alignment.center;
+    // pp1.layout.alignment.vAlign = UI.Alignment.middle;
+    pp1.position.set(700, 100);
+
+    let pp2 = new UI.Widgets.TextButton(pp1, 'A', {width: 30, height: 30});
+
+    let s2 = new UI.Widgets.Slider(pp1, UI.VERTICAL,
+        {width: 100, height: 300});
+    s2.vPolicy =
+        new UI.SizePolicies.SharedExpandingPolicy(s2, UI.VERTICAL);
+
+    s2.minValue = 100;
+    s2.maxValue = 0;
+    s2.value = 25;
+    s2.valueCB = (val)=>{
+        return Math.round(val);
+    }
+
+    let sl2 = new UI.Widgets.Label(pp1, 100);
+    s2.on('changed', ()=>{
+        sl2.beginBypassUpdate();
+        sl2.text = s2.value;
+        sl2.endBypassUpdate();
+        // sl1.text = Math.round(s1.value/2)*2;
+        // sl1.text = Math.ceil(s1.value/2)*2;
+    });
+
+    ////////////////////////////
+    ////////////////////////////
+    ////////////////////////////
+
+    let ppp1 = new UI.Widgets.Panel(myApp.root, {width: 400, height: 400});
+    ppp1.layout = new UI.Layouts.VBoxLayout(ppp1);
+    ppp1.position.set(700, 500);
+
+    ppp2 = new UI.Widgets.TextButton(ppp1, 'B');
+    ppp2.hPolicy = new UI.SizePolicies.SharedExpandingPolicy(ppp2);
+    ppp2.vPolicy = new UI.SizePolicies.SharedExpandingPolicy(ppp2, UI.VERTICAL);
+
+    ppp3 = new UI.Widgets.TextButton(ppp1, 'C');
+    ppp3.hPolicy = new UI.SizePolicies.SharedExpandingPolicy(ppp3);
+    ppp3.vPolicy = new UI.SizePolicies.SharedExpandingPolicy(ppp3, UI.VERTICAL);
+
+    ppp4 = new UI.Widgets.TextButton(ppp1, 'Fixed', {width: 100, height: 30});
+    ppp4.width = 100;
+    ppp4.height = 30;
+
+    // ppp4.hPolicy = new UI.SizePolicies.FixedPolicy(ppp4);
+    // ppp4.vPolicy = new UI.SizePolicies.FixedPolicy(ppp4);
+    //
+    //
+
+    // let spr = new PIXI.Sprite(myApp.theme.graphics.panelTexture);
+    // b1.addChild(spr);
+    // spr.width = 100;
+    // spr.height = 100;
+    // spr.filters = [UI.WidgetShader.getInstance()];
+    // spr.filters[0].uniforms.Color = PIXI.utils.hex2rgb(0xff0000);
+    // spr.shader = UI.WidgetShader.getInstance();
+    // myApp.renderer.plugins.sprite.bindShader(spr.shader);
+    // spr.shader.uniforms.rgb = PIXI.utils.hex2rgb(0xff0000);
+    //
+    //
+    // UI.renderer.plugins.sprite.shader
+    //     = UI.WidgetShader.inst();
+    // UI.renderer.bindShader(UI.WidgetShader.inst());
+    // UI.WidgetShader.inst().color =
+    //     PIXI.utils.hex2rgb(0x00ff00);
+
+
+    // myPanel.renderWebGl = function(ren){
+    //     myApp.renderer.bindShader(UI.WidgetShader.getInstance());
+    //     UI.WidgetShader.getInstance().uniforms.Color =
+    //         PIXI.utils.hex2rgb(0xff0000);
+    //         console.log('yeah');
+    // }
+    //
+    // ppp4._renderWebGl = function(ren){
+    //     myApp.renderer.bindShader(UI.WidgetShader.getInstance());
+    //     UI.WidgetShader.getInstance().uniforms.Color =
+    //         PIXI.utils.hex2rgb(0x0000ff);
+    // }
+        //new UI.WidgetShader(myApp.renderer.gl);
+    // myApp.renderer.bindShader(myApp.renderer.plugins.sprite.shader);
+    // myApp.renderer.plugins.sprite.shader.uniforms.Color =
+    //     PIXI.utils.hex2rgb(0x0000ff);
+
+//     spr._renderWebGL = function(ren) {
+//         if(this.shader){
+//         //change uniform of filter to my value!
+//             // this.shader.bind();
+//             myApp.renderer.bindShader(this.shader);
+//             this.shader.uniforms.rgb = PIXI.utils.hex2rgb(0xffffff);
+//         }
+// }
+//
+UI.hackSpriteRendererDrawCounter(myApp.renderer.plugins.sprite);
+
+    let main = function(){
+        myApp.update();
+        myLabel.beginBypassUpdate();
+        myLabel.text = myApp.renderer.plugins.sprite.draws;
+        myLabel.endBypassUpdate();
+        myApp.renderer.plugins.sprite.draws = 0;
+        requestAnimationFrame(main);
+    }
+
+    main();
+    </script>
+</body>
+</html>
