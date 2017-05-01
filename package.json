@@ -45,6 +45,7 @@
     "babel-register": "^6.24.0",
     "del": "^2.2.2",
     "eventemitter3": "^2.0.2",
-    "mocha-phantomjs-coverage-hook": "0.0.1"
+    "mocha-phantomjs-coverage-hook": "0.0.1",
+    "pixi-gl-core": "^1.1.0"
   }
 }
