@@ -1,20 +1,23 @@
 {
-  "name": "UI",
+  "name": "SaberTooth",
   "version": "0.1.0",
-  "description": "A UI for Pixi.js",
+  "description": "A WebGL UI framework for desktop, mobile and web apps",
   "main": "index.js",
   "scripts": {
     "test": "gulp test"
   },
-  "author": "Nathaniel Moore",
-  "license": "MIT",
+  "keywords": [],
+  "author": "Zach Moore <AbydosDigital@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbydosDigital/SaberTooth.git"
+  },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-version-inline": "^1.0.0",
     "babel-preset-es2015": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
-    "browserify-istanbul": "^2.0.0",
     "eslint": "^3.14.0",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-import": "^2.2.0",
@@ -22,8 +25,6 @@
     "gulp-connect": "^5.0.0",
     "gulp-eslint": "^3.0.1",
     "gulp-inject": "^4.2.0",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-istanbul-report": "0.0.1",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-mocha": "^4.1.0",
     "gulp-mocha-phantomjs": "^0.12.1",
@@ -31,9 +32,7 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "isparta": "^4.0.0",
-    "istanbul": "^0.4.5",
     "mocha-phantomjs": "^4.1.0",
-    "mocha-phantomjs-istanbul": "0.0.2",
     "phantomjs": "^1.9.7-15",
     "pixi.js": "^4.5.1",
     "vinyl-buffer": "^1.0.0",
