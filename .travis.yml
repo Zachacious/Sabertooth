@@ -1,7 +1,14 @@
 language: node_js
 node_js:
-  - "6.10.2"
+  - "4"
 
-before_script:
-  - npm install -g gulp
+install:
+  - npm install
+
+cache:
+  directories:
+    - node_modules
+
+script:
   - gulp build
+  - gulp doc

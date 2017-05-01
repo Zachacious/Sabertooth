@@ -2,7 +2,6 @@
 
 // Include required modules
 const gulp = require('gulp');
-// const inject = require('gulp-inject');
 const babelify = require('babelify');
 const browserify = require('browserify');
 const connect = require('gulp-connect');
@@ -15,7 +14,6 @@ const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const del = require('del');
 const mochaPhantomJS = require('gulp-mocha-phantomjs');
-
 
 // paths
 const NAME = require('./package.json').name;
