@@ -3,7 +3,7 @@
  */
 
 import BaseLayout from './BaseLayout';
-import Point from '../.././point';
+import Point from '../.././Point';
 import {HORIZONTAL} from '../.././const';
 import BaseWidget from '../.././widgets/BaseWidget';
 
