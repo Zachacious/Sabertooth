@@ -4,7 +4,7 @@
   "description": "A UI for Pixi.js",
   "main": "index.js",
   "scripts": {
-    "test": "mocha-phantomjs test/runner.html"
+    "test": "gulp test"
   },
   "author": "Nathaniel Moore",
   "license": "MIT",
