@@ -2,7 +2,7 @@
     alignment.js
  */
 
-import Point from '.././point';
+import Point from '.././Point';
 import EventEmitter from 'eventemitter3';
 
 /**
