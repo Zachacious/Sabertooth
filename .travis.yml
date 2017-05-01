@@ -13,4 +13,4 @@ cache:
 
 script:
   - gulp build
-  - gulp doc
+  - gulp test
