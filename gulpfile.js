@@ -14,11 +14,8 @@ const jsdoc = require('gulp-jsdoc3');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const del = require('del');
-// const mocha = require('gulp-mocha');
 const mochaPhantomJS = require('gulp-mocha-phantomjs');
-// const istanbulReport = require('gulp-istanbul-report');
-// const istanbul = require('gulp-istanbul');
-// const isparta = require('isparta');
+
 
 // paths
 const NAME = require('./package.json').name;
@@ -27,50 +24,9 @@ const LINT_PATH = DOC_PATH;
 const BUILD_OUTPUT = './dist';
 const DEMOS_OUTPUT = BUILD_OUTPUT + '/demos';
 const THEME_PATH = './themes';
-// const COVERAGE_FILE = './test/coverage/coverage.json';
-// const TEST_PATH = './test/**/*.js';
 
 // Default task. This will be run when no task is passed in arguments to gulp
 gulp.task('default', ['uglify', 'doc']);
-
-// gulp.task('test', ['uglify'], ()=>
-//   gulp.src(['./test/**/*.js'], {read: false})
-//   .pipe(mocha({reporter: 'spec', compilers: 'js:babel-core/register'}))
-// );
-//
-
-// let paths = {
-// 	javascript: ['./test/coverage/**/*.js'],
-// 	tests: ['./test/**/*.js'],
-// };
-
-// gulp.task('inject', ['instrument'], function(cb) {
-// 	return gulp.src('./test/runner.html')
-// 		// .pipe(inject(
-// 		// 	gulp.src(paths.javascript, {read: false}), {
-// 		// 		relative: true,
-//     //             starttag: '<!-- inject:js -->',
-// 		// 	}))
-// 		.pipe(inject(
-// 			gulp.src(paths.tests, {read: false}), {
-// 				relative: true,
-// 				starttag: '<!-- inject:tests:js -->',
-// 			}))
-// 		.pipe(gulp.dest('./test/coverage/'));
-// });
-
-// gulp.task('instrument', ['buildTest'], function() {
-// 	return gulp.src(['./src/**/*.js'])
-// 	// Covering files
-// 		.pipe(istanbul({
-//             instrumenter: isparta.Instrumenter,
-//             includeUntested: true,
-// 			coverageVariable: '__coverage__',
-// 		}))
-//         // .pipe(istanbul.hookRequire());
-// 		// instrumented files will go here
-// 		.pipe(gulp.dest('./test/coverage/'));
-// });
 
 // test
 gulp.task('test', ['buildTest'], function() {
@@ -82,19 +38,6 @@ gulp.task('test', ['buildTest'], function() {
         hooks: 'mocha-phantomjs-istanbul',
         coverageFile: ' ./test/coverage/coverage.json',
     }}));
-    //   .on('finish', function() {
-    //   gulp.src('./test/coverage/coverage.json')
-    //     .pipe(istanbulReport({
-    //         reporterOpts: {
-    //           dir: './test/coverage',
-    //         },
-    //         reporters: [
-    //           'text',
-    //           'text-summary',
-    //           'html',
-    //         ],
-    //     }));
-    //   });
 });
 
 // clean
@@ -106,11 +49,7 @@ gulp.task('clean', function(cb) {
 gulp.task('lint', () => {
     return gulp.src([LINT_PATH, '!node_modules/**'])
     .pipe(eslint())
-        // eslint.format() outputs the lint results to the console.
-        // Alternatively use eslint.formatEach() (see Docs).
         .pipe(eslint.format())
-        // To have the process exit with an error code (1) on
-        // lint error, return the stream and pipe to failAfterError last.
         .pipe(eslint.failAfterError());
 });
 
@@ -146,22 +85,8 @@ gulp.task('buildTest', ()=>{
     ;
 });
 
-// gulp.task('buildTestCoverage', ()=>{
-//     return browserify({
-//         entries: ['./test/index.js'],
-//         debug: true, /* !gulp.env.production,*/
-//         insertGlobals: true,
-//     })
-//     .transform(babelify.configure({presets: ['es2015']}))
-//     .transform(istanbul)
-//     .bundle()
-//     .pipe(source('test.js'))
-//     .pipe(gulp.dest('./test'))
-//     ;
-// });
-
 // Convert ES6 code in all js files in src/js folder and copy to
-// dist folder as bundle.js
+// dist folder
 gulp.task('build', ['copyThemes'], function() {
     return browserify({
         entries: ['./src/index.js'],
