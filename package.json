@@ -1,16 +1,18 @@
 {
   "name": "sabertooth",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A WebGL UI framework for desktop, mobile and web apps",
-  "main": "src/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "gulp test"
   },
-  "keywords": [],
-  "main": "src/index.js",
+  "keywords": ["WebGL", "UI", "user interface", "pixi", "2d", "mobile", "desktop", "web", "apps"],
   "author": "Zach Moore <AbydosDigital@gmail.com>",
   "license": "ISC",
-  "bugs": "github.com/AbydosDigital/SaberTooth/issues",
+  "bugs": {
+    "url": "github.com/AbydosDigital/SaberTooth/issues",
+    "email": "AbydosDigital@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/AbydosDigital/SaberTooth.git"
