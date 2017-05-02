@@ -38,4 +38,4 @@ export {
     hackSpriteRendererDrawCounter,
 };
 
-global.UI = exports; // eslint-disable-line
+global.ST = exports; // eslint-disable-line
