@@ -3,6 +3,7 @@
 // Include required modules
 const gulp = require('gulp');
 const babelify = require('babelify');
+const babel = require('gulp-babel');
 const browserify = require('browserify');
 const connect = require('gulp-connect');
 const source = require('vinyl-source-stream');
@@ -42,7 +43,7 @@ gulp.task('test', ['buildTest'], function() {
 
 // clean
 gulp.task('clean', function(cb) {
-  return del(['dist', 'doc'], cb);
+  return del(['dist', 'doc', 'lib'], cb);
 });
 
 // lint with eslint
@@ -102,7 +103,7 @@ gulp.task('build', ['copyThemes'], function() {
 
 // Convert ES6 code in all js files in src/js folder and copy to
 // dist folder
-gulp.task('npmBuild', ['copyThemes'], function() {
+gulp.task('npmbuild', ['copyThemes'], function() {
     return gulp.src(SRC_FILES)
       .pipe(sourcemaps.init())
         .pipe(babel({
