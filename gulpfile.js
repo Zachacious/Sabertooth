@@ -18,6 +18,8 @@ const mochaPhantomJS = require('gulp-mocha-phantomjs');
 // paths
 const NAME = require('./package.json').name;
 const DOC_PATH = './src/**/*.js';
+const SRC_FILES = DOC_PATH;
+const LIB_PATH = './lib';
 const LINT_PATH = DOC_PATH;
 const BUILD_OUTPUT = './dist';
 const DEMOS_OUTPUT = BUILD_OUTPUT + '/demos';
@@ -96,6 +98,18 @@ gulp.task('build', ['copyThemes'], function() {
     .pipe(source(NAME + '.js'))
     .pipe(gulp.dest(BUILD_OUTPUT))
     ;
+});
+
+// Convert ES6 code in all js files in src/js folder and copy to
+// dist folder
+gulp.task('npmBuild', ['copyThemes'], function() {
+    return gulp.src(SRC_FILES)
+      .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015'],
+        }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(LIB_PATH));
 });
 
 // uglify
