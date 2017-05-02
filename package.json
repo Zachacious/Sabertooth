@@ -1,5 +1,5 @@
 {
-  "name": "SaberTooth",
+  "name": "sabertooth",
   "version": "0.1.3",
   "description": "A WebGL UI framework for desktop, mobile and web apps",
   "main": "src/index.js",
