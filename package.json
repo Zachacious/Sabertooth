@@ -1,14 +1,16 @@
 {
-  "name": "SaberTooth",
-  "version": "0.1.0",
+  "name": "sabertooth",
+  "version": "0.1.1",
   "description": "A WebGL UI framework for desktop, mobile and web apps",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "gulp test"
   },
   "keywords": [],
+  "main": "index.js",
   "author": "Zach Moore <AbydosDigital@gmail.com>",
   "license": "ISC",
+  "bugs": "github.com/AbydosDigital/SaberTooth/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/AbydosDigital/SaberTooth.git"
@@ -44,7 +46,6 @@
     "babel-register": "^6.24.0",
     "del": "^2.2.2",
     "eventemitter3": "^2.0.2",
-    "mocha-phantomjs-coverage-hook": "0.0.1",
     "pixi-gl-core": "^1.1.0"
   }
 }
