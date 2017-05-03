@@ -1,43 +1,40 @@
-/*
-    alignment.js
- */
-
 import Point from '.././Point';
 import EventEmitter from 'eventemitter3';
 
 /**
- * Alignment class holds alignment policies for horizontal
+ * Holds alignment policies for horizontal
  * and vertical alignments - alignments are static callback
  * methods that return a relative position offset for the widget to
  * its parent.
- * @memberof UI
+ * @memberof ST
+ * @extends EventEmitter
  */
 export default class Alignment extends EventEmitter {
     /**
-     * @param {Function} [hAlign=Alignment.left] - default left align
-     * @param {Function} [vAlign=Alignment.top] - default top align
+     * @param {Function} [hAlign=Alignment.left] Horizontal alignment
+     * @param {Function} [vAlign=Alignment.top] Vertical alignment
      */
     constructor(hAlign = Alignment.left, vAlign = Alignment.top) {
         super();
         /**
          * Holds the HORIZONTAL alignment
-         * @type {Function}
+         * @member {Function}
          */
         this.hAlign = hAlign;
 
         /**
          * Holds the VERTICAL alignment
-         * @type {Function}
+         * @member {Function}
          */
         this.vAlign = vAlign;
     }
 
     /**
      * Get a position offset from alignments
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @param {Number} targetWidth - the widgets width
-     * @param {Number} targetHeight - the widgets height
-     * @return {Point} - the calculated offset relative to the parent
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @param {Number} targetWidth The widgets width
+     * @param {Number} targetHeight The widgets height
+     * @return {Point} The calculated offset relative to the parent
      */
     getOffset(parent, targetWidth, targetHeight) {
         let offset = new Point();
@@ -51,73 +48,66 @@ export default class Alignment extends EventEmitter {
     /**
      * Left Alignment
      * @static
-     * @param {Number} targetWidth - the widgets width
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @return {Number} - HORIZONTAL offset
+     * @param {Number} targetWidth The widgets width
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @return {Number} Horizontal offset
      */
     static left(targetWidth, parent) {
-        // return 0;
         return parent.padding.left;
     }
 
     /**
      * Center Alignment
      * @static
-     * @param {Number} targetWidth - the widgets width
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @return {Number} - HORIZONTAL offset
+     * @param {Number} targetWidth The widgets width
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @return {Number} Horizontal offset
      */
     static center(targetWidth, parent) {
-        // let pad = 0; // parent.padding.left;//  + parent.padding.right;
         return ((parent.width / 2) - (targetWidth / 2));// - pad;
     }
 
     /**
      * Right Alignment
      * @static
-     * @param {Number} targetWidth - the widgets width
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @return {Number} - HORIZONTAL offset
+     * @param {Number} targetWidth The widgets width
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @return {Number} Horizontal offset
      */
     static right(targetWidth, parent) {
-        // left padding is allready added to position must remove both
-        // let pad = 0;// parent.padding.right;// + parent.padding.left;
-        return (parent.width - targetWidth);// - pad;
+        return (parent.width - targetWidth);
     }
 
     /**
      * Top Alignment
      * @static
-     * @param {Number} targetHeight - the widgets width
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @return {Number} - VERTICAL offset
+     * @param {Number} targetHeight The widgets width
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @return {Number} Vertical offset
      */
     static top(targetHeight, parent) {
-        // return 0;
         return parent.padding.top;
     }
 
     /**
      * Middle Alignment
      * @static
-     * @param {Number} targetHeight - the widgets width
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @return {Number} - VERTICAL offset
+     * @param {Number} targetHeight The widgets width
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @return {Number} Vertical offset
      */
     static middle(targetHeight, parent) {
-        // let pad = 0;// parent.padding.top;// + parent.padding.bottom;
         return ((parent.height / 2) - (targetHeight / 2));// - pad;
     }
 
     /**
      * Bottom Alignment
      * @static
-     * @param {Number} targetHeight - the widgets width
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @return {Number} - VERTICAL offset
+     * @param {Number} targetHeight The widgets width
+     * @param {ST.Widgets.BaseWidget} parent The parent widget
+     * @return {Number} Vertical offset
      */
     static bottom(targetHeight, parent) {
-        // let pad = 0;// parent.padding.bottom + parent.padding.top;
-        return (parent.height - targetHeight);// - pad;
+        return (parent.height - targetHeight);
     }
 }

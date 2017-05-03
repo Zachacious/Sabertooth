@@ -1,99 +1,93 @@
-/*
-sharedExpandingPolicy.js
- */
-
 import ExpandingPolicy from './ExpandingPolicy';
 import {HORIZONTAL, VERTICAL} from '../.././const';
 
 /**
- * Like Expanding Policy except that it shares space with its siblings.
- * @memberof UI.SizePolicies
- * @extends UI.SizePolicies.ExpandingPolicy
+ * Expands widgets into their parent while sharing space with their siblings.
+ * @memberof ST.SizePolicies
+ * @extends ST.SizePolicies.ExpandingPolicy
  */
 export default class SharedExpandingPolicy extends ExpandingPolicy {
     /**
-     * @param {UI.Widgets.BaseWidget} hostWidget
-     * - the widget this policy belongs to
-     * @param {number} [orientation=HORIZONTAL] - the orientation of the policy
+     * @param {ST.Widgets.BaseWidget} hostWidget
+     * The widget this policy belongs to
+     * @param {number} [orientation=HORIZONTAL] The orientation of the policy
      */
     constructor(hostWidget, orientation = HORIZONTAL) {
         super(hostWidget, orientation);
+
+        /**
+         * Fires after size has been set
+         * @event ST.SizePolicies.SharedExpandingPolicy#finished
+         * @param {Number} size the size of the widget
+         */
     }
 
     /**
-     * Overidden from parent -
-     * Slot method to size widget after parent widget is finished.
+     * Size widget after parent widget is finished.
      * Note: When parent is finished we can size the widget and
      * know that parents size wont change afterward.
      * @override
      */
     parentReadyH() {
-        let w = this._host;
-        let parent = w.parent;
-        let pad = parent.padding.left + parent.padding.right;
-        let p = parent.hPolicy;
-        let remaining = p.totalChildrenFinished - 1;
-        let availableSpace = (parent.width - p.totalChildrenFinishedSize) - pad;
-        let size; // = availableSpace / remaining;
+        const w = this._host;
+        const parent = w.parent;
+        const pad = parent.padding.left + parent.padding.right;
+        const p = parent.hPolicy;
+        const remaining = p.totalChildrenFinished - 1;
+        const availableSpace
+            = (parent.width - p.totalChildrenFinishedSize) - pad;
+        let size;
 
+        // because some layouts dont need an orientation
         if('orientation' in parent.layout &&
             parent.layout.orientation === VERTICAL) {
                 size = parent.width - pad;
                 w.width = size;
-                // this.setWidgetWidth(w, size);
-                this.validateWidth();
+                this.validateWidth(); // obey widget min and max size
             } else {
                 size = availableSpace / remaining;
                 w.width = size;
-                // this.setWidgetWidth(w, size);
+                // obey widget min and max size
                 let vWidth = this.validateWidth();
-                // p.usedSpace += w.width;
                 if(vWidth === w.width) {
                     p.once('postIteration', this.consumeUnusedSpaceH, this);
                 }
             }
-        // } else {
-        //     size = availableSpace / remaining;
-        // }
+
         this.emit('finished', w.width);
     }
 
     /**
-     * Overidden from parent -
-     * Slot method to size widget after parent widget is finished.
+     * Size widget after parent widget is finished.
      * Note: When parent is finished we can size the widget and
      * know that parents size wont change afterward.
      * @override
      */
     parentReadyV() {
-        let w = this._host;
-        let parent = w.parent;
-        let pad = parent.padding.top + parent.padding.bottom;
-        let p = parent.vPolicy;
-        let remaining = p.totalChildrenFinished - 1;
-        let availableSpace =
+        const w = this._host;
+        const parent = w.parent;
+        const pad = parent.padding.top + parent.padding.bottom;
+        const p = parent.vPolicy;
+        const remaining = p.totalChildrenFinished - 1;
+        const availableSpace =
             (parent.height - p.totalChildrenFinishedSize ) - pad;
-        let size; // = availableSpace / remaining;
+        let size;
 
+        // because some layouts dont need an orientation
         if('orientation' in parent.layout &&
             parent.layout.orientation === HORIZONTAL) {
                 size = parent.height - pad;
                 w.height = size;
-                // this.setWidgetHeight(w, size);
-                this.validateHeight();
+                this.validateHeight(); // obey widget min and max size
             } else {
                 size = availableSpace / remaining;
                 w.height = size;
-                // this.setWidgetHeight(w, size);
+                // obey widget min and max size
                 let vHeight = this.validateHeight();
-                // p.usedSpace += w.height;
                 if(vHeight === w.height) {
                      p.once('postIteration', this.consumeUnusedSpaceV, this);
                 }
             }
-        // } else {
-        //     size = availableSpace / remaining;
-        // }
         this.emit('finished', w.height);
     }
 
@@ -103,18 +97,24 @@ export default class SharedExpandingPolicy extends ExpandingPolicy {
      * @callback
      */
     consumeUnusedSpaceH() {
-        let w = this._host;
-        let parent = w.parent;
-        let unusedSpace = parent.width - parent.hPolicy.usedSpace;
-        let remaining = parent.hPolicy.listeners('postIteration')
-        .filter((value)=>{
-            return value.name === this.consumeUnusedSpaceH.name;
-        });
-        let pad = parent.padding.left + parent.padding.right;
-        let relSize = (unusedSpace / (remaining.length+1)) - pad;
+        const w = this._host;
+        const parent = w.parent;
+        const unusedSpace = parent.width - parent.hPolicy.usedSpace;
+
+        // every widget listens to the postIteration event so use that
+        // to get a count on remaining widgets
+        const remaining = parent.hPolicy.listeners('postIteration')
+            .filter((value)=>{
+                return value.name === this.consumeUnusedSpaceH.name;
+            });
+        const pad = parent.padding.left + parent.padding.right;
+        const relSize = (unusedSpace / (remaining.length+1)) - pad;
+
+        // set the newly adjusted size
         w.width += relSize;
-        // this.setWidgetWidth(w, w.width + relSize);
-        this.validateWidth();
+        this.validateWidth(); // obey widget min and max size
+
+        // add used space back
         parent.hPolicy.usedSpace += relSize;
     }
 
@@ -124,18 +124,24 @@ export default class SharedExpandingPolicy extends ExpandingPolicy {
      * @callback
      */
     consumeUnusedSpaceV() {
-        let w = this._host;
-        let parent = w.parent;
-        let unusedSpace = parent.height - parent.vPolicy.usedSpace;
-        let remaining = parent.vPolicy.listeners('postIteration')
-        .filter((value)=>{
-            return value.name === this.consumeUnusedSpaceV.name;
-        });
-        let pad = parent.padding.top + parent.padding.bottom;
-        let relSize = (unusedSpace / (remaining.length+1)) - pad;
+        const w = this._host;
+        const parent = w.parent;
+        const unusedSpace = parent.height - parent.vPolicy.usedSpace;
+
+        // every widget listens to the postIteration event so use that
+        // to get a count on remaining widgets
+        const remaining = parent.vPolicy.listeners('postIteration')
+            .filter((value)=>{
+                return value.name === this.consumeUnusedSpaceV.name;
+            });
+        const pad = parent.padding.top + parent.padding.bottom;
+        const relSize = (unusedSpace / (remaining.length+1)) - pad;
+
+        // set the newly adjusted size
         w.height += relSize;
-        // this.setWidgetHeight(w, w.height + relSize);
-        this.validateHeight();
+        this.validateHeight();// obey widget min and max size
+
+        // add used space back
         parent.vPolicy.usedSpace += relSize;
     }
 }

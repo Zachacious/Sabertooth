@@ -14,7 +14,8 @@
     "verbose": true,
     "private": false,
     "encoding": "utf8",
-    "lenient": true
+    "lenient": true,
+    "template": "./node_modules/jaguarjs-jsdoc"
   },
 
   "plugins": [
@@ -28,11 +29,6 @@
     "default": {
       "outputSourceFiles": true
     },
-
-    "path": "ink-docstrap",
-    "theme": "cerulean",
-    "navType": "vertical",
-    "linenums": true,
-    "dateFormat": "MMMM Do YYYY, h:mm:ss a"
+    "linenums": true
   }
 }

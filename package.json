@@ -6,7 +6,17 @@
   "scripts": {
     "test": "gulp test"
   },
-  "keywords": ["WebGL", "UI", "user interface", "pixi", "2d", "mobile", "desktop", "web", "apps"],
+  "keywords": [
+    "WebGL",
+    "UI",
+    "user interface",
+    "pixi",
+    "2d",
+    "mobile",
+    "desktop",
+    "web",
+    "apps"
+  ],
   "author": "Zach Moore <AbydosDigital@gmail.com>",
   "license": "ISC",
   "bugs": {
@@ -36,6 +46,7 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "isparta": "^4.0.0",
+    "jaguarjs-jsdoc": "^1.0.2",
     "mocha-phantomjs": "^4.1.0",
     "phantomjs": "^1.9.7-15",
     "vinyl-buffer": "^1.0.0",

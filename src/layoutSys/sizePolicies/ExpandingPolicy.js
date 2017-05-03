@@ -1,32 +1,31 @@
-
-/*
-    expandingPolicy.js
- */
-
 import BasePolicy from './BasePolicy';
-// import Slot from '../.././Slot';
 import {HORIZONTAL} from '../.././const';
 
 /**
  * Expanding Policy causes children to expand in the given direction
  * filling the parent.
- * Note: This Policy doesn't respect siblings - best for widgets with a s
+ * Note: This Policy doesn't respect siblings - best for widgets with
  * a sigle child.
- * @memberof UI.SizePolicies
- * @extends UI.SizePolicies.BasePolicy
+ * @memberof ST.SizePolicies
+ * @extends ST.SizePolicies.BasePolicy
  */
 export default class ExpandingPolicy extends BasePolicy {
     /**
-     * @param {UI.Widgets.BaseWidget} hostWidget
-     * - the widget this policy belongs to
-     * @param {number} [orientation=HORIZONTAL] - the orientation of the policy
+     * @param {ST.Widgets.BaseWidget} hostWidget
+     * The widget this policy belongs to
+     * @param {number} [orientation=HORIZONTAL] The orientation of the policy
      */
     constructor(hostWidget, orientation = HORIZONTAL) {
         super(hostWidget, orientation);
+        /**
+         * Fires after size is set
+         * @event ST.SizePolicies.ExpandingPolicy#finished
+         * @param {Number} size the size of the widget
+         */
     }
 
     /**
-     * Overridden from parent class -  make connection so that the widget
+     * Make connection so that the widget
      * only gets sized after the parent is sized.
      * @override
      */
@@ -40,7 +39,7 @@ export default class ExpandingPolicy extends BasePolicy {
     }
 
     /**
-     * Overridden from parent class -  make connection so that the widget
+     * Make connection so that the widget
      * only gets sized after the parent is sized.
      * @override
      */
@@ -52,30 +51,32 @@ export default class ExpandingPolicy extends BasePolicy {
     }
 
     /**
-     * Slot method to size widget after parent widget is finished.
-     * Note: When parent is finished we can size the widget and
+     * Size widget after parent widget is finished.
+     * When parent is finished we can size the widget and
      * know that parents size wont change afterward.
+     * @callback
      */
     parentReadyH() {
-        let w = this._host;
-        let p = this._host.parent;
-        let pad = p.padding.left + p.padding.right;
-        // this.setWidgetWidth(w, p.width - pad);
+        const w = this._host;
+        const p = this._host.parent;
+        const pad = p.padding.left + p.padding.right;
+
         w.width = p.width - pad;
         this.validateWidth(); // make it obey widet.min and max
         this.emit('finished', w.width);
     }
 
     /**
-     * Slot method to size widget after parent widget is finished.
-     * Note: When parent is finished we can size the widget and
+     * Size widget after parent widget is finished.
+     * When parent is finished we can size the widget and
      * know that parents size wont change afterward.
+     * @callback
      */
     parentReadyV() {
-        let w = this._host;
-        let p = this._host.parent;
-        let pad = p.padding.top + p.padding.bottom;
-        // this.setWidgetHeight(w, p.height - pad);
+        const w = this._host;
+        const p = this._host.parent;
+        const pad = p.padding.top + p.padding.bottom;
+
         w.height = p.height - pad;
         this.validateHeight(); // make it obey widet.min and max
         this.emit('finished', w.height);
