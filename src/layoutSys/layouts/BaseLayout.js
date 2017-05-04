@@ -1,20 +1,16 @@
-/*
-    BaseLayout.js
- */
-
 import EventEmitter from 'eventemitter3';
 import Alignment from '.././Alignment';
 import BaseWidget from '../../widgets/BaseWidget';
 
 /**
  * The BaseLayout class is the abstract base class for all layouts.
- * @memberof UI.Layouts
+ * @memberof ST.Layouts
  * @abstract
  */
 export default class BaseLayout extends EventEmitter {
     /**
-     * @param {UI.Widgets.BaseWidget} hostWidget
-     * - The widget this layout belongs to
+     * @param {ST.Widgets.BaseWidget} hostWidget
+     * - Widget this layout belongs to
      */
     constructor(hostWidget) {
         super();
@@ -26,14 +22,14 @@ export default class BaseLayout extends EventEmitter {
 
         /**
          * The internal reference to the host widget
-         * @member {UI.Widgets.BaseWidget}
+         * @member {ST.Widgets.BaseWidget}
          * @private
          */
         this._host = hostWidget;
 
         /**
          * Holds the Alignment object
-         * @member {UI.Alignment}
+         * @member {ST.Alignment}
          */
         this.alignment = new Alignment();
 
@@ -41,10 +37,14 @@ export default class BaseLayout extends EventEmitter {
          * If set to true then the layout will update on host widget
          * changes in position and size.
          * @member {Boolean}
-         * @protected
          * @default false
          */
         this.updateOnHostChanges = false;
+
+        /**
+         * Fired when layout has finished updating
+         * @event ST.Layouts.BaseLayout#updated
+         */
     }
 
     /**
@@ -62,9 +62,16 @@ export default class BaseLayout extends EventEmitter {
     beginIteration() {}
 
     /**
+     * Overide in layouts - code that runs after the iteration
+     * of child layouts
+     * @virtual
+     */
+    endIteration() {}
+
+    /**
      * Overide in layouts - code that sets the position of
      * each child widget.
-     * @param {UI.Widgets.BaseWidget} child - the child widget in question
+     * @param {ST.Widgets.BaseWidget} child  the child widget in question
      * @virtual
      */
     setChildPos(child) {}
@@ -75,13 +82,13 @@ export default class BaseLayout extends EventEmitter {
      */
     exec() {
         this.beginIteration();
-        let w = this._host;
-        let len = w.children.length;
+        const w = this._host;
+        const len = w.children.length;
         let i = len;
         while(i--) {
-            let child = w.children[len - i]; // iterate in forward order
+            const child = w.children[len - i]; // iterate in forward order
             if(child instanceof BaseWidget) {
-                child.beginBypassUpdate();
+                child.beginBypassUpdate(); // prevents infinite loop
 
                     this.setChildPos(child);
                     child.layout.exec();
@@ -90,9 +97,14 @@ export default class BaseLayout extends EventEmitter {
             }
         }
 
-        // reset update request on host widget
-        w.validate();
-        w._updateClipGraphic();
-        w.emit('layoutUpdated');
+        /* layouts execute after size policies therefor
+        update is complete
+         */
+        w.validate(); // make sure updates stop on next loop
+        w._updateClipGraphic(); // because things have changed
+
+        w.emit('updated');
+
+        this.endIteration();
     }
 }
