@@ -1,7 +1,3 @@
-/*
-    BaseWidget.js
- */
-
 import * as PIXI from 'pixi.js';
 import Theme from '.././Theme';
 import Padding from '.././Padding';
