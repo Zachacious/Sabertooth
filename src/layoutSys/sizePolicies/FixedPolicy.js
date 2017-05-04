@@ -1,36 +1,34 @@
-/*
-    fixedPolicy.js
- */
-
 import {HORIZONTAL} from '../.././const';
 import BasePolicy from './BasePolicy';
 
 /**
- * The simplest policy - Fixed uses user defined size
- * @memberof UI.SizePolicies
- * @extends UI.SizePolicies.BasePolicy
+ * Sets the user defined size
+ * @memberof ST.SizePolicies
+ * @extends ST.SizePolicies.BasePolicy
  */
 export default class FixedPolicy extends BasePolicy {
     /**
-     * @param {UI.Widgets.BaseWidget} hostWidget
-     * - the widget this policy belongs to
-     * @param {number} [orientation=HORIZONTAL] - the orientation of the policy
+     * @param {ST.Widgets.BaseWidget} hostWidget
+     * The widget this policy belongs to
+     * @param {number} [orientation=HORIZONTAL] The orientation of the policy
      */
     constructor(hostWidget, orientation = HORIZONTAL) {
         super(hostWidget, orientation);
 
         /**
-         * If set to true the policy will update on changes to
-         * the parent widgets size and position.
-         * Should be true for Fixed policy
-         * @type {Boolean}
-         * @protected
+         * @override
          */
         this.updateOnHostChanges = true;
+
+        /**
+         * Fires after size is set
+         * @event ST.SizePolicies.FixedPolicy#finished
+         * @param {Number} size the size of the widget
+         */
     }
 
     /**
-     * Overridden from parent class -  only validates size
+     * Validates size
      * @override
      */
     sizeWidgetHorizontal() {
@@ -39,7 +37,7 @@ export default class FixedPolicy extends BasePolicy {
     }
 
     /**
-     * Overridden from parent class -  only validates size
+     * Validates size
      * @override
      */
     sizeWidgetVertical() {

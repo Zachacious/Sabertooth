@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Source: widgets/Slider.js</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{"outputSourceFiles":true},"linenums":true};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="UI.Alignment">
+            <span class="title">
+                <a href="UI.Alignment.html">UI.Alignment</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Alignment.bottom"><a href="UI.Alignment.html#.bottom">bottom</a></li>
+            
+                <li data-name="UI.Alignment.center"><a href="UI.Alignment.html#.center">center</a></li>
+            
+                <li data-name="UI.Alignment.left"><a href="UI.Alignment.html#.left">left</a></li>
+            
+                <li data-name="UI.Alignment.middle"><a href="UI.Alignment.html#.middle">middle</a></li>
+            
+                <li data-name="UI.Alignment.right"><a href="UI.Alignment.html#.right">right</a></li>
+            
+                <li data-name="UI.Alignment.top"><a href="UI.Alignment.html#.top">top</a></li>
+            
+                <li data-name="UI.Alignment#getOffset"><a href="UI.Alignment.html#getOffset">getOffset</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.App">
+            <span class="title">
+                <a href="UI.App.html">UI.App</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.App#_defaults"><a href="UI.App.html#_defaults">_defaults</a></li>
+            
+                <li data-name="UI.App#name"><a href="UI.App.html#name">name</a></li>
+            
+                <li data-name="UI.App#theme"><a href="UI.App.html#theme">theme</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.App#update"><a href="UI.App.html#update">update</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.GraphicsGen">
+            <span class="title">
+                <a href="UI.GraphicsGen.html">UI.GraphicsGen</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.GraphicsGen.rectangleGraphic"><a href="UI.GraphicsGen.html#.rectangleGraphic">rectangleGraphic</a></li>
+            
+                <li data-name="UI.GraphicsGen.rectangleTexture"><a href="UI.GraphicsGen.html#.rectangleTexture">rectangleTexture</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Layouts.BaseLayout">
+            <span class="title">
+                <a href="UI.Layouts.BaseLayout.html">UI.Layouts.BaseLayout</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Layouts.BaseLayout#alignment"><a href="UI.Layouts.BaseLayout.html#alignment">alignment</a></li>
+            
+                <li data-name="UI.Layouts.BaseLayout#updateOnHostChanges"><a href="UI.Layouts.BaseLayout.html#updateOnHostChanges">updateOnHostChanges</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Layouts.BaseLayout#beginIteration"><a href="UI.Layouts.BaseLayout.html#beginIteration">beginIteration</a></li>
+            
+                <li data-name="UI.Layouts.BaseLayout#exec"><a href="UI.Layouts.BaseLayout.html#exec">exec</a></li>
+            
+                <li data-name="UI.Layouts.BaseLayout#hostChildrenChanged"><a href="UI.Layouts.BaseLayout.html#hostChildrenChanged">hostChildrenChanged</a></li>
+            
+                <li data-name="UI.Layouts.BaseLayout#setChildPos"><a href="UI.Layouts.BaseLayout.html#setChildPos">setChildPos</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Layouts.BoxLayout">
+            <span class="title">
+                <a href="UI.Layouts.BoxLayout.html">UI.Layouts.BoxLayout</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Layouts.BoxLayout#alignment"><a href="UI.Layouts.BoxLayout.html#alignment">alignment</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#orientation"><a href="UI.Layouts.BoxLayout.html#orientation">orientation</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#posOffset"><a href="UI.Layouts.BoxLayout.html#posOffset">posOffset</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#updateOnHostChanges"><a href="UI.Layouts.BoxLayout.html#updateOnHostChanges">updateOnHostChanges</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Layouts.BoxLayout#beginIteration"><a href="UI.Layouts.BoxLayout.html#beginIteration">beginIteration</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#exec"><a href="UI.Layouts.BoxLayout.html#exec">exec</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#hostChildrenChanged"><a href="UI.Layouts.BoxLayout.html#hostChildrenChanged">hostChildrenChanged</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#initTotalChildrenSize"><a href="UI.Layouts.BoxLayout.html#initTotalChildrenSize">initTotalChildrenSize</a></li>
+            
+                <li data-name="UI.Layouts.BoxLayout#setChildPos"><a href="UI.Layouts.BoxLayout.html#setChildPos">setChildPos</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Layouts.FixedLayout">
+            <span class="title">
+                <a href="UI.Layouts.FixedLayout.html">UI.Layouts.FixedLayout</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Layouts.FixedLayout#updateOnHostChanges"><a href="UI.Layouts.FixedLayout.html#updateOnHostChanges">updateOnHostChanges</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Layouts.FixedLayout#setChildPos"><a href="UI.Layouts.FixedLayout.html#setChildPos">setChildPos</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Layouts.HBoxLayout">
+            <span class="title">
+                <a href="UI.Layouts.HBoxLayout.html">UI.Layouts.HBoxLayout</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Layouts.HBoxLayout#alignment"><a href="UI.Layouts.HBoxLayout.html#alignment">alignment</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#orientation"><a href="UI.Layouts.HBoxLayout.html#orientation">orientation</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#posOffset"><a href="UI.Layouts.HBoxLayout.html#posOffset">posOffset</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#updateOnHostChanges"><a href="UI.Layouts.HBoxLayout.html#updateOnHostChanges">updateOnHostChanges</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Layouts.HBoxLayout#beginIteration"><a href="UI.Layouts.HBoxLayout.html#beginIteration">beginIteration</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#exec"><a href="UI.Layouts.HBoxLayout.html#exec">exec</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#hostChildrenChanged"><a href="UI.Layouts.HBoxLayout.html#hostChildrenChanged">hostChildrenChanged</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#initTotalChildrenSize"><a href="UI.Layouts.HBoxLayout.html#initTotalChildrenSize">initTotalChildrenSize</a></li>
+            
+                <li data-name="UI.Layouts.HBoxLayout#setChildPos"><a href="UI.Layouts.HBoxLayout.html#setChildPos">setChildPos</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Layouts.VBoxLayout">
+            <span class="title">
+                <a href="UI.Layouts.VBoxLayout.html">UI.Layouts.VBoxLayout</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Layouts.VBoxLayout#alignment"><a href="UI.Layouts.VBoxLayout.html#alignment">alignment</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#orientation"><a href="UI.Layouts.VBoxLayout.html#orientation">orientation</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#posOffset"><a href="UI.Layouts.VBoxLayout.html#posOffset">posOffset</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#updateOnHostChanges"><a href="UI.Layouts.VBoxLayout.html#updateOnHostChanges">updateOnHostChanges</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Layouts.VBoxLayout#beginIteration"><a href="UI.Layouts.VBoxLayout.html#beginIteration">beginIteration</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#exec"><a href="UI.Layouts.VBoxLayout.html#exec">exec</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#hostChildrenChanged"><a href="UI.Layouts.VBoxLayout.html#hostChildrenChanged">hostChildrenChanged</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#initTotalChildrenSize"><a href="UI.Layouts.VBoxLayout.html#initTotalChildrenSize">initTotalChildrenSize</a></li>
+            
+                <li data-name="UI.Layouts.VBoxLayout#setChildPos"><a href="UI.Layouts.VBoxLayout.html#setChildPos">setChildPos</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Padding">
+            <span class="title">
+                <a href="UI.Padding.html">UI.Padding</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Padding#bottom"><a href="UI.Padding.html#bottom">bottom</a></li>
+            
+                <li data-name="UI.Padding#left"><a href="UI.Padding.html#left">left</a></li>
+            
+                <li data-name="UI.Padding#right"><a href="UI.Padding.html#right">right</a></li>
+            
+                <li data-name="UI.Padding#top"><a href="UI.Padding.html#top">top</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Padding#set"><a href="UI.Padding.html#set">set</a></li>
+            
+                <li data-name="UI.Padding#setAllTo"><a href="UI.Padding.html#setAllTo">setAllTo</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Point">
+            <span class="title">
+                <a href="UI.Point.html">UI.Point</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Point#x"><a href="UI.Point.html#x">x</a></li>
+            
+                <li data-name="UI.Point#y"><a href="UI.Point.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Point#set"><a href="UI.Point.html#set">set</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Size">
+            <span class="title">
+                <a href="UI.Size.html">UI.Size</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Size#height"><a href="UI.Size.html#height">height</a></li>
+            
+                <li data-name="UI.Size#width"><a href="UI.Size.html#width">width</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Size#set"><a href="UI.Size.html#set">set</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.SizePolicies.BasePolicy">
+            <span class="title">
+                <a href="UI.SizePolicies.BasePolicy.html">UI.SizePolicies.BasePolicy</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.SizePolicies.BasePolicy#childPolicyFinished"><a href="UI.SizePolicies.BasePolicy.html#childPolicyFinished">childPolicyFinished</a></li>
+            
+                <li data-name="UI.SizePolicies.BasePolicy#exec"><a href="UI.SizePolicies.BasePolicy.html#exec">exec</a></li>
+            
+                <li data-name="UI.SizePolicies.BasePolicy#sizeWidgetHorizontal"><a href="UI.SizePolicies.BasePolicy.html#sizeWidgetHorizontal">sizeWidgetHorizontal</a></li>
+            
+                <li data-name="UI.SizePolicies.BasePolicy#sizeWidgetVertical"><a href="UI.SizePolicies.BasePolicy.html#sizeWidgetVertical">sizeWidgetVertical</a></li>
+            
+                <li data-name="UI.SizePolicies.BasePolicy#validateHeight"><a href="UI.SizePolicies.BasePolicy.html#validateHeight">validateHeight</a></li>
+            
+                <li data-name="UI.SizePolicies.BasePolicy#validateWidth"><a href="UI.SizePolicies.BasePolicy.html#validateWidth">validateWidth</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.SizePolicies.ExpandingPolicy">
+            <span class="title">
+                <a href="UI.SizePolicies.ExpandingPolicy.html">UI.SizePolicies.ExpandingPolicy</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#childPolicyFinished"><a href="UI.SizePolicies.ExpandingPolicy.html#childPolicyFinished">childPolicyFinished</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#exec"><a href="UI.SizePolicies.ExpandingPolicy.html#exec">exec</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#parentReadyH"><a href="UI.SizePolicies.ExpandingPolicy.html#parentReadyH">parentReadyH</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#parentReadyV"><a href="UI.SizePolicies.ExpandingPolicy.html#parentReadyV">parentReadyV</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#sizeWidgetHorizontal"><a href="UI.SizePolicies.ExpandingPolicy.html#sizeWidgetHorizontal">sizeWidgetHorizontal</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#sizeWidgetVertical"><a href="UI.SizePolicies.ExpandingPolicy.html#sizeWidgetVertical">sizeWidgetVertical</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#validateHeight"><a href="UI.SizePolicies.ExpandingPolicy.html#validateHeight">validateHeight</a></li>
+            
+                <li data-name="UI.SizePolicies.ExpandingPolicy#validateWidth"><a href="UI.SizePolicies.ExpandingPolicy.html#validateWidth">validateWidth</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.SizePolicies.FixedPolicy">
+            <span class="title">
+                <a href="UI.SizePolicies.FixedPolicy.html">UI.SizePolicies.FixedPolicy</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.SizePolicies.FixedPolicy#childPolicyFinished"><a href="UI.SizePolicies.FixedPolicy.html#childPolicyFinished">childPolicyFinished</a></li>
+            
+                <li data-name="UI.SizePolicies.FixedPolicy#exec"><a href="UI.SizePolicies.FixedPolicy.html#exec">exec</a></li>
+            
+                <li data-name="UI.SizePolicies.FixedPolicy#sizeWidgetHorizontal"><a href="UI.SizePolicies.FixedPolicy.html#sizeWidgetHorizontal">sizeWidgetHorizontal</a></li>
+            
+                <li data-name="UI.SizePolicies.FixedPolicy#sizeWidgetVertical"><a href="UI.SizePolicies.FixedPolicy.html#sizeWidgetVertical">sizeWidgetVertical</a></li>
+            
+                <li data-name="UI.SizePolicies.FixedPolicy#validateHeight"><a href="UI.SizePolicies.FixedPolicy.html#validateHeight">validateHeight</a></li>
+            
+                <li data-name="UI.SizePolicies.FixedPolicy#validateWidth"><a href="UI.SizePolicies.FixedPolicy.html#validateWidth">validateWidth</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.SizePolicies.SharedExpandingPolicy">
+            <span class="title">
+                <a href="UI.SizePolicies.SharedExpandingPolicy.html">UI.SizePolicies.SharedExpandingPolicy</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            <span class="subtitle">Typedefs</span>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#consumeUnusedSpaceH"><a href="UI.SizePolicies.SharedExpandingPolicy.html#consumeUnusedSpaceH">consumeUnusedSpaceH</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#consumeUnusedSpaceV"><a href="UI.SizePolicies.SharedExpandingPolicy.html#consumeUnusedSpaceV">consumeUnusedSpaceV</a></li>
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#childPolicyFinished"><a href="UI.SizePolicies.SharedExpandingPolicy.html#childPolicyFinished">childPolicyFinished</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#exec"><a href="UI.SizePolicies.SharedExpandingPolicy.html#exec">exec</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#parentReadyH"><a href="UI.SizePolicies.SharedExpandingPolicy.html#parentReadyH">parentReadyH</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#parentReadyV"><a href="UI.SizePolicies.SharedExpandingPolicy.html#parentReadyV">parentReadyV</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#sizeWidgetHorizontal"><a href="UI.SizePolicies.SharedExpandingPolicy.html#sizeWidgetHorizontal">sizeWidgetHorizontal</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#sizeWidgetVertical"><a href="UI.SizePolicies.SharedExpandingPolicy.html#sizeWidgetVertical">sizeWidgetVertical</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#validateHeight"><a href="UI.SizePolicies.SharedExpandingPolicy.html#validateHeight">validateHeight</a></li>
+            
+                <li data-name="UI.SizePolicies.SharedExpandingPolicy#validateWidth"><a href="UI.SizePolicies.SharedExpandingPolicy.html#validateWidth">validateWidth</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Theme">
+            <span class="title">
+                <a href="UI.Theme.html">UI.Theme</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Theme.getClipGraphic"><a href="UI.Theme.html#.getClipGraphic">getClipGraphic</a></li>
+            
+                <li data-name="UI.Theme.registerDefaultWidgetStyle"><a href="UI.Theme.html#.registerDefaultWidgetStyle">registerDefaultWidgetStyle</a></li>
+            
+                <li data-name="UI.Theme#makeGraphicsRecursive"><a href="UI.Theme.html#makeGraphicsRecursive">makeGraphicsRecursive</a></li>
+            
+                <li data-name="UI.Theme#makeTexture"><a href="UI.Theme.html#makeTexture">makeTexture</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.UIGraphics">
+            <span class="title">
+                <a href="UI.UIGraphics.html">UI.UIGraphics</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.UIGraphics#altTexture;"><a href="UI.UIGraphics.html#altTexture;">altTexture;</a></li>
+            
+                <li data-name="UI.UIGraphics#bodyTexture;"><a href="UI.UIGraphics.html#bodyTexture;">bodyTexture;</a></li>
+            
+                <li data-name="UI.UIGraphics#clipGraphic;"><a href="UI.UIGraphics.html#clipGraphic;">clipGraphic;</a></li>
+            
+                <li data-name="UI.UIGraphics#disabledTexture;"><a href="UI.UIGraphics.html#disabledTexture;">disabledTexture;</a></li>
+            
+                <li data-name="UI.UIGraphics#downTexture;"><a href="UI.UIGraphics.html#downTexture;">downTexture;</a></li>
+            
+                <li data-name="UI.UIGraphics#hoverTexture;"><a href="UI.UIGraphics.html#hoverTexture;">hoverTexture;</a></li>
+            
+                <li data-name="UI.UIGraphics#panelTexture;"><a href="UI.UIGraphics.html#panelTexture;">panelTexture;</a></li>
+            
+                <li data-name="UI.UIGraphics#size"><a href="UI.UIGraphics.html#size">size</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.UIGraphics#makeGraphicsFromTheme"><a href="UI.UIGraphics.html#makeGraphicsFromTheme">makeGraphicsFromTheme</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.BaseWidget">
+            <span class="title">
+                <a href="UI.Widgets.BaseWidget.html">UI.Widgets.BaseWidget</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.BaseWidget#clipGraphic"><a href="UI.Widgets.BaseWidget.html#clipGraphic">clipGraphic</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#disabled"><a href="UI.Widgets.BaseWidget.html#disabled">disabled</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#height"><a href="UI.Widgets.BaseWidget.html#height">height</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#hPolicy"><a href="UI.Widgets.BaseWidget.html#hPolicy">hPolicy</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#layout"><a href="UI.Widgets.BaseWidget.html#layout">layout</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#position"><a href="UI.Widgets.BaseWidget.html#position">position</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#sizeProxy"><a href="UI.Widgets.BaseWidget.html#sizeProxy">sizeProxy</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#theme"><a href="UI.Widgets.BaseWidget.html#theme">theme</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#vPolicy"><a href="UI.Widgets.BaseWidget.html#vPolicy">vPolicy</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#width"><a href="UI.Widgets.BaseWidget.html#width">width</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#x"><a href="UI.Widgets.BaseWidget.html#x">x</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#y"><a href="UI.Widgets.BaseWidget.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.BaseWidget#addChild"><a href="UI.Widgets.BaseWidget.html#addChild">addChild</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#addChildAt"><a href="UI.Widgets.BaseWidget.html#addChildAt">addChildAt</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#invalidate"><a href="UI.Widgets.BaseWidget.html#invalidate">invalidate</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#onChildrenChange"><a href="UI.Widgets.BaseWidget.html#onChildrenChange">onChildrenChange</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#paintDefault"><a href="UI.Widgets.BaseWidget.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#paintDisabled"><a href="UI.Widgets.BaseWidget.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#paintDown"><a href="UI.Widgets.BaseWidget.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#paintHover"><a href="UI.Widgets.BaseWidget.html#paintHover">paintHover</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#recursiveRouteUpdate"><a href="UI.Widgets.BaseWidget.html#recursiveRouteUpdate">recursiveRouteUpdate</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#routeInvalidation"><a href="UI.Widgets.BaseWidget.html#routeInvalidation">routeInvalidation</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#setParent"><a href="UI.Widgets.BaseWidget.html#setParent">setParent</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#update"><a href="UI.Widgets.BaseWidget.html#update">update</a></li>
+            
+                <li data-name="UI.Widgets.BaseWidget#validate"><a href="UI.Widgets.BaseWidget.html#validate">validate</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.Button">
+            <span class="title">
+                <a href="UI.Widgets.Button.html">UI.Widgets.Button</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.Button#clipGraphic"><a href="UI.Widgets.Button.html#clipGraphic">clipGraphic</a></li>
+            
+                <li data-name="UI.Widgets.Button#disabled"><a href="UI.Widgets.Button.html#disabled">disabled</a></li>
+            
+                <li data-name="UI.Widgets.Button#height"><a href="UI.Widgets.Button.html#height">height</a></li>
+            
+                <li data-name="UI.Widgets.Button#hPolicy"><a href="UI.Widgets.Button.html#hPolicy">hPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Button#layout"><a href="UI.Widgets.Button.html#layout">layout</a></li>
+            
+                <li data-name="UI.Widgets.Button#position"><a href="UI.Widgets.Button.html#position">position</a></li>
+            
+                <li data-name="UI.Widgets.Button#sizeProxy"><a href="UI.Widgets.Button.html#sizeProxy">sizeProxy</a></li>
+            
+                <li data-name="UI.Widgets.Button#theme"><a href="UI.Widgets.Button.html#theme">theme</a></li>
+            
+                <li data-name="UI.Widgets.Button#vPolicy"><a href="UI.Widgets.Button.html#vPolicy">vPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Button#width"><a href="UI.Widgets.Button.html#width">width</a></li>
+            
+                <li data-name="UI.Widgets.Button#x"><a href="UI.Widgets.Button.html#x">x</a></li>
+            
+                <li data-name="UI.Widgets.Button#y"><a href="UI.Widgets.Button.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.Button#addChild"><a href="UI.Widgets.Button.html#addChild">addChild</a></li>
+            
+                <li data-name="UI.Widgets.Button#addChildAt"><a href="UI.Widgets.Button.html#addChildAt">addChildAt</a></li>
+            
+                <li data-name="UI.Widgets.Button#invalidate"><a href="UI.Widgets.Button.html#invalidate">invalidate</a></li>
+            
+                <li data-name="UI.Widgets.Button#onChildrenChange"><a href="UI.Widgets.Button.html#onChildrenChange">onChildrenChange</a></li>
+            
+                <li data-name="UI.Widgets.Button#paintDefault"><a href="UI.Widgets.Button.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.Button#paintDisabled"><a href="UI.Widgets.Button.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.Button#paintDown"><a href="UI.Widgets.Button.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.Button#paintHover"><a href="UI.Widgets.Button.html#paintHover">paintHover</a></li>
+            
+                <li data-name="UI.Widgets.Button#recursiveRouteUpdate"><a href="UI.Widgets.Button.html#recursiveRouteUpdate">recursiveRouteUpdate</a></li>
+            
+                <li data-name="UI.Widgets.Button#routeInvalidation"><a href="UI.Widgets.Button.html#routeInvalidation">routeInvalidation</a></li>
+            
+                <li data-name="UI.Widgets.Button#setParent"><a href="UI.Widgets.Button.html#setParent">setParent</a></li>
+            
+                <li data-name="UI.Widgets.Button#update"><a href="UI.Widgets.Button.html#update">update</a></li>
+            
+                <li data-name="UI.Widgets.Button#validate"><a href="UI.Widgets.Button.html#validate">validate</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.Container">
+            <span class="title">
+                <a href="UI.Widgets.Container.html">UI.Widgets.Container</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.Container#clipGraphic"><a href="UI.Widgets.Container.html#clipGraphic">clipGraphic</a></li>
+            
+                <li data-name="UI.Widgets.Container#disabled"><a href="UI.Widgets.Container.html#disabled">disabled</a></li>
+            
+                <li data-name="UI.Widgets.Container#height"><a href="UI.Widgets.Container.html#height">height</a></li>
+            
+                <li data-name="UI.Widgets.Container#hPolicy"><a href="UI.Widgets.Container.html#hPolicy">hPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Container#layout"><a href="UI.Widgets.Container.html#layout">layout</a></li>
+            
+                <li data-name="UI.Widgets.Container#position"><a href="UI.Widgets.Container.html#position">position</a></li>
+            
+                <li data-name="UI.Widgets.Container#sizeProxy"><a href="UI.Widgets.Container.html#sizeProxy">sizeProxy</a></li>
+            
+                <li data-name="UI.Widgets.Container#theme"><a href="UI.Widgets.Container.html#theme">theme</a></li>
+            
+                <li data-name="UI.Widgets.Container#vPolicy"><a href="UI.Widgets.Container.html#vPolicy">vPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Container#width"><a href="UI.Widgets.Container.html#width">width</a></li>
+            
+                <li data-name="UI.Widgets.Container#x"><a href="UI.Widgets.Container.html#x">x</a></li>
+            
+                <li data-name="UI.Widgets.Container#y"><a href="UI.Widgets.Container.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.Container#addChild"><a href="UI.Widgets.Container.html#addChild">addChild</a></li>
+            
+                <li data-name="UI.Widgets.Container#addChildAt"><a href="UI.Widgets.Container.html#addChildAt">addChildAt</a></li>
+            
+                <li data-name="UI.Widgets.Container#invalidate"><a href="UI.Widgets.Container.html#invalidate">invalidate</a></li>
+            
+                <li data-name="UI.Widgets.Container#onChildrenChange"><a href="UI.Widgets.Container.html#onChildrenChange">onChildrenChange</a></li>
+            
+                <li data-name="UI.Widgets.Container#paintDefault"><a href="UI.Widgets.Container.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.Container#paintDisabled"><a href="UI.Widgets.Container.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.Container#paintDown"><a href="UI.Widgets.Container.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.Container#paintHover"><a href="UI.Widgets.Container.html#paintHover">paintHover</a></li>
+            
+                <li data-name="UI.Widgets.Container#recursiveRouteUpdate"><a href="UI.Widgets.Container.html#recursiveRouteUpdate">recursiveRouteUpdate</a></li>
+            
+                <li data-name="UI.Widgets.Container#routeInvalidation"><a href="UI.Widgets.Container.html#routeInvalidation">routeInvalidation</a></li>
+            
+                <li data-name="UI.Widgets.Container#setParent"><a href="UI.Widgets.Container.html#setParent">setParent</a></li>
+            
+                <li data-name="UI.Widgets.Container#update"><a href="UI.Widgets.Container.html#update">update</a></li>
+            
+                <li data-name="UI.Widgets.Container#validate"><a href="UI.Widgets.Container.html#validate">validate</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.Image">
+            <span class="title">
+                <a href="UI.Widgets.Image.html">UI.Widgets.Image</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.Image#clipGraphic"><a href="UI.Widgets.Image.html#clipGraphic">clipGraphic</a></li>
+            
+                <li data-name="UI.Widgets.Image#disabled"><a href="UI.Widgets.Image.html#disabled">disabled</a></li>
+            
+                <li data-name="UI.Widgets.Image#height"><a href="UI.Widgets.Image.html#height">height</a></li>
+            
+                <li data-name="UI.Widgets.Image#hPolicy"><a href="UI.Widgets.Image.html#hPolicy">hPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Image#layout"><a href="UI.Widgets.Image.html#layout">layout</a></li>
+            
+                <li data-name="UI.Widgets.Image#position"><a href="UI.Widgets.Image.html#position">position</a></li>
+            
+                <li data-name="UI.Widgets.Image#sizeProxy"><a href="UI.Widgets.Image.html#sizeProxy">sizeProxy</a></li>
+            
+                <li data-name="UI.Widgets.Image#theme"><a href="UI.Widgets.Image.html#theme">theme</a></li>
+            
+                <li data-name="UI.Widgets.Image#vPolicy"><a href="UI.Widgets.Image.html#vPolicy">vPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Image#width"><a href="UI.Widgets.Image.html#width">width</a></li>
+            
+                <li data-name="UI.Widgets.Image#x"><a href="UI.Widgets.Image.html#x">x</a></li>
+            
+                <li data-name="UI.Widgets.Image#y"><a href="UI.Widgets.Image.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.Image#addChild"><a href="UI.Widgets.Image.html#addChild">addChild</a></li>
+            
+                <li data-name="UI.Widgets.Image#addChildAt"><a href="UI.Widgets.Image.html#addChildAt">addChildAt</a></li>
+            
+                <li data-name="UI.Widgets.Image#invalidate"><a href="UI.Widgets.Image.html#invalidate">invalidate</a></li>
+            
+                <li data-name="UI.Widgets.Image#onChildrenChange"><a href="UI.Widgets.Image.html#onChildrenChange">onChildrenChange</a></li>
+            
+                <li data-name="UI.Widgets.Image#paintDefault"><a href="UI.Widgets.Image.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.Image#paintDisabled"><a href="UI.Widgets.Image.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.Image#paintDown"><a href="UI.Widgets.Image.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.Image#paintHover"><a href="UI.Widgets.Image.html#paintHover">paintHover</a></li>
+            
+                <li data-name="UI.Widgets.Image#recursiveRouteUpdate"><a href="UI.Widgets.Image.html#recursiveRouteUpdate">recursiveRouteUpdate</a></li>
+            
+                <li data-name="UI.Widgets.Image#routeInvalidation"><a href="UI.Widgets.Image.html#routeInvalidation">routeInvalidation</a></li>
+            
+                <li data-name="UI.Widgets.Image#setParent"><a href="UI.Widgets.Image.html#setParent">setParent</a></li>
+            
+                <li data-name="UI.Widgets.Image#update"><a href="UI.Widgets.Image.html#update">update</a></li>
+            
+                <li data-name="UI.Widgets.Image#validate"><a href="UI.Widgets.Image.html#validate">validate</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.Label">
+            <span class="title">
+                <a href="UI.Widgets.Label.html">UI.Widgets.Label</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.Label#text"><a href="UI.Widgets.Label.html#text">text</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.Label#paintDefault"><a href="UI.Widgets.Label.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.Label#paintDisabled"><a href="UI.Widgets.Label.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.Label#paintDown"><a href="UI.Widgets.Label.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.Label#paintHover"><a href="UI.Widgets.Label.html#paintHover">paintHover</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.Panel">
+            <span class="title">
+                <a href="UI.Widgets.Panel.html">UI.Widgets.Panel</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.Panel#clipGraphic"><a href="UI.Widgets.Panel.html#clipGraphic">clipGraphic</a></li>
+            
+                <li data-name="UI.Widgets.Panel#disabled"><a href="UI.Widgets.Panel.html#disabled">disabled</a></li>
+            
+                <li data-name="UI.Widgets.Panel#height"><a href="UI.Widgets.Panel.html#height">height</a></li>
+            
+                <li data-name="UI.Widgets.Panel#hPolicy"><a href="UI.Widgets.Panel.html#hPolicy">hPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Panel#layout"><a href="UI.Widgets.Panel.html#layout">layout</a></li>
+            
+                <li data-name="UI.Widgets.Panel#position"><a href="UI.Widgets.Panel.html#position">position</a></li>
+            
+                <li data-name="UI.Widgets.Panel#sizeProxy"><a href="UI.Widgets.Panel.html#sizeProxy">sizeProxy</a></li>
+            
+                <li data-name="UI.Widgets.Panel#theme"><a href="UI.Widgets.Panel.html#theme">theme</a></li>
+            
+                <li data-name="UI.Widgets.Panel#vPolicy"><a href="UI.Widgets.Panel.html#vPolicy">vPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Panel#width"><a href="UI.Widgets.Panel.html#width">width</a></li>
+            
+                <li data-name="UI.Widgets.Panel#x"><a href="UI.Widgets.Panel.html#x">x</a></li>
+            
+                <li data-name="UI.Widgets.Panel#y"><a href="UI.Widgets.Panel.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.Panel#addChild"><a href="UI.Widgets.Panel.html#addChild">addChild</a></li>
+            
+                <li data-name="UI.Widgets.Panel#addChildAt"><a href="UI.Widgets.Panel.html#addChildAt">addChildAt</a></li>
+            
+                <li data-name="UI.Widgets.Panel#invalidate"><a href="UI.Widgets.Panel.html#invalidate">invalidate</a></li>
+            
+                <li data-name="UI.Widgets.Panel#onChildrenChange"><a href="UI.Widgets.Panel.html#onChildrenChange">onChildrenChange</a></li>
+            
+                <li data-name="UI.Widgets.Panel#paintDefault"><a href="UI.Widgets.Panel.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.Panel#paintDisabled"><a href="UI.Widgets.Panel.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.Panel#paintDown"><a href="UI.Widgets.Panel.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.Panel#paintHover"><a href="UI.Widgets.Panel.html#paintHover">paintHover</a></li>
+            
+                <li data-name="UI.Widgets.Panel#recursiveRouteUpdate"><a href="UI.Widgets.Panel.html#recursiveRouteUpdate">recursiveRouteUpdate</a></li>
+            
+                <li data-name="UI.Widgets.Panel#routeInvalidation"><a href="UI.Widgets.Panel.html#routeInvalidation">routeInvalidation</a></li>
+            
+                <li data-name="UI.Widgets.Panel#setParent"><a href="UI.Widgets.Panel.html#setParent">setParent</a></li>
+            
+                <li data-name="UI.Widgets.Panel#update"><a href="UI.Widgets.Panel.html#update">update</a></li>
+            
+                <li data-name="UI.Widgets.Panel#validate"><a href="UI.Widgets.Panel.html#validate">validate</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.SITransform">
+            <span class="title">
+                <a href="UI.Widgets.SITransform.html">UI.Widgets.SITransform</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.SITransform#updateTransform"><a href="UI.Widgets.SITransform.html#updateTransform">updateTransform</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.Slider">
+            <span class="title">
+                <a href="UI.Widgets.Slider.html">UI.Widgets.Slider</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="UI.Widgets.Slider#clipGraphic"><a href="UI.Widgets.Slider.html#clipGraphic">clipGraphic</a></li>
+            
+                <li data-name="UI.Widgets.Slider#disabled"><a href="UI.Widgets.Slider.html#disabled">disabled</a></li>
+            
+                <li data-name="UI.Widgets.Slider#height"><a href="UI.Widgets.Slider.html#height">height</a></li>
+            
+                <li data-name="UI.Widgets.Slider#hPolicy"><a href="UI.Widgets.Slider.html#hPolicy">hPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Slider#layout"><a href="UI.Widgets.Slider.html#layout">layout</a></li>
+            
+                <li data-name="UI.Widgets.Slider#orientation"><a href="UI.Widgets.Slider.html#orientation">orientation</a></li>
+            
+                <li data-name="UI.Widgets.Slider#position"><a href="UI.Widgets.Slider.html#position">position</a></li>
+            
+                <li data-name="UI.Widgets.Slider#sizeProxy"><a href="UI.Widgets.Slider.html#sizeProxy">sizeProxy</a></li>
+            
+                <li data-name="UI.Widgets.Slider#theme"><a href="UI.Widgets.Slider.html#theme">theme</a></li>
+            
+                <li data-name="UI.Widgets.Slider#value"><a href="UI.Widgets.Slider.html#value">value</a></li>
+            
+                <li data-name="UI.Widgets.Slider#vPolicy"><a href="UI.Widgets.Slider.html#vPolicy">vPolicy</a></li>
+            
+                <li data-name="UI.Widgets.Slider#width"><a href="UI.Widgets.Slider.html#width">width</a></li>
+            
+                <li data-name="UI.Widgets.Slider#x"><a href="UI.Widgets.Slider.html#x">x</a></li>
+            
+                <li data-name="UI.Widgets.Slider#y"><a href="UI.Widgets.Slider.html#y">y</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.Slider#addChild"><a href="UI.Widgets.Slider.html#addChild">addChild</a></li>
+            
+                <li data-name="UI.Widgets.Slider#addChildAt"><a href="UI.Widgets.Slider.html#addChildAt">addChildAt</a></li>
+            
+                <li data-name="UI.Widgets.Slider#invalidate"><a href="UI.Widgets.Slider.html#invalidate">invalidate</a></li>
+            
+                <li data-name="UI.Widgets.Slider#onChildrenChange"><a href="UI.Widgets.Slider.html#onChildrenChange">onChildrenChange</a></li>
+            
+                <li data-name="UI.Widgets.Slider#paintDefault"><a href="UI.Widgets.Slider.html#paintDefault">paintDefault</a></li>
+            
+                <li data-name="UI.Widgets.Slider#paintDisabled"><a href="UI.Widgets.Slider.html#paintDisabled">paintDisabled</a></li>
+            
+                <li data-name="UI.Widgets.Slider#paintDown"><a href="UI.Widgets.Slider.html#paintDown">paintDown</a></li>
+            
+                <li data-name="UI.Widgets.Slider#paintHover"><a href="UI.Widgets.Slider.html#paintHover">paintHover</a></li>
+            
+                <li data-name="UI.Widgets.Slider#recursiveRouteUpdate"><a href="UI.Widgets.Slider.html#recursiveRouteUpdate">recursiveRouteUpdate</a></li>
+            
+                <li data-name="UI.Widgets.Slider#routeInvalidation"><a href="UI.Widgets.Slider.html#routeInvalidation">routeInvalidation</a></li>
+            
+                <li data-name="UI.Widgets.Slider#setParent"><a href="UI.Widgets.Slider.html#setParent">setParent</a></li>
+            
+                <li data-name="UI.Widgets.Slider#update"><a href="UI.Widgets.Slider.html#update">update</a></li>
+            
+                <li data-name="UI.Widgets.Slider#updateTrackHitRect"><a href="UI.Widgets.Slider.html#updateTrackHitRect">updateTrackHitRect</a></li>
+            
+                <li data-name="UI.Widgets.Slider#validate"><a href="UI.Widgets.Slider.html#validate">validate</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.StageWidget">
+            <span class="title">
+                <a href="UI.Widgets.StageWidget.html">UI.Widgets.StageWidget</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="UI.Widgets.StageWidget#_calculateBounds"><a href="UI.Widgets.StageWidget.html#_calculateBounds">_calculateBounds</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="UI.Widgets.TextButton">
+            <span class="title">
+                <a href="UI.Widgets.TextButton.html">UI.Widgets.TextButton</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="widgets_Slider.js.html">Source: widgets/Slider.js</h1>
+        
+
+
+    
+    <section>
+        <article>
+            <pre id="source-code" class="prettyprint source linenums"><code>import Theme from '.././Theme';
+import Container from './Container';
+// import Button from './Button';
+import Image from './Image';
+import Alignment from '../layoutSys/Alignment';
+import ExpandingPolicy
+    from '../layoutSys/sizePolicies/ExpandingPolicy';
+import FixedPolicy
+    from '../layoutSys/sizePolicies/FixedPolicy';
+import {HORIZONTAL, VERTICAL} from '.././const';
+
+
+Theme.registerDefaultWidgetStyle('slider', {
+    track: {
+        enabled: 0x303030,
+        disabled: 0x2e2e2e,
+    },
+    button: {
+        enabled: 0x284328,
+        disabled: 0x303030,
+        hover: 0x264e26,
+        click: 0x3a723a,
+    },
+});
+
+/**
+ * A button on a track used to manipulate a variable
+ * @extends UI.Widgets.Container
+ * @memberof UI.Widgets
+ */
+export default class Slider extends Container {
+    /**
+     * @param {UI.Widgets.BaseWidget} parent the widgets parent
+     * @param {Number} orientation direction of slider
+     * @param {Object} [options]
+     */
+    constructor(parent, orientation = HORIZONTAL, options) {
+        super(parent, options);
+
+        // this.idealThemeFrameNode = 'slider';
+        // this.updateThemeTextureRoot();
+
+        this._orientation = orientation;
+
+        this.minValue = 0;
+        this.maxValue = 1;
+
+        this._value = 0;
+
+        this.valueCB = null;
+
+        this.padding.setAllTo(0);
+
+        this.track = new Image(this, this.theme.texture);
+        this.track.interactive = true;
+        this.trackHitRect = new PIXI.Rectangle();
+        this.track.hitArea = this.trackHitRect;
+        this.trackHitPadding = 5;
+
+
+        this.button = new Image(this, this.theme.texture, {
+            width: 20,
+            height: 20,
+        });
+        this.button.interactive = true;
+
+        this.btnHalfWidth = this.button.width / 2;
+        this.btnHalfHeight = this.button.height / 2;
+
+        this._dragging = false;
+
+        this.button.pointerdown = (e)=>{
+            this._dragging = true;
+            this.paintDown();
+            // e.stopPropagation();
+            // this.button.paintDown();
+        };
+
+        this.button.on('pointerup', (e)=>{
+            this._dragging = false;
+            this.paintDefault();
+            // e.stopPropagation();
+        });
+        this.button.on('pointerupoutside', (e)=>{
+            this._dragging = false;
+            this.paintDefault();
+            // e.stopPropagation();
+        });
+        this.button.on('pointercancel', (e)=>{
+            this._dragging = false;
+            this.paintDefault();
+            // e.stopPropagation();
+        });
+
+        // this.button.pointerup
+        // = this.button.pointerupoutside
+        // = this.button.pointercancel
+        // = (data)=>{
+        //     this._dragging = false;
+        //     this.paintDefault();
+        //     // data.stopped = false;
+        //     // this.button.paintDefault();
+        // };
+        //
+        this.button.on('pointermove', (e)=>{
+            if(this._dragging) {
+                // e.stopPropagation();
+              this.button.bypassInvalidation = true;
+              let pos = e.data.getLocalPosition(this);
+              let usableWidth = this.track.width - this.btnHalfWidth;
+              let usableHeight = this.track.height - this.btnHalfHeight;
+              if(this.orientation === UI.HORIZONTAL) {
+                  if (pos.x > this.btnHalfWidth
+                      &amp;&amp; pos.x &lt; usableWidth) {
+                    // this.button.bypassInvalidation = true;
+                    this.button.x = pos.x - this.btnHalfWidth;
+                    this.button.applyPosition();
+                    // this.button.bypassInvalidation = false;
+                    this.emit('changed');
+                } else if(pos.x > usableWidth) {
+                    // this.button.bypassInvalidation = true;
+                    this.button.x = usableWidth - this.btnHalfWidth;
+                    this.button.applyPosition();
+                    // this.button.bypassInvalidation = false;
+                    this.emit('changed');
+                } else if(pos.x &lt; this.btnHalfWidth) {
+                    // this.button.bypassInvalidation = true;
+                    this.button.x = 0; // this.btnHalfWidth;
+                    this.button.applyPosition();
+                    // this.button.bypassInvalidation = false;
+                    this.emit('changed');
+                }
+            } else { // vertical
+                  if (pos.y > this.btnHalfHeight
+                      &amp;&amp; pos.y &lt; usableHeight) {
+                    // this.button.bypassInvalidation = true;
+                    this.button.y = pos.y - this.btnHalfHeight;
+                    this.button.applyPosition();
+                    // this.button.bypassInvalidation = false;
+                    this.emit('changed');
+                } else if(pos.y > usableHeight) {
+                    // this.button.bypassInvalidation = true;
+                    this.button.y = usableHeight - this.btnHalfHeight;
+                    this.button.applyPosition();
+                    // this.button.bypassInvalidation = false;
+                    this.emit('changed');
+                } else if(pos.y &lt; this.btnHalfHeight) {
+                    // this.button.bypassInvalidation = true;
+                    this.button.y = 0;// this.btnHalfHeight;
+                    this.button.applyPosition();
+                    // this.button.bypassInvalidation = false;
+                    this.emit('changed');
+                }
+              }
+              this.button.bypassInvalidation = false;
+              this.paintDown();
+            //   this.button.paintDown();
+            }
+        });
+
+        // this.button.pointermove = (data)=>{
+        //     if(this._dragging) {
+        //         // data.stopPropagation();
+        //       this.button.bypassInvalidation = true;
+        //       let pos = data.data.getLocalPosition(this);
+        //       let usableWidth = this.track.width - this.btnHalfWidth;
+        //       let usableHeight = this.track.height - this.btnHalfHeight;
+        //       if(this.orientation === UI.HORIZONTAL) {
+        //           if (pos.x > this.btnHalfWidth
+        //               &amp;&amp; pos.x &lt; usableWidth) {
+        //             // this.button.bypassInvalidation = true;
+        //             this.button.x = pos.x - this.btnHalfWidth;
+        //             this.button.applyPosition();
+        //             // this.button.bypassInvalidation = false;
+        //             this.emit('changed');
+        //         } else if(pos.x > usableWidth) {
+        //             // this.button.bypassInvalidation = true;
+        //             this.button.x = usableWidth - this.btnHalfWidth;
+        //             this.button.applyPosition();
+        //             // this.button.bypassInvalidation = false;
+        //             this.emit('changed');
+        //         } else if(pos.x &lt; this.btnHalfWidth) {
+        //             // this.button.bypassInvalidation = true;
+        //             this.button.x = 0; // this.btnHalfWidth;
+        //             this.button.applyPosition();
+        //             // this.button.bypassInvalidation = false;
+        //             this.emit('changed');
+        //         }
+        //     } else { // vertical
+        //           if (pos.y > this.btnHalfHeight
+        //               &amp;&amp; pos.y &lt; usableHeight) {
+        //             // this.button.bypassInvalidation = true;
+        //             this.button.y = pos.y - this.btnHalfHeight;
+        //             this.button.applyPosition();
+        //             // this.button.bypassInvalidation = false;
+        //             this.emit('changed');
+        //         } else if(pos.y > usableHeight) {
+        //             // this.button.bypassInvalidation = true;
+        //             this.button.y = usableHeight - this.btnHalfHeight;
+        //             this.button.applyPosition();
+        //             // this.button.bypassInvalidation = false;
+        //             this.emit('changed');
+        //         } else if(pos.y &lt; this.btnHalfHeight) {
+        //             // this.button.bypassInvalidation = true;
+        //             this.button.y = 0;// this.btnHalfHeight;
+        //             this.button.applyPosition();
+        //             // this.button.bypassInvalidation = false;
+        //             this.emit('changed');
+        //         }
+        //       }
+        //       this.button.bypassInvalidation = false;
+        //       this.paintDown();
+        //     //   this.button.paintDown();
+        //     }
+        // };
+
+        this.track.on('pointertap', (e)=>{
+            let pos = e.data.getLocalPosition(this);
+            if(this.orientation === UI.HORIZONTAL) {
+                this.button.bypassInvalidation = true;
+                if(pos.x > this.track.width - this.button.width) {
+                    pos.x -= this.button.width;
+                }
+                this.button.x = pos.x;
+                this.button.applyPosition();
+                this.button.bypassInvalidation = false;
+            } else {
+                this.button.bypassInvalidation = true;
+                if(pos.y > this.track.height - this.button.height) {
+                    pos.y -= this.button.height;
+                }
+                this.button.y = pos.y;
+                this.button.applyPosition();
+                this.button.bypassInvalidation = false;
+            }
+            this.emit('changed');
+            // e.stopPropagation();
+        });
+        // clicking on the track sets position of button
+        // this.track.pointertap = (data)=>{
+        //     let pos = data.data.getLocalPosition(this);
+        //     if(this.orientation === UI.HORIZONTAL) {
+        //         this.button.bypassInvalidation = true;
+        //         if(pos.x > this.track.width - this.button.width) {
+        //             pos.x -= this.button.width;
+        //         }
+        //         this.button.x = pos.x;
+        //         this.button.applyPosition();
+        //         this.button.bypassInvalidation = false;
+        //     } else {
+        //         this.button.bypassInvalidation = true;
+        //         if(pos.y > this.track.height - this.button.height) {
+        //             pos.y -= this.button.height;
+        //         }
+        //         this.button.y = pos.y;
+        //         this.button.applyPosition();
+        //         this.button.bypassInvalidation = false;
+        //     }
+        //     this.emit('changed');
+        // };
+
+        this.orientation = orientation;
+
+        this.button.on('sizeChanged', ()=>{
+            this.btnHalfWidth = this.button.width / 2;
+            this.btnHalfHeight = this.button.height / 2;
+        }, this);
+
+        this.track.on('sizeChanged', ()=>{
+            // this._value = this.oldValue;
+            this.value = this._value;
+        }, this);
+
+        this.track.on('layoutUpdated', this.updateTrackHitRect, this);
+
+        this.paintDefault();
+    }
+
+    /**
+     *Update the filter area of the track to make it easier to
+     *click on it.
+     */
+    updateTrackHitRect() {
+        let thr = this.trackHitRect;
+        if(this.orientation === HORIZONTAL) {
+            thr.x = 0;
+            thr.y = 0 - this.trackHitPadding;
+            thr.width = this.track.width;
+            thr.height = this.track.height + (this.trackHitPadding * 2);
+        } else {
+            thr.x = 0 - this.trackHitPadding;
+            thr.y = 0;
+            thr.width = this.track.width + (this.trackHitPadding * 2);
+            thr.height = this.track.height;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    paintDefault() {
+        // no need to check track too. If button exist track does to
+        if(this.button) {
+            this.track.imgObj.texture
+                = this.theme.textures.slider.track.enabled;
+            this.button.imgObj.texture
+                = this.theme.textures.slider.button.enabled;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    paintDisabled() {
+        if(this.button) {
+            this.track.imgObj.texture
+                = this.theme.textures.slider.track.disabled;
+            this.button.imgObj.texture
+                = this.theme.textures.slider.button.disabled;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    paintDown() {
+        // this.track.imgObj.texture.frame
+        //     = this.theme.frames.slider.track.disabled;
+        if(this.button) {
+            this.button.imgObj.texture
+                = this.theme.textures.slider.button.click;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    paintHover() {
+        // this.track.imgObj.texture.frame
+        //     = this.theme.frames.slider.track.disabled;
+        if(this.button) {
+            this.button.imgObj.texture
+                = this.theme.textures.slider.button.hover;
+        }
+    }
+
+    /**
+     *@type {Number}
+     */
+    get value() {
+        if(this.orientation === HORIZONTAL) {
+            let value =
+                (((this.maxValue - this.minValue)
+                    / (this.track.width - this.button.width))
+                    * this.button.x) + this.minValue;
+
+                this._value = value;
+
+            if(this.valueCB) {
+                return this.valueCB(value);
+            } else {
+                return value;
+            }
+        } else {
+            let value =
+                (((this.maxValue - this.minValue)
+                    / (this.track.height - this.button.height))
+                    * this.button.y) + this.minValue;
+
+                this._value = value;
+
+            if(this.valueCB) {
+                return this.valueCB(value);
+            } else {
+                return value;
+            }
+        }
+    }
+
+    set value(val) { // eslint-disable-line require-jsdoc
+        val = Math.min(Math.max(val, this.minValue), this.maxValue);
+        this.oldValue = this._value = val;
+        this.button.beginBypassUpdate();
+        if(this.orientation === HORIZONTAL) {
+            let pos
+            = ((val - this.minValue) / (this.maxValue - this.minValue))
+            * (this.track.width - this.button.width);
+
+            // this.button.beginBypassUpdate();
+            this.button.x = pos;
+            this.button.applyPosition();
+            // this.button.endBypassUpdate();
+        } else {
+            let pos
+            = ((val - this.minValue) / (this.maxValue - this.minValue))
+            * (this.track.height - this.button.height);
+
+            // this.button.beginBypassUpdate();
+            this.button.y = pos;
+            this.button.applyPosition();
+            // this.button.endBypassUpdate();
+        }
+        this.button.endBypassUpdate();
+        this.emit('changed');
+    }
+
+    /**
+     * @type {Number}
+     */
+    get orientation() {
+        return this._orientation;
+    }
+
+    set orientation(val) { // eslint-disable-line require-jsdoc
+        if(val === HORIZONTAL) {
+            this._orientation = val;
+            this.min.height = this.button.height;
+            this.min.width = 30;
+            this.max.height = this.min.height;
+            this.max.width = 10000;
+            // this.updateTrackH();
+            this.track.width = this.width;
+            this.track.height = 5;
+            this.layout.alignment.hAlign = Alignment.left;
+            this.layout.alignment.vAlign = Alignment.middle;
+            this.track.hPolicy
+                = new ExpandingPolicy(this.track, HORIZONTAL);
+            this.track.vPolicy = new FixedPolicy(this.track);
+        } else if(val === VERTICAL) {
+            this._orientation = val;
+            this.min.height = 30;
+            this.min.width = this.button.width;
+            this.max.height = 10000;
+            this.max.width = this.min.width;
+            // this.updateTrackV();
+
+            this.track.width = 5;
+            this.track.height = this.height;
+            this.layout.alignment.hAlign = Alignment.center;
+            this.layout.alignment.vAlign = Alignment.top;
+            this.track.vPolicy
+                = new ExpandingPolicy(this.track, VERTICAL);
+            this.track.hPolicy = new FixedPolicy(this.track);
+        } else {
+            throw new Error('Slider.orientation must be either UI.HORIZONTAL'
+                + ' or UI.VERTICAL');
+        }
+    }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+
+
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue May 02 2017 09:54:37 GMT-0500 (Central Daylight Time)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/jaguar.js"></script>
+</body>
+</html>

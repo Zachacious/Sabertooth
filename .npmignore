@@ -3,6 +3,7 @@ src/
 
 # other files
 .gitignore
+.gitattributes
 .travis.yml
 gulpfile.js
 inch.json
@@ -11,8 +12,14 @@ jsdoc.json
 # ignore test
 test/
 
+# ignore docs
+docs/
+
 # ignore dist
 dist/
+
+# ignore scripts
+scripts/
 
 # Logs
 logs
