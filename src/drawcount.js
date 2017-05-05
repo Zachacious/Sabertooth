@@ -1,14 +1,29 @@
-// import settings from '../../settings';
 import glCore from 'pixi-gl-core';
 import bitTwiddle from 'bit-twiddle';
+
+/**
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
 
 let TICK = 0;
 let TEXTURE_TICK = 0;
 let settings = PIXI.settings;
+
 /**
 *A Hack to get a draw count from renderer.plugins.sprite(PIXI.SpriteRenderer)
 *Note: Ment to be used only temporarily to get a draw count
 *@param {PIXI.SpriteRenderer} ren the sprite renderer to hack
+*@example
+* hackSpriteRendererDrawCounter(myApp.renderer.plugins.sprite);
+* // main loop
+* let main = function(){
+*    myApp.renderer.plugins.sprite.draws = 0;
+*    myApp.update();
+*    myLabel.text = myApp.renderer.plugins.sprite.draws;
+*    requestAnimationFrame(main);
+*};
  */
 let hackSpriteRendererDrawCounter = function(ren) { //eslint-disable-line
     ren.draws = 0;
