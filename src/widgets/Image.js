@@ -1,31 +1,60 @@
 import BaseWidget from './BaseWidget';
 
 /**
- * Image Widget
- * @extends UI.Widgets.BaseWidget
- * @memberof UI.Widgets
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
+
+/**
+ * Wraps PIXI.Sprite and allows images/ textures to become widgets
+ * @extends ST.Widgets.BaseWidget
+ * @memberof ST.Widgets
  */
 export default class Image extends BaseWidget {
     /**
-     *@param {UI.Widgets.BaseWidget} parent widgets parent
-     *@param {PIXI.Texture} [texture = null] the texture for the Image
-     *@param {Object} [options]
+     *@param {ST.Widgets.BaseWidget} parent Widgets parent
+     *@param {Object} [options = Object] @see ST.Widgets.BaseWidget
+     *@param {PIXI.Texture} [options.texture = null] The texture for the Image
      */
-    constructor(parent, texture = null, options) {
+    constructor(parent, options = {}) {
         super(parent, options);
+        // default options
+        const defaults = {
+                texture: null,
+        };
 
-        this.imgObj = new PIXI.Sprite();
-        if(texture) {
-            this.imgObj.texture = texture;
+        // fill in missing options with defaults
+        options = Object.assign(options, defaults);
+
+        /**
+         * Holds the sprite internally
+         * @member {PIXI.Sprite}
+         * @private
+         */
+        this._sprite = new PIXI.Sprite();
+        if(options.texture) {
+            this._sprite.texture = options.texture;
         }
-        this.addChild(this.imgObj);
-        this.imgObj.width = this.width;
-        this.imgObj.height = this.height;
+        this.addChild(this._sprite);
+        this._sprite.width = this.width;
+        this._sprite.height = this.height;
 
-        this.sizeProxy = this.imgObj;
+        this.sizeProxy = this._sprite;
     }
 
-    /*
-        TODO: handle paintDefault, paintDown etc. to tint the image
-     */
+     /**
+      * The PIXI.Sprite used internally
+      * @method sprite
+      * @return {PIXI.Sprite}
+      */
+    get sprite() {
+        return this._sprite;
+    }
+
+    set sprite(val) { // eslint-disable-line require-jsdoc
+        if(val instanceof PIXI.Sprite) {
+            this._sprite = val;
+        }
+    }
 }

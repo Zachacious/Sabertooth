@@ -1,29 +1,34 @@
-/*
-    TextButton.js
- */
-
 import Button from './Button';
 import Label from './Label';
 
 /**
- * TODO
- * @memberof UI.Widgets
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
+
+/**
+ * Button with a text label
+ * @memberof ST.Widgets
+ * @extends ST.Widgets.Button
  */
 export default class TextButton extends Button {
     /**
-     * TODO
-     * @param {UI.BaseWidget} parent todo
-     * @param {String} [text] todo
-     * @param {Object} [options] todo
+     * @param {ST.BaseWidget} parent The widgets parent
+     * @param {Object} [options] @see ST.Widgets.BaseWidget
+     * @param {String} [options.text] The labels text
      */
-    constructor(parent, text = '', options) {
+    constructor(parent, options = {}) {
         super(parent, options);
 
-        this.label = new Label(this, text);
+        options = Object.assign(options, defaults);
+
+        this.label = new Label(this, options.text);
     }
 
     /**
-     * @member {String} todo
+     * The buttons text
+     * @member {String}
      */
     get text() {
         return this.label.text;
