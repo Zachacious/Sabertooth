@@ -1,33 +1,38 @@
-/*
-  App.js
+import * as PIXI from 'pixi.js';
+import Theme from './Theme';
+import StageWidget from './widgets/StageWidget';
+import EventEmitter from 'eventemitter3';
+
+/**
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
  */
- import * as PIXI from 'pixi.js';
- import {setOptions} from './options';
- import Theme from './Theme';
- import StageWidget from './widgets/StageWidget';
- // import WidgetShader from './WidgetShader';
- import EventEmitter from 'eventemitter3';
- // import Renderer from './Renderer';
+
+ /**
+  * The EventEmitter namespace
+  * @external EventEmitter
+  * @see https://github.com/primus/eventemitter3
+  */
 
 /**
  * App will setup PIXI renderer and root widget automatically.
  * Just call App.update() from your render loop
- *
  * @class
- * @memberof UI
+ * @memberof ST
+ * @extends external:EventEmitter
  */
 export default class App extends EventEmitter {
   /**
-   *
-   * @param {String} name - the name of the app
    * @param {Object} options - Optional parameters
-   * @param {UI.Theme} options.theme
+   * @param {String} name - The apps name
+   * @param {ST.Theme} options.theme
    * - Theme used by the app - by default creates
    * a new Theme with default settings.
    * @param {Boolean} [options.transparentBkg=false] - True makes
    * background transparent
    * @param {Boolean} [options.antialiasing=false] - Sets antialiasing
-   * @param {Boolean} [options.forceFXAA=false] - Less quality antialiasing but
+   * @param {Boolean} [options.forceFXAA=false] - Lower quality antialiasing but
    * performs better
    * @param {Number} [options.resolution=1] - Pixi renderer resolution
    * @param {Number} [options.width=800] - Width of app renderer
@@ -35,37 +40,33 @@ export default class App extends EventEmitter {
    * @param {Boolean} [options.autoResize=true] - True makes app resize with
    * browser automatically
    */
-  constructor(name = 'My App', options) {
+  constructor(options = {}) {
       super();
-    /**
-     * Internal default options
-     *
-     * @member {Object}
-     * @protected
-     */
-    this._defaults = this._defaults || {};
-    let defaults = this._defaults;
+    const defaults = {
+      name: 'My App',
+      theme: new Theme(),
+      transparentBkg: false,
+      antialiasing: false,
+      forceFXAA: false,
+      resolution: 1,
+      width: 800,
+      height: 600,
+      autoResize: true,
+    };
 
-    defaults.theme = defaults.theme || new Theme();
-    defaults.transparentBkg = defaults.transparentBkg || false;
-    defaults.antialiasing = defaults.antialiasing || false;
-    defaults.forceFXAA = defaults.forceFXAA || false;
-    defaults.resolution = defaults.resolution || 1;
-    defaults.width = defaults.width || 800;
-    defaults.height = defaults.height || 600;
-    defaults.autoResize = defaults.autoResize || true;
-
-    options = setOptions(options, defaults);
+    options = Object.assign(options, defaults);
 
     /**
      * The internal name of the app
      * @type {String}
      * @private
      */
-    this._name = name;
+    this._name = options.name;
+
+    // html docs title tag
     document.title = this._name;
 
-    let renderOptions = {
+    const renderOptions = {
       resolution: options.resolution,
       forceFXAA: options.forceFXAA,
       antialias: options.antialiasing,
@@ -73,26 +74,14 @@ export default class App extends EventEmitter {
       roundPixels: true,
     };
 
-    // PIXI.ticker.shared.autoStart = false;
-    // PIXI.ticker.shared.stop();
-    // PIXI.INTERACTION_FREQUENCY = 60;
-
     /**
      * Points to the correct PIXI renderer. Webgl if possible
-     * @type {PIXI.WebglRenderer | PIXI.CanvasRenderer}
+     * @member {PIXI.WebglRenderer | PIXI.CanvasRenderer}
      */
     this.renderer = PIXI.autoDetectRenderer(options.width, options.height,
       renderOptions);
 
-    // this.renderer.plugins.interaction.moveWhenInside = true;
-
-    // Renderer.setInst(PIXI.autoDetectRenderer(options.width, options.height,
-    //   renderOptions));
-    // this.renderer.plugins.interaction.interactionFrequency = 100000;
-
-    // Renderer.inst().plugins.sprite.shader = WidgetShader.inst();
-
-    // Setup the document properly
+    // Add webgl canvas to the doc. Set padding and margins to 0
     document.body.appendChild(this.renderer.view);
     let newStyle = document.createElement('style');
     let style = '* {padding: 0; margin: 0}';
@@ -101,19 +90,16 @@ export default class App extends EventEmitter {
 
     /**
      * Internal theme for app
-     * @type {UI.Theme}
+     * @member {ST.Theme}
      * @private
      */
     this._theme = options.theme;
-    // this._theme.setCurrent();
-
-    // WidgetShader.setInstance(new WidgetShader(renderer.gl));
 
     /**
-     * Basic empty widget - serves as the topmost widget and size is set
-     * to the widow size
+     * All widgets should be children or children of children of the
+     * root widget.
      *
-     * @type {UI.Widgets.BaseWidget}
+     * @member {ST.Widgets.BaseWidget}
      */
     this.root = new StageWidget();
     this.root.padding.setAllTo(0);
@@ -121,8 +107,6 @@ export default class App extends EventEmitter {
     this.root.height = window.innerHeight;
 
     this.renderer.backgroundColor = this._theme.background;
-
-    // CONNECTIONS ---
 
     if(options.autoResize) {
       // initial resize
@@ -140,9 +124,13 @@ export default class App extends EventEmitter {
 
     // listen for window resize. emit signal
     window.addEventListener('resize', (e)=>{
-      // this.signal_documentResize.emit();
       this.emit('resize');
     });
+
+    /**
+     * Fires when the window is resized
+     * @event ST.App#resize
+     */
   }
 
   /**
@@ -154,11 +142,9 @@ export default class App extends EventEmitter {
     }
   }
 
-  // properties
-
   /**
    * The name of the app
-   * @return {String}
+   * @member {String}
    */
   get name() {
     return this._name;
@@ -166,12 +152,12 @@ export default class App extends EventEmitter {
 
   set name(val) { // eslint-disable-line require-jsdoc
     this._name = val;
-    document.title = val;
+    document.title = val; // html doc's title tag
   }
 
   /**
    * The theme for the app
-   * @return {UI.Theme}
+   * @member {ST.Theme}
    */
   get theme() {
     return this._theme;
