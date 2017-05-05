@@ -569,7 +569,7 @@ export default class BaseWidget extends PIXI.Container {
         }
 
         // recursively set children
-        const i = this.children.length;
+        let i = this.children.length;
         while(i--) {
             this.children[i].disabled = val;
         }
