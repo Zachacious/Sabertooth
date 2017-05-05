@@ -1,34 +1,66 @@
-/*
- *  Theme.js
- */
-
 import EventEmitter from 'eventemitter3';
 import GraphicsGen from './GraphicsGen';
 import Point from './Point';
 
+/**
+ * The EventEmitter namespace
+ * @external EventEmitter
+ * @see https://github.com/primus/eventemitter3
+ */
+
  /**
   * Themes represent colors and font properties used by the ui
-  * @memberof UI
+  * @memberof ST
+  * @extends external:EventEmitter
   */
   export default class Theme extends EventEmitter {
     /**
      * @param {Object} [options] theme object
      */
-      constructor(options) {
+      constructor(options = {}) {
         super();
-        options = options || {};
-        let opts = Object.assign(options, Theme.defaults);
+        const opts = Object.assign(options, Theme.defaults);
+
+        /**
+         * Theme colors
+         * @member {Object}
+         */
         this.colors = JSON.parse(JSON.stringify(opts.widgets));
+
+        /**
+         * Theme font styles
+         * @member {Object}
+         */
         this.fontStyles = JSON.parse(JSON.stringify(opts.text));
+
+        /**
+         * Frame rects for theme textures
+         * @member {Object}
+         */
         this.frames = JSON.parse(JSON.stringify(this.colors));
+
+        /**
+         * The base texture for all the themes textures
+         * @member {PIXI.baseTexture}
+         */
         this.baseTexture = this.makeTexture();
+
+        /**
+         * Theme textures(frames for the base texture)
+         * @member {Object}
+         */
         this.textures = Object.assign({}, this.frames);
+
+        // Creates the textures from the frames
         this.makeTexturesRecursive(this.textures);
+
+        // App background color
         this.background = opts.background;
       }
 
       /**
        * Returns the global graphic used for widget clipping
+       * @static
        * @return {PIXI.Graphics}
        */
       static getClipGraphic() {
@@ -36,10 +68,10 @@ import Point from './Point';
       }
 
       /**
-       * All themeable widget classes should register their style
+       * Adds the given styles to the global Theme.defaults.
+       * @param {String} name  Name of the widget
+       * @param {Object} styles A collection of styles for the widget
        * @static
-       * @param {String} name  name of the widget
-       * @param {Object} styles a collection of styles for the widget
        */
       static registerDefaultWidgetStyle(name, styles) {
         if(!name || !styles) {
@@ -50,15 +82,16 @@ import Point from './Point';
       }
 
       /**
-       *For internal use only.
+       *(For internal use only!)
        *Makes sure a graphic is created and parented to a base graphic
        *for every color listed in the widgets section of the theme.
        *graphics are positioned with 1 pixel of spacing.
        *@param {Object} frames containes widget section of theme object
-       *@param {UI.Point} pos position object to be
+       *@param {ST.Point} pos position object to be
        *continuous throughout recursion
        *@param {PIXI.Graphics} graphic base graphic
        *that theme graphics are added to
+       *@private
        */
      makeGraphicsRecursive(frames, pos, graphic) {
         let keys = Object.keys(frames);
@@ -79,15 +112,16 @@ import Point from './Point';
       }
 
       /**
-       * Makes the texture used to color the widgets
+       * Makes the base texture used to color the widgets
+       * @private
        * @return {PIXI.Texture}
        */
       makeTexture() {
         let baseGraphic = GraphicsGen.rectangleGraphic(1024, 8, 0x000000);
         let pos = new Point();
 
-        /* make this.frames = the widgets portion of the theme Object
-        the colors in this.frames will be replaced by PIXI.Rectangles
+        /* make this.frames = the widgets portion of the theme Object.
+        The colors in this.frames will be replaced by PIXI.Rectangles
         that are the texture frames*/
         this.frames = JSON.parse(JSON.stringify(this.colors));
 
@@ -97,7 +131,7 @@ import Point from './Point';
       }
 
       /**
-       * Makes a all the textures needed by the theme. BaseTextures
+       * Makes all the textures needed by the theme. BaseTextures
        * contain the actual image. Textures serve as frames for the
        * sprites.
        * @param {PIXI.BaseTexture} tex
@@ -116,45 +150,9 @@ import Point from './Point';
             }
         }
       }
-
-      // /**
-      //  * iterate over all widget colors from theme and create a
-      //  * single texture containing all of them in 2x2 blocks whilst
-      //  * setting this.frame values to equal frame info.( texture atlas )
-      //  * this.frames should contain widgets section of theme before
-      //  * executing this function.
-      //  * @return {PIXI.Texture}
-      //  * @private
-      //  */
-      // createTextures() {
-      //   let base = GraphicsGen.rectangleGraphic(1024, 8, 0x000000);
-      //   let pos = new Point();
-      //
-      //   // keys = theme.widgets
-      //   let keys = Object.keys(this.frames);
-      //   for (let i = keys.length-1; i == 0; i--) {
-      //     // subkeys = enabled, hover... for each widget
-      //     let subKeys = Object.keys(this.frames[key[i]]);
-      //       for (let ii = subKeys.length-1; ii == 0; ii--) {
-      //         // accessing theme.widgets.(some widget).enabled, hover ...
-      //         // for color value
-      //         let g = GraphicsGen
-      //           .rectangleGraphic(2, 2, this.frames[key[i]][subKeys[ii]]);
-      //         base.addChild(g);
-      //         g.position.set(pos.x, pos.y);
-      //         pos.x += 3;
-      //         this.frames[key[i]][subKeys[ii]]
-      //           = new PIXI.Rectangle(pos.x, pos.y, 2, 2);
-      //       }
-      //   }
-      //
-      //   // At this point base graphic should contain all the needed colors.
-      //   // create and return the texture
-      //   let tex = base.generateCanvasTexture();
-      //   return tex;
-      // }
   }
 
+// Global Theme defaults
   Theme.defaults = {
       background: 0x222222,
       widgets: {
@@ -185,124 +183,5 @@ import Point from './Point';
       },
   };
 
+// Global clip graphic
   Theme.clipGraphic = GraphicsGen.rectangleGraphic(1, 1, 0x000000);
-  // Theme.cacheId = 0;
-
-// /**
-//  * Themes represent colors and font properties used by the ui
-//  * @memberof UI
-//  */
-//  export default class Theme extends EventEmitter {
-//      /**
-//       * @param {Object} options - optional parameters
-//       * @param {Number} [options.bkgColor=0x444444] - renderer bk color
-//       * @param {Number} [options.bodyColor=0x222222] - widget body color
-//       * @param {Number} [options.highlightColor=0x886611] - mouse over color
-//       * @param {Number} [options.textColor=0xdddddd] - default text color
-//       * @param {Number} [options.textSize=12]
-//       * @param {String} [options.font='Arial']
-//       */
-//      constructor(options) {
-//          super();
-//           let defaults = {
-//               bkgColor: 0x444444,
-//               panelColor: 0x222222,
-//               bodyColor: 0x2f2f2f,
-//               downColor: 0x2d2d2d,
-//               hoverColor: 0x886611,
-//               disabledColor: 0x116688,
-//               altColor: 0x000000,
-//               defaultTextStyle: {
-//                   fontFamily: 'Arial',
-//                   fontSize: 12,
-//                   fill: 0xdddddd,
-//               },
-//               hoverTextStyle: {
-//                   fontFamily: 'Arial',
-//                   fontSize: 12,
-//                   fill: 0xdddddd,
-//               },
-//               downTextStyle: {
-//                   fontFamily: 'Arial',
-//                   fontSize: 12,
-//                   fill: 0xdddddd,
-//               },
-//               disabledTextStyle: {
-//                   fontFamily: 'Arial',
-//                   fontSize: 12,
-//                   fill: 0xdddddd,
-//               },
-//               altTextStyle: {
-//                  fontFamily: 'Arial',
-//                  fontSize: 12,
-//                  fill: 0xdddddd,
-//             },
-//           };
-//
-//           options = setOptions(options, defaults);
-//
-//           /**
-//            * @member {Number}
-//            */
-//           this.bkgColor = options.bkgColor;
-//
-//           /**
-//            * @member {Number}
-//            */
-//           this.panelColor = options.panelColor;
-//
-//           /**
-//            * @member {Number}
-//            */
-//            this.bodyColor = options.bodyColor;
-//
-//           /**
-//            * @member {Number}
-//            */
-//           this.downColor = options.downColor;
-//
-//           /**
-//            * @member {Number}
-//            */
-//           this.hoverColor = options.hoverColor;
-//
-//           /**
-//            * @member {Number}
-//            */
-//           this.disabledColor = options.disabledColor;
-//
-//           /**
-//            * @member {Number}
-//            */
-//           this.altColor = options.altColor;
-//
-//           /**
-//            * @member {PIXI.TextStyle}
-//            */
-//           this.defaultTextStyle = options.defaultTextStyle;
-//
-//           /**
-//            * @member {PIXI.TextStyle}
-//            */
-//           this.downTextStyle = options.downTextStyle;
-//
-//           /**
-//            * @member {PIXI.TextStyle}
-//            */
-//           this.hoverTextStyle = options.hoverTextStyle;
-//
-//           /**
-//            * @member {PIXI.TextStyle}
-//            */
-//           this.disabledTextStyle = options.disabledTextStyle;
-//
-//           /**
-//            * @member {PIXI.TextStyle}
-//            */
-//           this.altTextStyle = options.altTextStyle;
-//
-//           this.graphics = new UIGraphics();
-//           this.graphics.makeGraphicsFromTheme(this);
-//      }
-//
-//   }
