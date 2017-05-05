@@ -1,5 +1,4 @@
 import App from './App';
-// import Renderer from './Renderer';
 import {HORIZONTAL, VERTICAL} from './const';
 import GraphicsGen from './GraphicsGen';
 import {setOptions} from './options';
@@ -8,7 +7,6 @@ import Point from './Point';
 import Size from './Size';
 import Theme from './Theme';
 import UIGraphics from './UIGraphics';
-// import WidgetShader from './WidgetShader';
 import {hackSpriteRendererDrawCounter} from './drawcount';
 
 import * as Widgets from './widgets';
@@ -33,9 +31,7 @@ export {
     UIGraphics,
     Theme,
     App,
-    // Renderer,
-    // WidgetShader,
     hackSpriteRendererDrawCounter,
 };
 
-global.UI = exports; // eslint-disable-line
+global.ST = exports; // eslint-disable-line
