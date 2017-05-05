@@ -1,13 +1,16 @@
-/*
-    siTransform.js
- */
-
 import * as PIXI from 'pixi.js';
 
 /**
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
+
+/**
  * Transform that makes a PIXI.Container size independent
- * from its parent
- * @memberof UI.Widgets
+ * from its parent. ( FOR INTERNAL USE ONLY! )
+ * @memberof ST.Widgets
+ * @extends external:PIXI#TransformStatic
  */
 export default class SITransform extends PIXI.TransformStatic {
     /**
@@ -41,10 +44,15 @@ export default class SITransform extends PIXI.TransformStatic {
            // concat the parent matrix with the objects transform.
            const pt = parentTransform.worldTransform;
            const wt = this.worldTransform;
+
+           /* I believe that removing the folowing prevent size modification
+           from the parent*/
+
         //    wt.a = (lt.a * pt.a) + (lt.b * pt.c);
         //    wt.b = (lt.a * pt.b) + (lt.b * pt.d);
         //    wt.c = (lt.c * pt.a) + (lt.d * pt.c);
         //    wt.d = (lt.c * pt.b) + (lt.d * pt.d);
+        //
            wt.tx = (lt.tx * pt.a) + (lt.ty * pt.c) + pt.tx;
            wt.ty = (lt.tx * pt.b) + (lt.ty * pt.d) + pt.ty;
            this._parentID = parentTransform._worldID;

@@ -1,6 +1,5 @@
 import Theme from '.././Theme';
 import Container from './Container';
-// import Button from './Button';
 import Image from './Image';
 import Alignment from '../layoutSys/Alignment';
 import ExpandingPolicy
@@ -9,7 +8,16 @@ import FixedPolicy
     from '../layoutSys/sizePolicies/FixedPolicy';
 import {HORIZONTAL, VERTICAL} from '.././const';
 
+/**
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
 
+/* Add widget style to ST.Theme.defaults. This way the widget
+will always have a style even if the given theme doesn't have one
+specifically for it. All widgets that have themable elements
+should call this method before describing their class.*/
 Theme.registerDefaultWidgetStyle('slider', {
     track: {
         enabled: 0x303030,
@@ -25,199 +33,175 @@ Theme.registerDefaultWidgetStyle('slider', {
 
 /**
  * A button on a track used to manipulate a variable
- * @extends UI.Widgets.Container
- * @memberof UI.Widgets
+ * @extends ST.Widgets.Container
+ * @memberof ST.Widgets
  */
 export default class Slider extends Container {
     /**
-     * @param {UI.Widgets.BaseWidget} parent the widgets parent
-     * @param {Number} orientation direction of slider
-     * @param {Object} [options]
+     * @param {ST.Widgets.BaseWidget} parent The widgets parent
+     * @param {Object} [options] @see ST.Widgets.BaseWidget
+     * @param {Number} [options.orientation] Direction of slider
      */
-    constructor(parent, orientation = HORIZONTAL, options) {
+    constructor(parent, options = {}) {
         super(parent, options);
 
-        // this.idealThemeFrameNode = 'slider';
-        // this.updateThemeTextureRoot();
+        options = Object.assign(options, defaults);
 
-        this._orientation = orientation;
+        /**
+         * Holds orientation internally
+         * @member {Number}
+         * @private
+         */
+        this._orientation = options.orientation;
 
+        /**
+         * The minimum value of the slider
+         * @member {Number}
+         */
         this.minValue = 0;
+
+        /**
+         * The maximum value of the slider
+         * @member {Number}
+         */
         this.maxValue = 1;
 
+        /**
+         * Holds the current value internally
+         * @member {Number}
+         */
         this._value = 0;
 
+        /**
+         * Set this callback and it will fire
+         * whenever the slider value changes.
+         * @member {Function}
+         */
         this.valueCB = null;
 
+        // Remove padding so that the track
+        // extends the full length of the widget
         this.padding.setAllTo(0);
 
+        /**
+         * The track that the button slides on
+         * @member {ST.Widgets.Image}
+         */
         this.track = new Image(this, this.theme.texture);
         this.track.interactive = true;
+
+        /**
+         * Rectangle used to extend the 'clickable' area of the track
+         * @member {PIXI.Rectangle}
+         * @private
+         */
         this.trackHitRect = new PIXI.Rectangle();
         this.track.hitArea = this.trackHitRect;
+
+        /**
+         * Padding that extends the 'clickable' area of the track
+         * @member {Number}
+         * @default 5
+         */
         this.trackHitPadding = 5;
 
-
+        /**
+         * The button that rides the track
+         * @type {ST.Widgets.Image}
+         */
         this.button = new Image(this, this.theme.texture, {
             width: 20,
             height: 20,
         });
         this.button.interactive = true;
 
+        /**
+         * Pre-calculated and cached. Used in multiple places
+         * @member {Number}
+         * @private
+         */
         this.btnHalfWidth = this.button.width / 2;
+
+        /**
+         * Pre-calculated and cached. Used in multiple places
+         * @member {Number}
+         * @private
+         */
         this.btnHalfHeight = this.button.height / 2;
 
+        /**
+         * Used internally to track if the mouse is dragging
+         * @member {Boolean}
+         */
         this._dragging = false;
 
-        this.button.pointerdown = (e)=>{
+        // listen to button pointer events, Handle dragging and call this
+        // widgets paint methods
+        this.button.on('pointerdown', (e)=>{
             this._dragging = true;
             this.paintDown();
-            // e.stopPropagation();
-            // this.button.paintDown();
-        };
-
+        });
         this.button.on('pointerup', (e)=>{
             this._dragging = false;
             this.paintDefault();
-            // e.stopPropagation();
         });
         this.button.on('pointerupoutside', (e)=>{
             this._dragging = false;
             this.paintDefault();
-            // e.stopPropagation();
         });
         this.button.on('pointercancel', (e)=>{
             this._dragging = false;
             this.paintDefault();
-            // e.stopPropagation();
         });
 
-        // this.button.pointerup
-        // = this.button.pointerupoutside
-        // = this.button.pointercancel
-        // = (data)=>{
-        //     this._dragging = false;
-        //     this.paintDefault();
-        //     // data.stopped = false;
-        //     // this.button.paintDefault();
-        // };
-        //
+        // Handle sliding the button on the track
         this.button.on('pointermove', (e)=>{
             if(this._dragging) {
-                // e.stopPropagation();
+                // prevent infinite loop caused by updates
               this.button.bypassInvalidation = true;
-              let pos = e.data.getLocalPosition(this);
-              let usableWidth = this.track.width - this.btnHalfWidth;
-              let usableHeight = this.track.height - this.btnHalfHeight;
-              if(this.orientation === UI.HORIZONTAL) {
+
+              const pos = e.data.getLocalPosition(this);
+              const usableWidth = this.track.width - this.btnHalfWidth;
+              const usableHeight = this.track.height - this.btnHalfHeight;
+
+              if(this.orientation === ST.HORIZONTAL) {
                   if (pos.x > this.btnHalfWidth
                       && pos.x < usableWidth) {
-                    // this.button.bypassInvalidation = true;
                     this.button.x = pos.x - this.btnHalfWidth;
                     this.button.applyPosition();
-                    // this.button.bypassInvalidation = false;
-                    this.emit('changed');
                 } else if(pos.x > usableWidth) {
-                    // this.button.bypassInvalidation = true;
                     this.button.x = usableWidth - this.btnHalfWidth;
                     this.button.applyPosition();
-                    // this.button.bypassInvalidation = false;
-                    this.emit('changed');
                 } else if(pos.x < this.btnHalfWidth) {
-                    // this.button.bypassInvalidation = true;
-                    this.button.x = 0; // this.btnHalfWidth;
+                    this.button.x = 0;
                     this.button.applyPosition();
-                    // this.button.bypassInvalidation = false;
-                    this.emit('changed');
                 }
             } else { // vertical
                   if (pos.y > this.btnHalfHeight
                       && pos.y < usableHeight) {
-                    // this.button.bypassInvalidation = true;
                     this.button.y = pos.y - this.btnHalfHeight;
                     this.button.applyPosition();
-                    // this.button.bypassInvalidation = false;
-                    this.emit('changed');
                 } else if(pos.y > usableHeight) {
-                    // this.button.bypassInvalidation = true;
                     this.button.y = usableHeight - this.btnHalfHeight;
                     this.button.applyPosition();
-                    // this.button.bypassInvalidation = false;
-                    this.emit('changed');
                 } else if(pos.y < this.btnHalfHeight) {
-                    // this.button.bypassInvalidation = true;
-                    this.button.y = 0;// this.btnHalfHeight;
+                    this.button.y = 0;
                     this.button.applyPosition();
-                    // this.button.bypassInvalidation = false;
-                    this.emit('changed');
                 }
               }
               this.button.bypassInvalidation = false;
               this.paintDown();
-            //   this.button.paintDown();
+              this.emit('changed');
             }
         });
 
-        // this.button.pointermove = (data)=>{
-        //     if(this._dragging) {
-        //         // data.stopPropagation();
-        //       this.button.bypassInvalidation = true;
-        //       let pos = data.data.getLocalPosition(this);
-        //       let usableWidth = this.track.width - this.btnHalfWidth;
-        //       let usableHeight = this.track.height - this.btnHalfHeight;
-        //       if(this.orientation === UI.HORIZONTAL) {
-        //           if (pos.x > this.btnHalfWidth
-        //               && pos.x < usableWidth) {
-        //             // this.button.bypassInvalidation = true;
-        //             this.button.x = pos.x - this.btnHalfWidth;
-        //             this.button.applyPosition();
-        //             // this.button.bypassInvalidation = false;
-        //             this.emit('changed');
-        //         } else if(pos.x > usableWidth) {
-        //             // this.button.bypassInvalidation = true;
-        //             this.button.x = usableWidth - this.btnHalfWidth;
-        //             this.button.applyPosition();
-        //             // this.button.bypassInvalidation = false;
-        //             this.emit('changed');
-        //         } else if(pos.x < this.btnHalfWidth) {
-        //             // this.button.bypassInvalidation = true;
-        //             this.button.x = 0; // this.btnHalfWidth;
-        //             this.button.applyPosition();
-        //             // this.button.bypassInvalidation = false;
-        //             this.emit('changed');
-        //         }
-        //     } else { // vertical
-        //           if (pos.y > this.btnHalfHeight
-        //               && pos.y < usableHeight) {
-        //             // this.button.bypassInvalidation = true;
-        //             this.button.y = pos.y - this.btnHalfHeight;
-        //             this.button.applyPosition();
-        //             // this.button.bypassInvalidation = false;
-        //             this.emit('changed');
-        //         } else if(pos.y > usableHeight) {
-        //             // this.button.bypassInvalidation = true;
-        //             this.button.y = usableHeight - this.btnHalfHeight;
-        //             this.button.applyPosition();
-        //             // this.button.bypassInvalidation = false;
-        //             this.emit('changed');
-        //         } else if(pos.y < this.btnHalfHeight) {
-        //             // this.button.bypassInvalidation = true;
-        //             this.button.y = 0;// this.btnHalfHeight;
-        //             this.button.applyPosition();
-        //             // this.button.bypassInvalidation = false;
-        //             this.emit('changed');
-        //         }
-        //       }
-        //       this.button.bypassInvalidation = false;
-        //       this.paintDown();
-        //     //   this.button.paintDown();
-        //     }
-        // };
-
         this.track.on('pointertap', (e)=>{
-            let pos = e.data.getLocalPosition(this);
-            if(this.orientation === UI.HORIZONTAL) {
+            const pos = e.data.getLocalPosition(this);
+
+            if(this.orientation === ST.HORIZONTAL) {
+                // prevent infinite loop caused by updates
                 this.button.bypassInvalidation = true;
+
                 if(pos.x > this.track.width - this.button.width) {
                     pos.x -= this.button.width;
                 }
@@ -234,51 +218,35 @@ export default class Slider extends Container {
                 this.button.bypassInvalidation = false;
             }
             this.emit('changed');
-            // e.stopPropagation();
         });
-        // clicking on the track sets position of button
-        // this.track.pointertap = (data)=>{
-        //     let pos = data.data.getLocalPosition(this);
-        //     if(this.orientation === UI.HORIZONTAL) {
-        //         this.button.bypassInvalidation = true;
-        //         if(pos.x > this.track.width - this.button.width) {
-        //             pos.x -= this.button.width;
-        //         }
-        //         this.button.x = pos.x;
-        //         this.button.applyPosition();
-        //         this.button.bypassInvalidation = false;
-        //     } else {
-        //         this.button.bypassInvalidation = true;
-        //         if(pos.y > this.track.height - this.button.height) {
-        //             pos.y -= this.button.height;
-        //         }
-        //         this.button.y = pos.y;
-        //         this.button.applyPosition();
-        //         this.button.bypassInvalidation = false;
-        //     }
-        //     this.emit('changed');
-        // };
 
-        this.orientation = orientation;
+        this.orientation = options.orientation;
 
+        // keep these cached vars updated with changes in button size
         this.button.on('sizeChanged', ()=>{
             this.btnHalfWidth = this.button.width / 2;
             this.btnHalfHeight = this.button.height / 2;
         }, this);
 
+        // make sure value doesn't change when widget resizes
         this.track.on('sizeChanged', ()=>{
-            // this._value = this.oldValue;
             this.value = this._value;
         }, this);
 
-        this.track.on('layoutUpdated', this.updateTrackHitRect, this);
+        // update tracks extended hit area when orientation or size changes
+        this.track.on('updated', this.updateTrackHitRect, this);
 
         this.paintDefault();
+
+        /**
+         * Fires when the sliders value changes
+         * @event ST.widgets.slider#changed
+         */
     }
 
     /**
-     *Update the filter area of the track to make it easier to
-     *click on it.
+     *Update the tracks extended clickable area
+     *@private
      */
     updateTrackHitRect() {
         let thr = this.trackHitRect;
@@ -295,11 +263,9 @@ export default class Slider extends Container {
         }
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     paintDefault() {
-        // no need to check track too. If button exist track does to
+        // no need to check track too. If button exist track should
         if(this.button) {
             this.track.imgObj.texture
                 = this.theme.textures.slider.track.enabled;
@@ -308,9 +274,7 @@ export default class Slider extends Container {
         }
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     paintDisabled() {
         if(this.button) {
             this.track.imgObj.texture
@@ -320,9 +284,7 @@ export default class Slider extends Container {
         }
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     paintDown() {
         // this.track.imgObj.texture.frame
         //     = this.theme.frames.slider.track.disabled;
@@ -332,9 +294,7 @@ export default class Slider extends Container {
         }
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     paintHover() {
         // this.track.imgObj.texture.frame
         //     = this.theme.frames.slider.track.disabled;
@@ -345,11 +305,12 @@ export default class Slider extends Container {
     }
 
     /**
-     *@type {Number}
+     * The value of the slider based on the buttons position on the track
+     *@member {Number}
      */
     get value() {
         if(this.orientation === HORIZONTAL) {
-            let value =
+            const value =
                 (((this.maxValue - this.minValue)
                     / (this.track.width - this.button.width))
                     * this.button.x) + this.minValue;
@@ -362,7 +323,7 @@ export default class Slider extends Container {
                 return value;
             }
         } else {
-            let value =
+            const value =
                 (((this.maxValue - this.minValue)
                     / (this.track.height - this.button.height))
                     * this.button.y) + this.minValue;
@@ -378,34 +339,34 @@ export default class Slider extends Container {
     }
 
     set value(val) { // eslint-disable-line require-jsdoc
+        // make sure the value is within the set range
         val = Math.min(Math.max(val, this.minValue), this.maxValue);
         this.oldValue = this._value = val;
+
         this.button.beginBypassUpdate();
+
         if(this.orientation === HORIZONTAL) {
-            let pos
+            const pos
             = ((val - this.minValue) / (this.maxValue - this.minValue))
             * (this.track.width - this.button.width);
 
-            // this.button.beginBypassUpdate();
             this.button.x = pos;
             this.button.applyPosition();
-            // this.button.endBypassUpdate();
         } else {
-            let pos
+            const pos
             = ((val - this.minValue) / (this.maxValue - this.minValue))
             * (this.track.height - this.button.height);
 
-            // this.button.beginBypassUpdate();
             this.button.y = pos;
             this.button.applyPosition();
-            // this.button.endBypassUpdate();
         }
         this.button.endBypassUpdate();
         this.emit('changed');
     }
 
     /**
-     * @type {Number}
+     * The direction of the slider
+     * @member {Number}
      */
     get orientation() {
         return this._orientation;
@@ -414,35 +375,40 @@ export default class Slider extends Container {
     set orientation(val) { // eslint-disable-line require-jsdoc
         if(val === HORIZONTAL) {
             this._orientation = val;
+
             this.min.height = this.button.height;
             this.min.width = 30;
             this.max.height = this.min.height;
             this.max.width = 10000;
-            // this.updateTrackH();
+
             this.track.width = this.width;
             this.track.height = 5;
+
             this.layout.alignment.hAlign = Alignment.left;
             this.layout.alignment.vAlign = Alignment.middle;
+
             this.track.hPolicy
                 = new ExpandingPolicy(this.track, HORIZONTAL);
             this.track.vPolicy = new FixedPolicy(this.track);
         } else if(val === VERTICAL) {
             this._orientation = val;
+
             this.min.height = 30;
             this.min.width = this.button.width;
             this.max.height = 10000;
             this.max.width = this.min.width;
-            // this.updateTrackV();
 
             this.track.width = 5;
             this.track.height = this.height;
+
             this.layout.alignment.hAlign = Alignment.center;
             this.layout.alignment.vAlign = Alignment.top;
+
             this.track.vPolicy
                 = new ExpandingPolicy(this.track, VERTICAL);
             this.track.hPolicy = new FixedPolicy(this.track);
         } else {
-            throw new Error('Slider.orientation must be either UI.HORIZONTAL'
+            throw new Error('Slider.orientation must be either ST.HORIZONTAL'
                 + ' or UI.VERTICAL');
         }
     }
