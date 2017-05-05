@@ -5,22 +5,26 @@ import Point from '.././Point';
 import Size from '.././Size';
 import FixedLayout from '../layoutSys/layouts/FixedLayout';
 import FixedPolicy from '../layoutSys/sizePolicies/FixedPolicy';
-import {setOptions} from '.././options';
 import SITransform from './SITransform';
 import {HORIZONTAL, VERTICAL} from '.././const';
-// import WidgetShader from '.././WidgetShader';
 
 /**
- * The Basic base widget
- * @memberof UI.Widgets
- * @extends PIXI.Container
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
+
+/**
+ * The base class for all widgets
+ * @memberof ST.Widgets
+ * @extends external:PIXI#Container
  * @abstract
  */
 export default class BaseWidget extends PIXI.Container {
     /**
-     * @param {UI.Widgets.BaseWidget} parent - the parent widget
-     * @param {Object} [options] - optional parameters
-     * @param {UI.Theme} options.theme - Theme for this widget -
+     * @param {ST.Widgets.BaseWidget} parent - the parent widget
+     * @param {Object} [options = Object] - optional parameters
+     * @param {ST.Theme} options.theme - Theme for this widget -
      * defaults to current theme
      * @param {Number} [options.x=0] - x position
      * @param {Number} [options.y=0] - y position
@@ -35,49 +39,43 @@ export default class BaseWidget extends PIXI.Container {
      * @param {Number} [options.padBottom=4] -bottom padding
      * @param {Number} [options.padRight=4] -right padding
      */
-    constructor(parent, options) {
+    constructor(parent, options = {}) {
         super();
+        // default options
+        defaults = {
+            theme: null,
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0,
+            minWidth: 0,
+            minHeight: 0,
+            maxWidth: 10000,
+            maxHeight: 10000,
+            padTop: 4,
+            padLeft: 4,
+            padBottom: 4,
+            padRight: 4,
+            hPolicy: new FixedPolicy(this, HORIZONTAL),
+            vPolicy: new FixedPolicy(this, VERTICAL),
+            layout: new FixedLayout(this),
+        };
 
-        /**
-         * Holds default options - dont use directly
-         * @type {Object}
-         * @protected
-         */
-        this._defaults = this._defaults || {};
-        let defaults = this._defaults;
-
-        defaults.theme = defaults.theme || null; // || Theme.current;
-        defaults.x = defaults.x || 0;
-        defaults.y = defaults.y || 0;
-        defaults.width = defaults.width || 0;
-        defaults.height = defaults.height || 0;
-        defaults.minWidth = defaults.minWidth || 0;
-        defaults.minHeight = defaults.minHeight || 0;
-        defaults.maxWidth = defaults.maxWidth || 10000;
-        defaults.maxHeight = defaults.maxHeight || 10000;
-        defaults.padTop = defaults.padTop || 4;
-        defaults.padLeft = defaults.padLeft || 4;
-        defaults.padBottom = defaults.padBottom || 4;
-        defaults.padRight = defaults.padRight || 4;
-        defaults.hPolicy = defaults.hPolicy
-        || new FixedPolicy(this, HORIZONTAL);
-        defaults.vPolicy = defaults.vPolicy
-        || new FixedPolicy(this, VERTICAL);
-        defaults.layout = defaults.layout || new FixedLayout(this);
-
-        options = setOptions(options, defaults);
+        // fill in missing options with defaults
+        options = Object.assign(options, defaults);
 
         if(parent) {
             parent.addChild(this);
         }
 
-        // All widgets should be size independent from their parents.
-        // SITransform acomplishes this.
+        // Make sure widgets can be sized independent from
+        // their parents.
+        // Also fixes widget jitters when resizing
         this.transform = new SITransform();
 
         /**
          * Allows width and height to control a child object
-         * @type {PIXI.Container}
+         * @member {PIXI.Container}
          * @default this
          * @private
          */
@@ -85,19 +83,16 @@ export default class BaseWidget extends PIXI.Container {
 
         /**
          * Internal Theme
-         * @type {UI.Theme}
+         * @member {ST.Theme}
          * @private
          */
         if(options.theme) {
             this._theme = options.theme;
         }
 
-        // this.idealThemeFrameNode = 'baseWidget';
-        // this.themeFrameRootNode;
-
         /**
          * Holds padding component
-         * @type {UI.Padding}
+         * @member {ST.Padding}
          */
         this.padding = new Padding();
         this.padding.set(options.padTop, options.padLeft,
@@ -105,63 +100,103 @@ export default class BaseWidget extends PIXI.Container {
 
         /**
          * The internal HORIZONTAL policy
-         * @type {UI.SizePolicies.BasePolicy}
+         * @member {ST.SizePolicies.BasePolicy}
          * @private
          */
         this._hPolicy = options.hPolicy;
 
         /**
          * The internal VERTICAL policy
-         * @type {UI.SizePolicies.BasePolicy}
+         * @member {ST.SizePolicies.BasePolicy}
          * @private
          */
         this._vPolicy = options.vPolicy;
 
         /**
          * Holds the layout internally
-         * @type {UI.Layouts.BaseLayout}
+         * @member {ST.Layouts.BaseLayout}
          * @private
          */
         this._layout = options.layout;
 
         /**
-         * Overides PIXI.Container's position allowing us to
-         * add offset to position in layout before applying the final position
-         * @type {UI.Point}
+         * Replaces PIXI.Containers position object.
+         * This allows us to use a 'virtual' position that we
+         * add the padding and alignment to before applying it
+         * to the 'real' position.
+         * @member {ST.Point}
          * @override
+         * @private
          */
         this._position = new Point();
         this._position.set(options.x, options.y);
 
         /**
          * Hold minimum allowed size for the widget
-         * @type {UI.Size}
+         * @member {ST.Size}
          */
         this.min = new Size();
         this.min.set(options.minWidth, options.minHeight);
 
         /**
          * Holds maximum allowed size for the widget
-         * @type {UI.Size}
+         * @member {ST.Size}
          */
         this.max = new Size();
         this.max.set(options.maxWidth, options.maxHeight);
 
         /**
          * Widget width
-         * @type {Number}
+         * @member {Number}
          */
         this.width = options.width;
 
         /**
          * Widget height
-         * @type {Number}
+         * @member {Number}
          */
         this.height = options.height;
 
+        /**
+         * The state of the widget. If false, the widget will be
+         * updated on the next loop iteration. Should only be
+         * used in conditional checks
+         * @member {Boolean}
+         * @readonly
+         */
         this.valid = false;
 
+        /**
+         * Used internally by beginBypassUpdate() and endBypassUpdate().
+         * Should not be used directly
+         * @member {Boolean}
+         * @private
+         */
         this.bypassInvalidation = false;
+
+        /**
+         * Stores the state of the interactive property
+         * @private
+         */
+        this._interactiveState = this.interactive;
+
+        /**
+         * Internal - disabled state
+         * @private
+         */
+        this._disabled = false;
+
+        /**
+         * PIXI.Graphics used to mask the widgets contents -
+         * usually applies to children
+         * @member {PIXI.Graphics}
+         * @private
+         */
+        this._clipGraphic = Theme.clipGraphic.clone();
+        this.addChild(this._clipGraphic);
+        this._clipGraphic.boundsPadding = 0;
+        this._updateClipGraphic();
+        this._clipGraphic.renderable = false;
 
         // if no theme is set at this point set default
         if(!this._theme) {
@@ -172,104 +207,84 @@ export default class BaseWidget extends PIXI.Container {
             }
         }
 
-        // this.pointercancel = this.paintDefault;
-        // this.pointerdown = this.paintDown;
-        // this.pointerover = this.paintHover;
-        // this.pointerout = this.paintDefault;
-        // this.pointerup = this.paintHover;
-
+        // Connect mouse events with methods that change
+        // the widgets texture
         this.on('mousecancel', this.paintDefault);
         this.on('mousedown', this.paintDown);
         this.on('mouseover', this.paintHover);
         this.on('mouseout', this.paintDefault);
         this.on('mouseup', this.paintHover);
 
-        // this.dragging = false;
-        //
-        // this.on('pointercancel', (e)=>{
-        //     this.paintDefault();
-        //     this.dragging = false;
-        //     e.stopPropagation();
-        // });
-        // this.on('pointerdown', (e)=>{
-        //     this.paintDown();
-        //     this.dragging = false;
-        //     e.stopPropagation();
-        // });
-        // this.on('pointerover', (e)=>{
-        //     this.paintHover();
-        //     // e.stopPropagation();
-        // });
-        // this.on('pointerupoutside', (e)=>{
-        //     this.dragging = false;
-        //     this.paintDefault();
-        //     e.stopPropagation();
-        // });
-        // this.on('pointerup', (e)=>{
-        //     this.dragging = false;
-        //     this.paintHover();
-        //     // e.stopPropagation();
-        // });
-        // this.on('pointerout', (e)=>{
-        //     this.dragging = false;
-        //     this.paintDefault();
-        //     // e.stopPropagation();
-        // });
-        // this.on('pointermove', (e)=>{
-        //     if(this.dragging) e.stopPropagation();
-        // });
+        /**
+         * Fires each frame after widget is rendered. Can be used to make
+         * per frame updates.
+         * @event ST.Widgets.BaseWidget#render
+         */
 
         /**
-         * Stores the state of the interactive property
-         * @private
+         * Fires whenever the widgets theme is changed.
+         * @event ST.Widgets.BaseWidget#themeChanged
+         * @param {ST.Theme} theme The set theme
          */
-        this._interactiveState = this.interactive;
 
         /**
-         * Internal - disabled state
+         * Fires whenever one of the size policies are changed.
+         * @event ST.Widgets.BaseWidget#policyChanged
+         * @param {ST.SizePolicies.BasePolicy} policy the set policy
          */
-        this._disabled = false;
 
-        /**
-         * PIXI.Graphics used to mask the widgets contents -
-         * usually applies to children
-         * @type {PIXI.Graphics}
-         * @default null
-         * @protected
-         */
-        this._clipGraphic = Theme.clipGraphic.clone();
-        this.addChild(this._clipGraphic);
-        this._clipGraphic.boundsPadding = 0;
-        this._updateClipGraphic();
-        this._clipGraphic.renderable = false;
+         /**
+          * Fires whenever the widgets layout is changed.
+          * @event ST.Widgets.BaseWidget#layoutChanged
+          * @param {ST.Layouts.BaseLayout} layout The set layout
+          */
 
-        // this.padding.on('paddingChanged', this.routeInvalidation, this);
-        // this.position.on('changed', this.routeInvalidation, this);
-        // this.on('sizeChanged', this.routeInvalidation, this);
-        // this.on('layoutChanged', this.routeInvalidation, this);
-        // this.on('policyChanged', this.routeInvalidation, this);
+          /**
+          * Fires whenever the widgets width is changed.
+          * @event ST.Widgets.BaseWidget#widthChanged
+          * @param {Number} width The set width
+          */
 
-        this.name = '';
-        // this.color = PIXI.utils.hex2rgb(0x000000);
+          /**
+          * Fires whenever the widgets height is changed.
+          * @event ST.Widgets.BaseWidget#heightChanged
+          * @param {Number} height The set height
+          */
+
+          /**
+          * Fires whenever the widgets size is changed.
+          * @event ST.Widgets.BaseWidget#sizeChanged
+          * @param {Number} width The set width
+          * @param {Number} height The set height
+          */
+
+          /**
+           * Fires when widget is updated
+           * @event ST.Widgets.BaseWidget#updated
+           */
     }
 
     /**
-     * TODO
+     * Set default textures and other cosmetics
+     * @virtual
      */
     paintDefault() {}
 
     /**
-     * TODO
+     * Set textures for pointerover events
+     * @virtual
      */
     paintHover() {}
 
     /**
-     * TODO
+     * Set textures for pointerdown events
+     * @virtual
      */
     paintDown() {}
 
     /**
-     * TODO
+     * Set textures for disabled state
+     * @virtual
      */
     paintDisabled() {}
 
@@ -290,28 +305,29 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Updates size and layout
+     * Executes sizepolicies and the layout
      */
     update() {
-        // this.sizeManager.update();
-        // this.layoutManager.update();
         this._hPolicy.exec();
         this._vPolicy.exec();
         this._layout.exec();
-        console.log('update: ' + this.name);
+        this.emit('updated');
     }
 
     /**
-     * TODO
-     * @param {Object} context - contextual this
+     * Sets validation state to true.
      */
     validate() {
         this.valid = true;
     }
 
     /**
-     * TODO
-     * @param {Boolean} [route=false] - wether to route the invalidation
+     * Sets invalidation state to false.
+     * If widget is invalid, an update will be attempted on the
+     * next loop iteration
+     * @param {Boolean} [route=false] If true then an attempt will be
+     * made to route the invalidation to an ancestor widget.
+     * @see #routeInvalidation
      */
     invalidate(route = false) {
         if(!route) {
@@ -322,8 +338,10 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * TODO
-     * @param {Object} context todo
+     * Attempts to route the invalidation of the widget upward through
+     * its ancestors untill one with either no parent or
+     * one with a FixedLayout is found. This insures that all the affected
+     * widgets get updated.
      */
     routeInvalidation() {
         let done = false;
@@ -343,7 +361,9 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * TODO
+     * Attempts to send update() upward to the highest invalid parent in an
+     * effort to prevent updating any one widget twice in the same
+     * loop iteration.
      */
     recursiveRouteUpdate() {
         let par = this;
@@ -360,7 +380,7 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Called every frame and is used like an update method
+     * Checks validation and updates if neccessary each frame.
      * @override
      * @private
      */
@@ -373,12 +393,11 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Called every frame and is used like an update method
+     * Checks validation and updates if neccessary each frame.
      * @override
      * @private
      */
     renderWebGL(ren) {
-        // WidgetShader.inst().color = this.color;
         super.renderWebGL(ren);
         if(!this.valid) {
             this.recursiveRouteUpdate();
@@ -387,8 +406,8 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Override from PIXI.Container
-     * @param {UI.Widgets.BaseWidget} widget - parent to be
+     * Sets the parent of the widget
+     * @param {ST.Widgets.BaseWidget} widget Parent to be
      * @override
      */
     setParent(widget) {
@@ -396,8 +415,10 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Overidden from PIXI.Container - adds child widget
-     * @param {UI.Widgets.BaseWidget} child - the child to add
+     * Adds a child or children widgets. Sets the child to be clipped by
+     * its parent and to take its theme.
+     * @see http://pixijs.download/release/docs/PIXI.Container.html#addChild
+     * @param {ST.Widgets.BaseWidget} child The child or children to add
      * @override
      */
     addChild(child) {
@@ -415,9 +436,11 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Overidden from PIXI.Container - adds child widget at specified index
-     * @param {UI.Widgets.BaseWidget} child - the child to add
-     * @param {Number} index - the index into children array
+     * Adds a child or children widgets at the specified index.
+     * Sets the child to be clipped by its parent and to take its theme.
+     * @see http://pixijs.download/release/docs/PIXI.Container.html#addChild
+     * @param {ST.Widgets.BaseWidget} child The child to add
+     * @param {Number} index The index into children array
      * @override
      */
     addChildAt(child, index) {
@@ -436,7 +459,7 @@ export default class BaseWidget extends PIXI.Container {
 
 
     /**
-     * Overidden from PIXI.Container - Handle changes to children array
+     * Invalidates the widget if children have been added or removed.
      * @override
      */
     onChildrenChange() {
@@ -446,51 +469,31 @@ export default class BaseWidget extends PIXI.Container {
 
     /**
      * Apply the otherwise virtual position.
-     * @private
      * @param {Number} [offsetX = 0] added to the position
      * @param {Number} [offsetY = 0] added to the position
      */
     applyPosition(offsetX = 0, offsetY = 0) {
-        // offsetX += this.width * this.pivot.x;
-        // offsetY += this.height * this.pivot.y;
         this.transform.position.set(this.x + offsetX, this.y + offsetY);
     }
 
     /**
-     * Update the clip graphic - this clipGraphic is used to mask
-     * its children
-     * @param {Object} context - contextual this
+     * Update the clipgraphics size to match the widgets size - padding.
      * @private
      */
     _updateClipGraphic() {
-        let pad = this.padding;
-        let w = this.width - (pad.left + pad.right);
-        let h = this.height - (pad.top + pad.bottom);
-        let cg = this._clipGraphic;
+        const pad = this.padding;
+        const w = this.width - (pad.left + pad.right);
+        const h = this.height - (pad.top + pad.bottom);
+        const cg = this._clipGraphic;
         cg.width = w;
         cg.height = h;
         cg.transform.position.set(pad.left, pad.top);
         cg.renderable = false;
     }
 
-    // /**
-    //  * Update the root node to access the appropriate texture frame
-    //  * for the widget if the set theme has one.
-    //  */
-    // updateThemeTextureRoot() {
-    //     let node = this.theme.frames[this.idealThemeFrameNode]
-    //         ? this.idealThemeFrame : 'default';
-    //
-    //     this.themeFrameRootNode = this.theme.frames[node];
-    // }
-
-    // PROPERTIES ---
-
-
     /**
-     * The theme that applies to this widget - default is
-     * the global Theme.current
-     * @type {UI.Theme}
+     * The theme for this widget
+     * @member {ST.Theme}
      */
     get theme() {
         return this._theme;
@@ -505,7 +508,7 @@ export default class BaseWidget extends PIXI.Container {
             // recursive - set childrens theme to match
             let i = this.children.length;
             while(i--) {
-                let child = this.children[i];
+                const child = this.children[i];
                 if(child instanceof BaseWidget) {
                     this.children[i].theme = theme;
                 }
@@ -517,7 +520,7 @@ export default class BaseWidget extends PIXI.Container {
 
     /**
      * The clipGraphic is used to mask this widgets children
-     * @type {PIXI.Graphics}
+     * @member {PIXI.Graphics}
      */
     get clipGraphic() {
         return this._clipGraphic;
@@ -545,6 +548,7 @@ export default class BaseWidget extends PIXI.Container {
 
     /**
      * Set true to disable the widget
+     * @member {Boolean}
      */
     get disabled() {
         return this._disabled;
@@ -563,11 +567,17 @@ export default class BaseWidget extends PIXI.Container {
                 this.paintDefault();
             }
         }
+
+        // recursively set children
+        let i = this.children.length;
+        while(i--) {
+            this.children[i].disabled = val;
+        }
     }
 
     /**
      * The HORIZONTAL size policy
-     * @member {UI.SizePolicies.BasePolicy}
+     * @member {ST.SizePolicies.BasePolicy}
      */
     get hPolicy() {
         return this._hPolicy;
@@ -581,7 +591,7 @@ export default class BaseWidget extends PIXI.Container {
 
     /**
      * The VERTICAL size policy
-     * @member {UI.SizePolicies.BasePolicy}
+     * @member {ST.SizePolicies.BasePolicy}
      */
     get vPolicy() {
         return this._vPolicy;
@@ -594,8 +604,8 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * The layout that this manager manages
-    * @member {UI.Layouts.BaseLayout}
+     * The layout for this widget
+     * @member {ST.Layouts.BaseLayout}
      */
     get layout() {
         return this._layout;
@@ -618,7 +628,6 @@ export default class BaseWidget extends PIXI.Container {
     set x(val) { // eslint-disable-line require-jsdoc
         this.position.x = val;
         if(!this.bypassInvalidation) this.routeInvalidation();
-        // this.emit('positionChanged', this.position);
     }
 
     /**
@@ -632,12 +641,11 @@ export default class BaseWidget extends PIXI.Container {
     set y(val) { // eslint-disable-line require-jsdoc
         this.position.y = val;
         if(!this.bypassInvalidation) this.routeInvalidation();
-        // this.emit('positionChanged', this.position);
     }
 
     /**
-     * Widget position - use position.set(x,y)
-     * @member {UI.Point}
+     * The position object for the widget(position.set(x, y)).
+     * @member {ST.Point}
      * @override
      * @readonly
      */

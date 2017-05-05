@@ -1,12 +1,15 @@
-/*
-    padding.js
- */
-
 import EventEmitter from 'eventemitter3';
 
 /**
+ * The EventEmitter namespace
+ * @external EventEmitter
+ * @see https://github.com/primus/eventemitter3
+ */
+
+/**
  * Padding componenet holds padding data for 4 sides
- * @memberof UI
+ * @memberof ST
+ * @extends external:EventEmitter
  */
 export default class Padding extends EventEmitter {
     /**
@@ -20,31 +23,36 @@ export default class Padding extends EventEmitter {
 
         /**
          * Internal top padding
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._top = top;
 
         /**
          * Internal left padding
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._left = left;
 
         /**
          * Internal bottom padding
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._bottom = bottom;
 
         /**
          * Internal right padding
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._right = right;
+
+        /**
+         * Fires when one or more of the paddings have changed
+         * @event ST.Padding#changed
+         */
     }
 
     /**
@@ -60,8 +68,7 @@ export default class Padding extends EventEmitter {
         this._left = left;
         this._bottom = bottom;
         this._right = right;
-        // this.signal_paddingChanged.emit(this);
-        this.emit('paddingChanged', this);
+        this.emit('changed', this);
         return [top, left, bottom, right];
     }
 
@@ -72,16 +79,13 @@ export default class Padding extends EventEmitter {
      */
     setAllTo(val = 0) {
         this._top = this._bottom = this._left = this._right = val;
-        // this.signal_paddingChanged.emit(this);
-        this.emit('paddingChanged', this);
+        this.emit('changed', this);
         return val;
     }
 
-    // properties
-
     /**
      * Top padding
-     * @return {Number}
+     * @member {Number}
      */
     get top() {
         return this._top;
@@ -89,12 +93,12 @@ export default class Padding extends EventEmitter {
 
     set top(val) { // eslint-disable-line require-jsdoc
         this._top = val;
-        this.emit('paddingChanged', this);
+        this.emit('changed', this);
     }
 
     /**
      * Left padding
-     * @return {Number}
+     * @member {Number}
      */
     get left() {
         return this._left;
@@ -102,12 +106,12 @@ export default class Padding extends EventEmitter {
 
     set left(val) { // eslint-disable-line require-jsdoc
         this._left = val;
-        this.emit('paddingChanged', this);
+        this.emit('changed', this);
     }
 
     /**
      * Bottom padding
-     * @return {Number}
+     * @member {Number}
      */
     get bottom() {
         return this._bottom;
@@ -115,11 +119,11 @@ export default class Padding extends EventEmitter {
 
     set bottom(val) { // eslint-disable-line require-jsdoc
         this._bottom = val;
-        this.emit('paddingChanged', this);
+        this.emit('changed', this);
     }
     /**
      * Right padding
-     * @return {Number}
+     * @member {Number}
      */
     get right() {
         return this._right;
@@ -127,6 +131,6 @@ export default class Padding extends EventEmitter {
 
     set right(val) { // eslint-disable-line require-jsdoc
         this._right = val;
-        this.emit('paddingChanged', this);
+        this.emit('changed', this);
     }
 }

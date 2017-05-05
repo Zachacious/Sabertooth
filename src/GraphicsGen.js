@@ -1,17 +1,19 @@
-/*
-    GraphicsGen.js
- */
-
 import * as PIXI from 'pixi.js';
 
 /**
+ * The PIXI namespace
+ * @external PIXI
+ * @see http://pixijs.download/release/docs/index.html
+ */
+
+/**
  * Methods that generate Pixi.Graphics
- * @memberof UI
+ * @memberof ST
  */
 export default class GraphicsGen {
 
     /**
-     * Generate a rectangle
+     * Generate a rectangle as a graphic
      * @param {Number} width - width of rectangle
      * @param {Number} height - height of rectangle
      * @param {Number} color - color of rectangle

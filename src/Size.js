@@ -1,12 +1,15 @@
-/*
-    size.js
- */
-
 import EventEmitter from 'eventemitter3';
 
 /**
+ * The EventEmitter namespace
+ * @external EventEmitter
+ * @see https://github.com/primus/eventemitter3
+ */
+
+/**
  * Holds size information
- * @memberof UI
+ * @memberof ST
+ * @extends external:EventEmitter
  */
 export default class Size extends EventEmitter {
     /**
@@ -18,17 +21,22 @@ export default class Size extends EventEmitter {
 
         /**
          * Internal width
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._width = width;
 
         /**
          * Internal height
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._height = height;
+
+        /**
+         * Fires when size data changes
+         * @event ST.Size#changed
+         */
     }
 
     /**
@@ -41,8 +49,6 @@ export default class Size extends EventEmitter {
         this._height = height;
         this.emit('changed', this);
     }
-
-    // properties
 
     /**
      * @member {Number}
