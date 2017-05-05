@@ -1,14 +1,16 @@
-/*
-    Point.js
- */
-
 import EventEmitter from 'eventemitter3';
 
 /**
+ * The EventEmitter namespace
+ * @external EventEmitter
+ * @see https://github.com/primus/eventemitter3
+ */
+
+/**
  * Hold position data.
- * Note: Could use PIXI.Point instead if you dont need
- * the signal/ slot mechanism.
- * @memberof UI
+ * Like PIXI.Point but with certain events
+ * @memberof ST
+ * @extends external:EventEmitter
  */
 export default class Point extends EventEmitter {
     /**
@@ -20,17 +22,23 @@ export default class Point extends EventEmitter {
 
         /**
          * Internal x coordinate
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._x = x;
 
         /**
          * Internal y coordinate
-         * @type {Number}
+         * @member {Number}
          * @private
          */
         this._y = y;
+
+        /**
+         * Fires when positional data changes
+         * @event ST.Point#changed
+         * @param {ST.Point}
+         */
     }
 
     /**
