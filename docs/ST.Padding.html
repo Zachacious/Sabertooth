@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: layoutSys/layouts/BoxLayout.js</title>
+    <title>Class: Padding</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -1525,189 +1525,985 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="layoutSys_layouts_BoxLayout.js.html">Source: layoutSys/layouts/BoxLayout.js</h1>
+        <h1 class="page-title" data-filename="ST.Padding.html">Class: Padding</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>import BaseLayout from './BaseLayout';
-import Point from '../.././Point';
-import {HORIZONTAL} from '../.././const';
-import BaseWidget from '../.././widgets/BaseWidget';
+<header>
+    <h2>
+    Padding
+    </h2>
+    
+        <div class="class-description"><p>Padding componenet holds padding data for 4 sides</p></div>
+    
+</header>  
 
-/**
- * Lays out widgets in a straight line in one direction
- * @memberof ST.Layouts
- * @extends ST.Layouts.BaseLayout
- */
-export default class BoxLayout extends BaseLayout {
-    /**
-     *@param {ST.Widgets.BaseWidget} hostWidget
-     *The widget this layout belongs to
-     *@param {number} [orientation=HORIZONTAL] Orientation of layout
-     *@param {number} [spacing=4] the space between widgets in pixels
-     */
-    constructor(hostWidget, orientation = HORIZONTAL, spacing = 4) {
-        super(hostWidget);
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Padding">
+            
+            new ST.Padding<span class="signature">(<span class="optional">top</span>, <span class="optional">left</span>, <span class="optional">bottom</span>, <span class="optional">right</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Padding.js.html">Padding.js</a>, <a href="Padding.js.html#line16">line 16</a>
+        </div>
+        
+    </div>
 
-        /**
-         * Orientation of the layout
-         * @member {number}
-         */
-        this.orientation = orientation;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * The space between widgets in pixels
-         * @member {number}
-         */
-        this.spacing = spacing;
+    
+    
+    
+    
+    
+        
 
-        /**
-         * Holds the offset applied to each
-         * consecutive child widget's position
-         * @member {Point}
-         * @private
-         */
-        this.posOffset = new Point();
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>top</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
 
-        /**
-         * Total width of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidth = 0;
 
-        /**
-         * Total height of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeight = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>left</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidthOld = 0;
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeightOld = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>bottom</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
 
-        /**
-         * Wether child sizes have been calculted
-         * @member {Boolean}
-         * @private
-         */
-        this._totalChildrenSizeInitialized = false;
 
-        /**
-         * Fires when layout is finished
-         * @event ST.Layouts.BoxLayout#finished
-         */
-    }
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>right</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
 
-    /**
-     * Calculates the total combined size of children
-     */
-    initTotalChildrenSize() {
-        const children = this._host.children;
-        let i = children.length;
-        while(i--) {
-            const child = children[i];
-            if(child instanceof BaseWidget) {
-                this._totalChildrenWidth += child.width + this.spacing;
-                this._totalChildrenHeight += child.height + this.spacing;
-            }
-        }
 
-        this._totalChildrenSizeInitialized = true;
-    }
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-    /**
-     * Prepare for iteration
-     * @override
-     * @private
-     */
-    beginIteration() {
-        if(!this._totalChildrenSizeInitialized) {
-            this.initTotalChildrenSize();
-        };
-        // cache the old sizes
-        this._totalChildrenWidthOld = this._totalChildrenWidth;
-        this._totalChildrenHeightOld = this._totalChildrenHeight;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        // reset totals
-        this._totalChildrenWidth = 0;
-        this._totalChildrenHeight = 0;
+    
+    
 
-        this.posOffset.set(0, 0);
-    }
+    
 
-    /**
-     * Sets childs position and calculate next offset
-     * @param {ST.Widgets.BaseWidget} child - the child in question
-     * @override
-     */
-    setChildPos(child) {
-        let alignmentOffset;
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-        // update should already be bypassed on host so this
-        // shouldn't cause an update / infinite loop
-        child.position.set(this.posOffset.x, this.posOffset.y);
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="external-EventEmitter.html">external:EventEmitter</a></li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="bottom">bottom<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Bottom padding</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        // add spacing to the totals for the next one
-        this._totalChildrenWidth += child.width + this.spacing;
-        this._totalChildrenHeight += child.height + this.spacing;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        if(this.orientation === HORIZONTAL) {
-            alignmentOffset = this.alignment.getOffset(this._host,
-                this._totalChildrenWidthOld, child.height);
+    
+    
+</dd>
 
-            // set posOffset for the next one
-            this.posOffset.x += child.width + this.spacing;
-        } else { // VERTICAL
-            alignmentOffset = this.alignment.getOffset(this._host,
-                child.width, this._totalChildrenHeightOld);
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="left">left<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Left padding</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-            // set posOffset for the next one
-            this.posOffset.y += child.height + this.spacing;
-        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        child.x += alignmentOffset.x;
-        child.y += alignmentOffset.y;
+    
+    
+</dd>
 
-        // set the real position from the virtual
-        child.applyPosition();
-    }
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="right">right<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Right padding</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-    /**
-     * Emits finished event
-     */
-    endIteration() {
-        this.emit('finished');
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-    /**
-     * When host widgets children change this will re-calculate the
-     * total size of the children
-     * @override
-     */
-    hostChildrenChanged() {
-        this._totalChildrenSizeInitialized = false;
-    }
+    
+    
+</dd>
 
-}
-</code></pre>
-        </article>
-    </section>
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="top">top<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Top padding</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="set">
+            
+            set<span class="signature">(<span class="optional">top</span>, <span class="optional">left</span>, <span class="optional">bottom</span>, <span class="optional">right</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Array}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Padding.js.html">Padding.js</a>, <a href="Padding.js.html#line68">line 68</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Convienent way to set all paddings to different values</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>top</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>left</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>bottom</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>right</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Array
+                        
+                    
+            </td>
+            <td class="description last"><ul>
+<li>Contains padding values</li>
+</ul></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="setAllTo">
+            
+            setAllTo<span class="signature">(<span class="optional">val</span>)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Padding.js.html">Padding.js</a>, <a href="Padding.js.html#line82">line 82</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Set all padding to the same value</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>val</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>the amount of padding</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last"><ul>
+<li>the padding</li>
+</ul></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Events</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="event:changed">
+            
+            changed
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Padding.js.html">Padding.js</a>, <a href="Padding.js.html#line54">line 54</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires when one or more of the paddings have changed</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>  
 
 
 
@@ -1716,7 +2512,7 @@ export default class BoxLayout extends BaseLayout {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

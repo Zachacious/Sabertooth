@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: layoutSys/layouts/BoxLayout.js</title>
+    <title>Class: Alignment</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -1525,189 +1525,1424 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="layoutSys_layouts_BoxLayout.js.html">Source: layoutSys/layouts/BoxLayout.js</h1>
+        <h1 class="page-title" data-filename="ST.Alignment.html">Class: Alignment</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>import BaseLayout from './BaseLayout';
-import Point from '../.././Point';
-import {HORIZONTAL} from '../.././const';
-import BaseWidget from '../.././widgets/BaseWidget';
+<header>
+    <h2>
+    Alignment
+    </h2>
+    
+        <div class="class-description"><p>Holds alignment policies for horizontal
+and vertical alignments - alignments are static callback
+methods that return a relative position offset for the widget to
+its parent.</p></div>
+    
+</header>  
 
-/**
- * Lays out widgets in a straight line in one direction
- * @memberof ST.Layouts
- * @extends ST.Layouts.BaseLayout
- */
-export default class BoxLayout extends BaseLayout {
-    /**
-     *@param {ST.Widgets.BaseWidget} hostWidget
-     *The widget this layout belongs to
-     *@param {number} [orientation=HORIZONTAL] Orientation of layout
-     *@param {number} [spacing=4] the space between widgets in pixels
-     */
-    constructor(hostWidget, orientation = HORIZONTAL, spacing = 4) {
-        super(hostWidget);
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Alignment">
+            
+            new ST.Alignment<span class="signature">(<span class="optional">hAlign</span>, <span class="optional">vAlign</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line14">line 14</a>
+        </div>
+        
+    </div>
 
-        /**
-         * Orientation of the layout
-         * @member {number}
-         */
-        this.orientation = orientation;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * The space between widgets in pixels
-         * @member {number}
-         */
-        this.spacing = spacing;
+    
+    
+    
+    
+    
+        
 
-        /**
-         * Holds the offset applied to each
-         * consecutive child widget's position
-         * @member {Point}
-         * @private
-         */
-        this.posOffset = new Point();
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>hAlign</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
 
-        /**
-         * Total width of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidth = 0;
 
-        /**
-         * Total height of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeight = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    Alignment.left
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Horizontal alignment</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>vAlign</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidthOld = 0;
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeightOld = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    Alignment.top
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>Vertical alignment</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        /**
-         * Wether child sizes have been calculted
-         * @member {Boolean}
-         * @private
-         */
-        this._totalChildrenSizeInitialized = false;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        /**
-         * Fires when layout is finished
-         * @event ST.Layouts.BoxLayout#finished
-         */
-    }
+    
+    
 
-    /**
-     * Calculates the total combined size of children
-     */
-    initTotalChildrenSize() {
-        const children = this._host.children;
-        let i = children.length;
-        while(i--) {
-            const child = children[i];
-            if(child instanceof BaseWidget) {
-                this._totalChildrenWidth += child.width + this.spacing;
-                this._totalChildrenHeight += child.height + this.spacing;
-            }
-        }
+    
 
-        this._totalChildrenSizeInitialized = true;
-    }
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-    /**
-     * Prepare for iteration
-     * @override
-     * @private
-     */
-    beginIteration() {
-        if(!this._totalChildrenSizeInitialized) {
-            this.initTotalChildrenSize();
-        };
-        // cache the old sizes
-        this._totalChildrenWidthOld = this._totalChildrenWidth;
-        this._totalChildrenHeightOld = this._totalChildrenHeight;
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li>EventEmitter</li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".bottom">
+            
+            <span class="type-signature static">static</span>ST.Alignment.bottom<span class="signature">(targetHeight, parent)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line112">line 112</a>
+        </div>
+        
+    </div>
 
-        // reset totals
-        this._totalChildrenWidth = 0;
-        this._totalChildrenHeight = 0;
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Bottom Alignment</p>
+    </div>
+    
 
-        this.posOffset.set(0, 0);
-    }
+    
+    
+    
+    
+    
+        
 
-    /**
-     * Sets childs position and calculate next offset
-     * @param {ST.Widgets.BaseWidget} child - the child in question
-     * @override
-     */
-    setChildPos(child) {
-        let alignmentOffset;
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetHeight</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
 
-        // update should already be bypassed on host so this
-        // shouldn't cause an update / infinite loop
-        child.position.set(this.posOffset.x, this.posOffset.y);
 
-        // add spacing to the totals for the next one
-        this._totalChildrenWidth += child.width + this.spacing;
-        this._totalChildrenHeight += child.height + this.spacing;
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
 
-        if(this.orientation === HORIZONTAL) {
-            alignmentOffset = this.alignment.getOffset(this._host,
-                this._totalChildrenWidthOld, child.height);
 
-            // set posOffset for the next one
-            this.posOffset.x += child.width + this.spacing;
-        } else { // VERTICAL
-            alignmentOffset = this.alignment.getOffset(this._host,
-                child.width, this._totalChildrenHeightOld);
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-            // set posOffset for the next one
-            this.posOffset.y += child.height + this.spacing;
-        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        child.x += alignmentOffset.x;
-        child.y += alignmentOffset.y;
+    
+    
 
-        // set the real position from the virtual
-        child.applyPosition();
-    }
+    
 
-    /**
-     * Emits finished event
-     */
-    endIteration() {
-        this.emit('finished');
-    }
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
 
-    /**
-     * When host widgets children change this will re-calculate the
-     * total size of the children
-     * @override
-     */
-    hostChildrenChanged() {
-        this._totalChildrenSizeInitialized = false;
-    }
 
-}
-</code></pre>
-        </article>
-    </section>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last">Vertical offset</td>
+        </tr>
+    
+    </tbody>
+</table>
 
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".center">
+            
+            <span class="type-signature static">static</span>ST.Alignment.center<span class="signature">(targetWidth, parent)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line68">line 68</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Center Alignment</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetWidth</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last">Horizontal offset</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".left">
+            
+            <span class="type-signature static">static</span>ST.Alignment.left<span class="signature">(targetWidth, parent)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line57">line 57</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Left Alignment</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetWidth</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last">Horizontal offset</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".middle">
+            
+            <span class="type-signature static">static</span>ST.Alignment.middle<span class="signature">(targetHeight, parent)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line101">line 101</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Middle Alignment</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetHeight</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last">Vertical offset</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".right">
+            
+            <span class="type-signature static">static</span>ST.Alignment.right<span class="signature">(targetWidth, parent)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line79">line 79</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Right Alignment</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetWidth</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last">Horizontal offset</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id=".top">
+            
+            <span class="type-signature static">static</span>ST.Alignment.top<span class="signature">(targetHeight, parent)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Number}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line90">line 90</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Top Alignment</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetHeight</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Number
+                        
+                    
+            </td>
+            <td class="description last">Vertical offset</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getOffset">
+            
+            getOffset<span class="signature">(parent, targetWidth, targetHeight)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Point}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_Alignment.js.html">layoutSys/Alignment.js</a>, <a href="layoutSys_Alignment.js.html#line41">line 41</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Get a position offset from alignments</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The parent widget</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetWidth</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>targetHeight</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The widgets height</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Point
+                        
+                    
+            </td>
+            <td class="description last">The calculated offset relative to the parent</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
 
 
 
@@ -1716,7 +2951,7 @@ export default class BoxLayout extends BaseLayout {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

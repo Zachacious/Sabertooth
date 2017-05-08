@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: layoutSys/layouts/BoxLayout.js</title>
+    <title>Class: SITransform</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -1525,189 +1525,194 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="layoutSys_layouts_BoxLayout.js.html">Source: layoutSys/layouts/BoxLayout.js</h1>
+        <h1 class="page-title" data-filename="ST.Widgets.SITransform.html">Class: SITransform</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>import BaseLayout from './BaseLayout';
-import Point from '../.././Point';
-import {HORIZONTAL} from '../.././const';
-import BaseWidget from '../.././widgets/BaseWidget';
+<header>
+    <h2>
+    SITransform
+    </h2>
+    
+        <div class="class-description"><p>Transform that makes a PIXI.Container size independent
+from its parent. ( FOR INTERNAL USE ONLY! )</p></div>
+    
+</header>  
 
-/**
- * Lays out widgets in a straight line in one direction
- * @memberof ST.Layouts
- * @extends ST.Layouts.BaseLayout
- */
-export default class BoxLayout extends BaseLayout {
-    /**
-     *@param {ST.Widgets.BaseWidget} hostWidget
-     *The widget this layout belongs to
-     *@param {number} [orientation=HORIZONTAL] Orientation of layout
-     *@param {number} [spacing=4] the space between widgets in pixels
-     */
-    constructor(hostWidget, orientation = HORIZONTAL, spacing = 4) {
-        super(hostWidget);
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="SITransform">
+            
+            new ST.Widgets.SITransform<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_SITransform.js.html">widgets/SITransform.js</a>, <a href="widgets_SITransform.js.html#line17">line 17</a>
+        </div>
+        
+    </div>
 
-        /**
-         * Orientation of the layout
-         * @member {number}
-         */
-        this.orientation = orientation;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * The space between widgets in pixels
-         * @member {number}
-         */
-        this.spacing = spacing;
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        /**
-         * Holds the offset applied to each
-         * consecutive child widget's position
-         * @member {Point}
-         * @private
-         */
-        this.posOffset = new Point();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        /**
-         * Total width of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidth = 0;
+    
+    
 
-        /**
-         * Total height of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeight = 0;
+    
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidthOld = 0;
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeightOld = 0;
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li>external:PIXI#TransformStatic</li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="updateTransform">
+            
+            updateTransform<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_SITransform.js.html">widgets/SITransform.js</a>, <a href="widgets_SITransform.js.html#line28">line 28</a>
+        </div>
+        
+    </div>
 
-        /**
-         * Wether child sizes have been calculted
-         * @member {Boolean}
-         * @private
-         */
-        this._totalChildrenSizeInitialized = false;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * Fires when layout is finished
-         * @event ST.Layouts.BoxLayout#finished
-         */
-    }
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-    /**
-     * Calculates the total combined size of children
-     */
-    initTotalChildrenSize() {
-        const children = this._host.children;
-        let i = children.length;
-        while(i--) {
-            const child = children[i];
-            if(child instanceof BaseWidget) {
-                this._totalChildrenWidth += child.width + this.spacing;
-                this._totalChildrenHeight += child.height + this.spacing;
-            }
-        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        this._totalChildrenSizeInitialized = true;
-    }
+    
+    
 
-    /**
-     * Prepare for iteration
-     * @override
-     * @private
-     */
-    beginIteration() {
-        if(!this._totalChildrenSizeInitialized) {
-            this.initTotalChildrenSize();
-        };
-        // cache the old sizes
-        this._totalChildrenWidthOld = this._totalChildrenWidth;
-        this._totalChildrenHeightOld = this._totalChildrenHeight;
+    
 
-        // reset totals
-        this._totalChildrenWidth = 0;
-        this._totalChildrenHeight = 0;
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-        this.posOffset.set(0, 0);
-    }
+        </dl>
+    
+    
+    
+    
+    
+</article>
 
-    /**
-     * Sets childs position and calculate next offset
-     * @param {ST.Widgets.BaseWidget} child - the child in question
-     * @override
-     */
-    setChildPos(child) {
-        let alignmentOffset;
-
-        // update should already be bypassed on host so this
-        // shouldn't cause an update / infinite loop
-        child.position.set(this.posOffset.x, this.posOffset.y);
-
-        // add spacing to the totals for the next one
-        this._totalChildrenWidth += child.width + this.spacing;
-        this._totalChildrenHeight += child.height + this.spacing;
-
-        if(this.orientation === HORIZONTAL) {
-            alignmentOffset = this.alignment.getOffset(this._host,
-                this._totalChildrenWidthOld, child.height);
-
-            // set posOffset for the next one
-            this.posOffset.x += child.width + this.spacing;
-        } else { // VERTICAL
-            alignmentOffset = this.alignment.getOffset(this._host,
-                child.width, this._totalChildrenHeightOld);
-
-            // set posOffset for the next one
-            this.posOffset.y += child.height + this.spacing;
-        }
-
-        child.x += alignmentOffset.x;
-        child.y += alignmentOffset.y;
-
-        // set the real position from the virtual
-        child.applyPosition();
-    }
-
-    /**
-     * Emits finished event
-     */
-    endIteration() {
-        this.emit('finished');
-    }
-
-    /**
-     * When host widgets children change this will re-calculate the
-     * total size of the children
-     * @override
-     */
-    hostChildrenChanged() {
-        this._totalChildrenSizeInitialized = false;
-    }
-
-}
-</code></pre>
-        </article>
-    </section>
-
+</section>  
 
 
 
@@ -1716,7 +1721,7 @@ export default class BoxLayout extends BaseLayout {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

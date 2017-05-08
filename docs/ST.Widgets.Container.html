@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: layoutSys/layouts/BoxLayout.js</title>
+    <title>Class: Container</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -1525,189 +1525,3012 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="layoutSys_layouts_BoxLayout.js.html">Source: layoutSys/layouts/BoxLayout.js</h1>
+        <h1 class="page-title" data-filename="ST.Widgets.Container.html">Class: Container</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>import BaseLayout from './BaseLayout';
-import Point from '../.././Point';
-import {HORIZONTAL} from '../.././const';
-import BaseWidget from '../.././widgets/BaseWidget';
+<header>
+    <h2>
+    Container
+    </h2>
+    
+        <div class="class-description"><p>Serves as a container for other widgets. Can be used to layout
+widgets without having a background.</p></div>
+    
+</header>  
 
-/**
- * Lays out widgets in a straight line in one direction
- * @memberof ST.Layouts
- * @extends ST.Layouts.BaseLayout
- */
-export default class BoxLayout extends BaseLayout {
-    /**
-     *@param {ST.Widgets.BaseWidget} hostWidget
-     *The widget this layout belongs to
-     *@param {number} [orientation=HORIZONTAL] Orientation of layout
-     *@param {number} [spacing=4] the space between widgets in pixels
-     */
-    constructor(hostWidget, orientation = HORIZONTAL, spacing = 4) {
-        super(hostWidget);
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Container">
+            
+            new ST.Widgets.Container<span class="signature">(parent, <span class="optional">options</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_Container.js.html">widgets/Container.js</a>, <a href="widgets_Container.js.html#line17">line 17</a>
+        </div>
+        
+    </div>
 
-        /**
-         * Orientation of the layout
-         * @member {number}
-         */
-        this.orientation = orientation;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * The space between widgets in pixels
-         * @member {number}
-         */
-        this.spacing = spacing;
+    
+    
+    
+    
+    
+        
 
-        /**
-         * Holds the offset applied to each
-         * consecutive child widget's position
-         * @member {Point}
-         * @private
-         */
-        this.posOffset = new Point();
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
 
-        /**
-         * Total width of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidth = 0;
 
-        /**
-         * Total height of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeight = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>parent widget</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidthOld = 0;
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeightOld = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    Object
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>@see ST.Widgets.BaseWidget</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        /**
-         * Wether child sizes have been calculted
-         * @member {Boolean}
-         * @private
-         */
-        this._totalChildrenSizeInitialized = false;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        /**
-         * Fires when layout is finished
-         * @event ST.Layouts.BoxLayout#finished
-         */
-    }
+    
+    
 
-    /**
-     * Calculates the total combined size of children
-     */
-    initTotalChildrenSize() {
-        const children = this._host.children;
-        let i = children.length;
-        while(i--) {
-            const child = children[i];
-            if(child instanceof BaseWidget) {
-                this._totalChildrenWidth += child.width + this.spacing;
-                this._totalChildrenHeight += child.height + this.spacing;
-            }
-        }
+    
 
-        this._totalChildrenSizeInitialized = true;
-    }
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-    /**
-     * Prepare for iteration
-     * @override
-     * @private
-     */
-    beginIteration() {
-        if(!this._totalChildrenSizeInitialized) {
-            this.initTotalChildrenSize();
-        };
-        // cache the old sizes
-        this._totalChildrenWidthOld = this._totalChildrenWidth;
-        this._totalChildrenHeightOld = this._totalChildrenHeight;
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="ST.Widgets.Panel.html">ST.Widgets.Panel</a></li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="clipGraphic">clipGraphic<span class="type-signature type pixi.graphics">PIXI.Graphics</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The clipGraphic is used to mask this widgets children</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        // reset totals
-        this._totalChildrenWidth = 0;
-        this._totalChildrenHeight = 0;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        this.posOffset.set(0, 0);
-    }
+    
+    
+</dd>
 
-    /**
-     * Sets childs position and calculate next offset
-     * @param {ST.Widgets.BaseWidget} child - the child in question
-     * @override
-     */
-    setChildPos(child) {
-        let alignmentOffset;
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="disabled">disabled<span class="type-signature type boolean">Boolean</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Set true to disable the widget</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        // update should already be bypassed on host so this
-        // shouldn't cause an update / infinite loop
-        child.position.set(this.posOffset.x, this.posOffset.y);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        // add spacing to the totals for the next one
-        this._totalChildrenWidth += child.width + this.spacing;
-        this._totalChildrenHeight += child.height + this.spacing;
+    
+    
+</dd>
 
-        if(this.orientation === HORIZONTAL) {
-            alignmentOffset = this.alignment.getOffset(this._host,
-                this._totalChildrenWidthOld, child.height);
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="height">height<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Widget height</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-            // set posOffset for the next one
-            this.posOffset.x += child.width + this.spacing;
-        } else { // VERTICAL
-            alignmentOffset = this.alignment.getOffset(this._host,
-                child.width, this._totalChildrenHeightOld);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-            // set posOffset for the next one
-            this.posOffset.y += child.height + this.spacing;
-        }
+    
+    
+</dd>
 
-        child.x += alignmentOffset.x;
-        child.y += alignmentOffset.y;
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="hPolicy">hPolicy<span class="type-signature type st.sizepolicies.basepolicy"><a href="ST.SizePolicies.BasePolicy.html">ST.SizePolicies.BasePolicy</a></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The HORIZONTAL size policy</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        // set the real position from the virtual
-        child.applyPosition();
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-    /**
-     * Emits finished event
-     */
-    endIteration() {
-        this.emit('finished');
-    }
+    
+    
+</dd>
 
-    /**
-     * When host widgets children change this will re-calculate the
-     * total size of the children
-     * @override
-     */
-    hostChildrenChanged() {
-        this._totalChildrenSizeInitialized = false;
-    }
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="layout">layout<span class="type-signature type st.layouts.baselayout"><a href="ST.Layouts.BaseLayout.html">ST.Layouts.BaseLayout</a></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The layout for this widget</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-}
-</code></pre>
-        </article>
-    </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="position"><span class="type-signature ">readonly</span>position<span class="type-signature type st.point"><a href="ST.Point.html">ST.Point</a></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The position object for the widget(position.set(x, y)).</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="sizeProxy">sizeProxy<span class="type-signature type pixi.container">PIXI.Container</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Used to apply transforms to a proxy that serves as the widget</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="theme">theme<span class="type-signature type st.theme"><a href="ST.Theme.html">ST.Theme</a></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The theme for this widget</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="vPolicy">vPolicy<span class="type-signature type st.sizepolicies.basepolicy"><a href="ST.SizePolicies.BasePolicy.html">ST.SizePolicies.BasePolicy</a></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The VERTICAL size policy</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="width">width<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Widget width</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="x">x<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>X position</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="y">y<span class="type-signature type number">Number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Y position</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="addChild">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#addChild">inherited</a></span>
+            
+            addChild<span class="signature">(child)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line426">line 426</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Adds a child or children widgets. Sets the child to be clipped by
+its parent and to take its theme.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>child</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The child or children to add</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a target="_blank" href="http://pixijs.download/release/docs/PIXI.Container.html#addChild">http://pixijs.download/release/docs/PIXI.Container.html#addChild</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="addChildAt">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#addChildAt">inherited</a></span>
+            
+            addChildAt<span class="signature">(child, index)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line448">line 448</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Adds a child or children widgets at the specified index.
+Sets the child to be clipped by its parent and to take its theme.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>child</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The child to add</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The index into children array</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a target="_blank" href="http://pixijs.download/release/docs/PIXI.Container.html#addChild">http://pixijs.download/release/docs/PIXI.Container.html#addChild</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="applyPosition">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#applyPosition">inherited</a></span>
+            
+            applyPosition<span class="signature">(<span class="optional">offsetX</span>, <span class="optional">offsetY</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line477">line 477</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Apply the otherwise virtual position.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>offsetX</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>added to the position</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>offsetY</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>added to the position</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="invalidate">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#invalidate">inherited</a></span>
+            
+            invalidate<span class="signature">(<span class="optional">route</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line334">line 334</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Sets invalidation state to false.
+If widget is invalid, an update will be attempted on the
+next loop iteration</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>route</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>If true then an attempt will be
+made to route the invalidation to an ancestor widget.</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="ST.Widgets.Container.html#routeInvalidation">#routeInvalidation</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="onChildrenChange">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#onChildrenChange">inherited</a></span>
+            
+            onChildrenChange<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line467">line 467</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Invalidates the widget if children have been added or removed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="paintDefault">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#paintDefault">inherited</a></span>
+            
+            paintDefault<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line273">line 273</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Set default textures and other cosmetics</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="paintDisabled">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#paintDisabled">inherited</a></span>
+            
+            paintDisabled<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line291">line 291</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Set textures for disabled state</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="paintDown">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#paintDown">inherited</a></span>
+            
+            paintDown<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line285">line 285</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Set textures for pointerdown events</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="paintHover">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#paintHover">inherited</a></span>
+            
+            paintHover<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line279">line 279</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Set textures for pointerover events</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="recursiveRouteUpdate">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#recursiveRouteUpdate">inherited</a></span>
+            
+            recursiveRouteUpdate<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line370">line 370</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Attempts to send update() upward to the highest invalid parent in an
+effort to prevent updating any one widget twice in the same
+loop iteration.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="routeInvalidation">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#routeInvalidation">inherited</a></span>
+            
+            routeInvalidation<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line348">line 348</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Attempts to route the invalidation of the widget upward through
+its ancestors untill one with either no parent or
+one with a FixedLayout is found. This insures that all the affected
+widgets get updated.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="setParent">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#setParent">inherited</a></span>
+            
+            setParent<span class="signature">(widget)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line415">line 415</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Sets the parent of the widget</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>widget</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>Parent to be</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="update">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#update">inherited</a></span>
+            
+            update<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line312">line 312</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Executes sizepolicies and the layout</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="validate">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#validate">inherited</a></span>
+            
+            validate<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line322">line 322</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Sets validation state to true.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Events</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:heightChanged">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:heightChanged">inherited</a></span>
+            
+            heightChanged
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line250">line 250</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires whenever the widgets height is changed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The set height</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:layoutChanged">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:layoutChanged">inherited</a></span>
+            
+            layoutChanged
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line238">line 238</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires whenever the widgets layout is changed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>layout</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Layouts.BaseLayout.html">ST.Layouts.BaseLayout</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The set layout</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:policyChanged">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:policyChanged">inherited</a></span>
+            
+            policyChanged
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line232">line 232</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires whenever one of the size policies are changed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>policy</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.SizePolicies.BasePolicy.html">ST.SizePolicies.BasePolicy</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>the set policy</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:render">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:render">inherited</a></span>
+            
+            render
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line220">line 220</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires each frame after widget is rendered. Can be used to make
+per frame updates.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:sizeChanged">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:sizeChanged">inherited</a></span>
+            
+            sizeChanged
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line256">line 256</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires whenever the widgets size is changed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The set width</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The set height</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:themeChanged">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:themeChanged">inherited</a></span>
+            
+            themeChanged
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line226">line 226</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires whenever the widgets theme is changed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>theme</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Theme.html">ST.Theme</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The set theme</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:updated">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:updated">inherited</a></span>
+            
+            updated
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line263">line 263</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires when widget is updated</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:widthChanged">
+            
+                <span class="inherited"><a href="ST.Widgets.BaseWidget.html#event:widthChanged">inherited</a></span>
+            
+            widthChanged
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="widgets_BaseWidget.js.html">widgets/BaseWidget.js</a>, <a href="widgets_BaseWidget.js.html#line244">line 244</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires whenever the widgets width is changed.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>The set width</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>  
 
 
 
@@ -1716,7 +4539,7 @@ export default class BoxLayout extends BaseLayout {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

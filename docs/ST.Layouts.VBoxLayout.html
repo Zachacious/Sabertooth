@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: layoutSys/layouts/BoxLayout.js</title>
+    <title>Class: VBoxLayout</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -1525,189 +1525,953 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="layoutSys_layouts_BoxLayout.js.html">Source: layoutSys/layouts/BoxLayout.js</h1>
+        <h1 class="page-title" data-filename="ST.Layouts.VBoxLayout.html">Class: VBoxLayout</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>import BaseLayout from './BaseLayout';
-import Point from '../.././Point';
-import {HORIZONTAL} from '../.././const';
-import BaseWidget from '../.././widgets/BaseWidget';
+<header>
+    <h2>
+    VBoxLayout
+    </h2>
+    
+        <div class="class-description"><p>Vertical Box Layout - for convenience</p></div>
+    
+</header>  
 
-/**
- * Lays out widgets in a straight line in one direction
- * @memberof ST.Layouts
- * @extends ST.Layouts.BaseLayout
- */
-export default class BoxLayout extends BaseLayout {
-    /**
-     *@param {ST.Widgets.BaseWidget} hostWidget
-     *The widget this layout belongs to
-     *@param {number} [orientation=HORIZONTAL] Orientation of layout
-     *@param {number} [spacing=4] the space between widgets in pixels
-     */
-    constructor(hostWidget, orientation = HORIZONTAL, spacing = 4) {
-        super(hostWidget);
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="VBoxLayout">
+            
+            new ST.Layouts.VBoxLayout<span class="signature">(hostWidget, <span class="optional">spacing</span>)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_VBoxLayout.js.html">layoutSys/layouts/VBoxLayout.js</a>, <a href="layoutSys_layouts_VBoxLayout.js.html#line11">line 11</a>
+        </div>
+        
+    </div>
 
-        /**
-         * Orientation of the layout
-         * @member {number}
-         */
-        this.orientation = orientation;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * The space between widgets in pixels
-         * @member {number}
-         */
-        this.spacing = spacing;
+    
+    
+    
+    
+    
+        
 
-        /**
-         * Holds the offset applied to each
-         * consecutive child widget's position
-         * @member {Point}
-         * @private
-         */
-        this.posOffset = new Point();
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>hostWidget</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
 
-        /**
-         * Total width of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidth = 0;
 
-        /**
-         * Total height of child widgets combined
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeight = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>The widget this layout belongs to</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>spacing</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenWidthOld = 0;
 
-        /**
-         * Result of the old calculation. This is the value used.
-         * @member {Number}
-         * @private
-         */
-        this._totalChildrenHeightOld = 0;
+            
+            </td>
+            
+            
+                <td class="default">
+                
+                    4
+                
+                </td>
+            
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>The space in pixels between widgets</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        /**
-         * Wether child sizes have been calculted
-         * @member {Boolean}
-         * @private
-         */
-        this._totalChildrenSizeInitialized = false;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        /**
-         * Fires when layout is finished
-         * @event ST.Layouts.BoxLayout#finished
-         */
-    }
+    
+    
 
-    /**
-     * Calculates the total combined size of children
-     */
-    initTotalChildrenSize() {
-        const children = this._host.children;
-        let i = children.length;
-        while(i--) {
-            const child = children[i];
-            if(child instanceof BaseWidget) {
-                this._totalChildrenWidth += child.width + this.spacing;
-                this._totalChildrenHeight += child.height + this.spacing;
-            }
-        }
+    
 
-        this._totalChildrenSizeInitialized = true;
-    }
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-    /**
-     * Prepare for iteration
-     * @override
-     * @private
-     */
-    beginIteration() {
-        if(!this._totalChildrenSizeInitialized) {
-            this.initTotalChildrenSize();
-        };
-        // cache the old sizes
-        this._totalChildrenWidthOld = this._totalChildrenWidth;
-        this._totalChildrenHeightOld = this._totalChildrenHeight;
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="ST.Layouts.BoxLayout.html">ST.Layouts.BoxLayout</a></li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="alignment">alignment<span class="type-signature type st.alignment"><a href="ST.Alignment.html">ST.Alignment</a></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Holds the Alignment object</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        // reset totals
-        this._totalChildrenWidth = 0;
-        this._totalChildrenHeight = 0;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        this.posOffset.set(0, 0);
-    }
+    
+    
+</dd>
 
-    /**
-     * Sets childs position and calculate next offset
-     * @param {ST.Widgets.BaseWidget} child - the child in question
-     * @override
-     */
-    setChildPos(child) {
-        let alignmentOffset;
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="updateOnHostChanges">updateOnHostChanges<span class="type-signature type boolean">Boolean</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>If set to true then the layout will update on host widget
+changes in position and size.</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        // update should already be bypassed on host so this
-        // shouldn't cause an update / infinite loop
-        child.position.set(this.posOffset.x, this.posOffset.y);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy"><li>false</li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        // add spacing to the totals for the next one
-        this._totalChildrenWidth += child.width + this.spacing;
-        this._totalChildrenHeight += child.height + this.spacing;
+    
+    
+</dd>
 
-        if(this.orientation === HORIZONTAL) {
-            alignmentOffset = this.alignment.getOffset(this._host,
-                this._totalChildrenWidthOld, child.height);
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="beginIteration">
+            
+                <span class="inherited"><a href="ST.Layouts.BaseLayout.html#beginIteration">inherited</a></span>
+            
+            beginIteration<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BaseLayout.js.html">layoutSys/layouts/BaseLayout.js</a>, <a href="layoutSys_layouts_BaseLayout.js.html#line64">line 64</a>
+        </div>
+        
+    </div>
 
-            // set posOffset for the next one
-            this.posOffset.x += child.width + this.spacing;
-        } else { // VERTICAL
-            alignmentOffset = this.alignment.getOffset(this._host,
-                child.width, this._totalChildrenHeightOld);
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Overide in layouts - code that runs before the iteration
+of child layouts</p>
+    </div>
+    
 
-            // set posOffset for the next one
-            this.posOffset.y += child.height + this.spacing;
-        }
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-        child.x += alignmentOffset.x;
-        child.y += alignmentOffset.y;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-        // set the real position from the virtual
-        child.applyPosition();
-    }
+    
+    
 
-    /**
-     * Emits finished event
-     */
-    endIteration() {
-        this.emit('finished');
-    }
+    
 
-    /**
-     * When host widgets children change this will re-calculate the
-     * total size of the children
-     * @override
-     */
-    hostChildrenChanged() {
-        this._totalChildrenSizeInitialized = false;
-    }
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-}
-</code></pre>
-        </article>
-    </section>
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="endIteration">
+            
+                <span class="inherited"><a href="ST.Layouts.BoxLayout.html#endIteration">inherited</a></span>
+            
+            endIteration<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BoxLayout.js.html">layoutSys/layouts/BoxLayout.js</a>, <a href="layoutSys_layouts_BoxLayout.js.html#line161">line 161</a>
+        </div>
+        
+    </div>
 
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Emits finished event</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="exec">
+            
+                <span class="inherited"><a href="ST.Layouts.BaseLayout.html#exec">inherited</a></span>
+            
+            exec<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BaseLayout.js.html">layoutSys/layouts/BaseLayout.js</a>, <a href="layoutSys_layouts_BaseLayout.js.html#line85">line 85</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Execute the layout update - iterates over child widgets
+and executes their layouts before positioning them.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="hostChildrenChanged">
+            
+                <span class="inherited"><a href="ST.Layouts.BaseLayout.html#hostChildrenChanged">inherited</a></span>
+            
+            hostChildrenChanged<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BaseLayout.js.html">layoutSys/layouts/BaseLayout.js</a>, <a href="layoutSys_layouts_BaseLayout.js.html#line57">line 57</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Override in layouts if they need to act upon the addition or
+removal of children from the host widget.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="initTotalChildrenSize">
+            
+                <span class="inherited"><a href="ST.Layouts.BoxLayout.html#initTotalChildrenSize">inherited</a></span>
+            
+            initTotalChildrenSize<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BoxLayout.js.html">layoutSys/layouts/BoxLayout.js</a>, <a href="layoutSys_layouts_BoxLayout.js.html#line87">line 87</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Calculates the total combined size of children</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="setChildPos">
+            
+                <span class="inherited"><a href="ST.Layouts.BaseLayout.html#setChildPos">inherited</a></span>
+            
+            setChildPos<span class="signature">(child)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BaseLayout.js.html">layoutSys/layouts/BaseLayout.js</a>, <a href="layoutSys_layouts_BaseLayout.js.html#line79">line 79</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Overide in layouts - code that sets the position of
+each child widget.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>child</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ST.Widgets.BaseWidget.html">ST.Widgets.BaseWidget</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>the child widget in question</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Events</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:finished">
+            
+                <span class="inherited"><a href="ST.Layouts.BoxLayout.html#event:finished">inherited</a></span>
+            
+            finished
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BoxLayout.js.html">layoutSys/layouts/BoxLayout.js</a>, <a href="layoutSys_layouts_BoxLayout.js.html#line78">line 78</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fires when layout is finished</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer inherited">
+        <h4 class="name" id="event:updated">
+            
+                <span class="inherited"><a href="ST.Layouts.BaseLayout.html#event:updated">inherited</a></span>
+            
+            updated
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="layoutSys_layouts_BaseLayout.js.html">layoutSys/layouts/BaseLayout.js</a>, <a href="layoutSys_layouts_BaseLayout.js.html#line46">line 46</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Fired when layout has finished updating</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>  
 
 
 
@@ -1716,7 +2480,7 @@ export default class BoxLayout extends BaseLayout {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 08 2017 12:33:36 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>
