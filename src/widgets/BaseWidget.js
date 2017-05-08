@@ -42,7 +42,7 @@ export default class BaseWidget extends PIXI.Container {
     constructor(parent, options = {}) {
         super();
         // default options
-        defaults = {
+        const defaults = {
             theme: null,
             x: 0,
             y: 0,
