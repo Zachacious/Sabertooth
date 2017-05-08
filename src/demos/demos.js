@@ -17,11 +17,12 @@ One could also install & use SaberTooth via npm.
 // Themes should be loaded in index.html before this file.
 
 // Create a subclass of ST.App
-let DemoApp = function() {
+let DemoApp = function(theme) {
     // call parent constructor
     ST.App.call(this, {
         name: 'Demos',
-        theme: greyToadTheme, // must be loaded before this file
+        theme: theme, // must be loaded before this file
+        autoResize: true,
     });
 
     // hack the sprite renderer to get a draw count since PIXI.js no longer
@@ -47,7 +48,6 @@ DemoApp.prototype.begin = function() {
         this.dpDrawCountLabel.beginBypassUpdate(); // prevent a layout update
             this.dpDrawCountLabel.text = this.draws;
         this.dpDrawCountLabel.endBypassUpdate();
-
         requestAnimationFrame(this.main); // rinse, repeat
     };
 };
@@ -59,16 +59,15 @@ DemoApp.prototype.createDebugPanel = function() {
     this.debugPanel = new ST.Widgets.Panel(this.root, {
         width: 300,
         height: 150,
-        layout: new ST.Layouts.VBoxLayout(this.debugPanel),
     });
+    this.debugPanel.layout = new ST.Layouts.VBoxLayout(this.debugPanel);
 
     // creates a label at the top with the apps name
     this.dpTitle = new ST.Widgets.Label(this.debugPanel, {text: this.name});
 
-    // creates a container with hbox below the title
-    this.dpDrawCountSet = new ST.Widgets.Container(this.debugPanel, {
-        layout: new ST.Layouts.HBoxLayout(this.dpDrawCountSet),
-    });
+    // creates a container with hbox layout below the title
+    this.dpDrawCountSet = new ST.Widgets.Container(this.debugPanel);
+    this.dpDrawCountSet.layout = new ST.Layouts.HBoxLayout(this.dpDrawCountSet);
 
     // sets 'Draw Count: ' on the left side of this.dpDrawCountSet
     this.dpDrawCountTitle
