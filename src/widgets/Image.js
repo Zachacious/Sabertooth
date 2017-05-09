@@ -25,7 +25,7 @@ export default class Image extends BaseWidget {
         };
 
         // fill in missing options with defaults
-        options = Object.assign(options, defaults);
+        options = Object.assign(defaults, options);
 
         /**
          * Holds the sprite internally
