@@ -1,19 +1,18 @@
 'use strict';
 
 describe('App', ()=>{
-    let app = new UI.App();
+    let app = new ST.App();
 
     it('should create a pixi canvas on the page', ()=>{
         expect(document.body.contains(app.renderer.view)).to.be.true;
     });
 
     it('should have a valid theme', ()=>{
-        expect(app.theme).to.be.an.instanceof(UI.Theme);
+        expect(app.theme).to.be.an.instanceof(ST.Theme);
     });
 
     it('should have a valid root widget', ()=>{
-        expect(app.root).not.to.equal(undefined);
-        expect(app.root).not.to.equal(null);
+        expect(app.root).to.be.an.instanceof(ST.BaseWidget);
     });
 
     it('should resize the root widget to match the window', ()=>{

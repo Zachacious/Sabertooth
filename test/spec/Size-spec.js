@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Size', ()=>{
-    let s = new UI.Size();
+    let s = new ST.Size();
     it('should create with default size of 0', ()=>{
         expect(s.width).to.equal(0);
         expect(s.height).to.equal(0);
