@@ -29,7 +29,6 @@ let DemoApp = function(theme) {
     // supports draw counts.
     ST.hackSpriteRendererDrawCounter(this.renderer.plugins.sprite);
 
-    this.draws = 0; // stores the draw count
     this.createDebugPanel();
 };
 
@@ -42,14 +41,22 @@ DemoApp.prototype.constructor = DemoApp;
 
 // Begins the main application loop
 DemoApp.prototype.begin = function() {
+    let _this = this;
+
     this.main = function() {
-        this.draws = 0; // reset the draw count for the next frame
-        this.update(); // updates the app
-        this.dpDrawCountLabel.beginBypassUpdate(); // prevent a layout update
-            this.dpDrawCountLabel.text = this.draws;
-        this.dpDrawCountLabel.endBypassUpdate();
-        requestAnimationFrame(this.main); // rinse, repeat
+        // reset the draw count for the next frame
+        _this.renderer.plugins.sprite.draws = 0;
+
+        _this.update(); // updates the app
+
+        _this.dpDrawCountLabel.beginBypassUpdate(); // prevent a layout update
+            _this.dpDrawCountLabel.text = _this.renderer.plugins.sprite.draws;
+        _this.dpDrawCountLabel.endBypassUpdate();
+
+        requestAnimationFrame(_this.main); // rinse, repeat
     };
+
+    this.main();
 };
 
 // Creates a simple debug panel with draw counter.
@@ -66,8 +73,11 @@ DemoApp.prototype.createDebugPanel = function() {
     this.dpTitle = new ST.Widgets.Label(this.debugPanel, {text: this.name});
 
     // creates a container with hbox layout below the title
-    this.dpDrawCountSet = new ST.Widgets.Container(this.debugPanel);
+    this.dpDrawCountSet
+    = new ST.Widgets.Container(this.debugPanel, {height: 30});
     this.dpDrawCountSet.layout = new ST.Layouts.HBoxLayout(this.dpDrawCountSet);
+    this.dpDrawCountSet.hPolicy
+    = new ST.SizePolicies.ExpandingPolicy(this.dpDrawCountSet);
 
     // sets 'Draw Count: ' on the left side of this.dpDrawCountSet
     this.dpDrawCountTitle

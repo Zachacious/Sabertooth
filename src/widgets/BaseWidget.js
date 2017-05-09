@@ -62,7 +62,7 @@ export default class BaseWidget extends PIXI.Container {
         };
 
         // fill in missing options with defaults
-        options = Object.assign(options, defaults);
+        options = Object.assign(defaults, options);
 
         if(parent) {
             parent.addChild(this);

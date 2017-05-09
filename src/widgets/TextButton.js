@@ -21,7 +21,11 @@ export default class TextButton extends Button {
     constructor(parent, options = {}) {
         super(parent, options);
 
-        options = Object.assign(options, defaults);
+        const defaults = {
+            text: '',
+        };
+
+        options = Object.assign(defaults, options);
 
         this.label = new Label(this, options.text);
     }

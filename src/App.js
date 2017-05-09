@@ -54,7 +54,7 @@ export default class App extends EventEmitter {
       autoResize: true,
     };
 
-    options = Object.assign(options, defaults);
+    options = Object.assign(defaults, options);
 
     /**
      * The internal name of the app
