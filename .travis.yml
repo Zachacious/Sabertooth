@@ -6,7 +6,6 @@ install:
   - npm install
   - npm install pixi-gl-core -save
   - npm install bit-twiddle
-  - npm install gulp-babel
 
 cache:
   directories:

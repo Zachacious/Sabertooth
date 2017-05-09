@@ -8,11 +8,11 @@
         "ecmaVersion": 6,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+
           }
   },
   "extends": "google",
   "rules": {
-
+      "linebreak-style": 0
   }
 }

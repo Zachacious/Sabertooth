@@ -19,7 +19,7 @@ import Point from './Point';
      */
       constructor(options = {}) {
         super();
-        const opts = Object.assign(options, Theme.defaults);
+        const opts = Object.assign(Theme.defaults, options);
 
         /**
          * Theme colors

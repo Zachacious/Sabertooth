@@ -45,7 +45,11 @@ export default class Slider extends Container {
     constructor(parent, options = {}) {
         super(parent, options);
 
-        options = Object.assign(options, defaults);
+        const defaults = {
+            orientation: HORIZONTAL,
+        };
+
+        options = Object.assign(defaults, options);
 
         /**
          * Holds orientation internally

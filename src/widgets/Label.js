@@ -25,7 +25,7 @@ export default class Label extends BaseWidget {
             text: '',
         };
 
-        options = Object.assign(options, defaults);
+        options = Object.assign(defaults, options);
 
         /**
          * Internal PIXI.Text object
