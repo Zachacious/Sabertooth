@@ -12,4 +12,5 @@ cache:
     - node_modules
 
 script:
-  - gulp build
+  - gulp
+  - gulp test
