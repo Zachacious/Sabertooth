@@ -12,7 +12,7 @@ describe('App', ()=>{
     });
 
     it('should have a valid root widget', ()=>{
-        expect(app.root).to.be.an.instanceof(ST.BaseWidget);
+        expect(app.root).to.be.an.instanceof(ST.Widgets.BaseWidget);
     });
 
     it('should resize the root widget to match the window', ()=>{

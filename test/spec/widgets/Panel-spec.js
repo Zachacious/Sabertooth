@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Panel', ()=>{
-    let panel = new ST.Panel();
+    let panel = new ST.Widgets.Panel();
 
     describe('#_bkgObj', ()=>{
         it('should be a sprite', ()=>{

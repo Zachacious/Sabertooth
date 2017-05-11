@@ -137,6 +137,7 @@ describe('BaseWidget', ()=>{
         it('should set to size of widget - padding', ()=>{
             widget2.width = 400;
             widget2.height = 400;
+            widget1.update(); // should call _updateClipGraphic()
             expect(widget2.clipGraphic.width).to.equal(392);
             expect(widget2.clipGraphic.height).to.equal(392);
         });

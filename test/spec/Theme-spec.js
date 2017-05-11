@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Theme', ()=>{
-    let greyToadTheme = require('../../themes/greyToadTheme');
+    // let greyToadTheme = require('../../themes/greyToadTheme');
     // let change one style because this theme is the same as the defaults
     greyToadTheme.background = 0xffffff;
     greyToadTheme.widgets.button.hover = 0xff00ff;
@@ -15,8 +15,9 @@ describe('Theme', ()=>{
     });
 
     it('should load the default styles if no style is given', ()=>{
-        expect(defTheme.background).to.equal(0x222222);
-        expect(defTheme.colors.button.hover).to.equal(0x264e26);
+        expect(defTheme.background).to.equal(ST.Theme.defaults.background);
+        expect(defTheme.colors.button.hover).to.equal(ST.Theme.defaults
+            .widgets.button.hover);
         // not gonna check each one. This should be enough
     });
 
@@ -26,22 +27,25 @@ describe('Theme', ()=>{
         });
     });
 
-    describe('#fonStyles', ()=>{
-        it('should equal the fontStyles portion of the styles', ()=>{
-            expect(theme.fontStyles).to.deep.equal(greyToadTheme.fontStyles);
+    describe('#fontStyles', ()=>{
+        it('should equal the text portion of the styles', ()=>{
+            expect(theme.fontStyles).to.deep.equal(greyToadTheme.text);
         });
     });
 
     describe('#frames', ()=>{
         it('should contain rects in the structure of the widgets' +
             ' portion of the styles', ()=>{
+                // textures becomes an alias for frames therefor
+                // see #textures
+
                 // try a few of them
-                expect(theme.frames.button.enabled).to.be.an
-                    .instanceof(PIXI.Rectangle);
-                expect(theme.frames.panel.hover).to.be.an
-                    .instanceof(PIXI.Rectangle);
-                expect(theme.frames.slider.button.enabled).to.be.an
-                    .instanceof(PIXI.Rectangle);
+                // expect(theme.frames.button.enabled).to.be.an
+                //     .instanceof(PIXI.Rectangle);
+                // expect(theme.frames.panel.hover).to.be.an
+                //     .instanceof(PIXI.Rectangle);
+                // expect(theme.frames.slider.button.enabled).to.be.an
+                //     .instanceof(PIXI.Rectangle);
             });
     });
 
@@ -72,12 +76,12 @@ describe('Theme', ()=>{
 
     describe('#getClipGraphic() (STATIC)', ()=>{
         it('should return the global clipGraphic', ()=>{
-            expect(theme.getClipGraphic()).to.be.an
-                .instanceof(PIXI.clipGraphic);
+            expect(ST.Theme.getClipGraphic()).to.be.an
+                .instanceof(PIXI.Graphics);
         });
     });
 
-    decribe('#registerDefaultWidgetStyle() (STATIC)', ()=>{
+    describe('#registerDefaultWidgetStyle() (STATIC)', ()=>{
         it('should add the given style to theme.defaults(global)', ()=>{
             let style = {
                 knob: {

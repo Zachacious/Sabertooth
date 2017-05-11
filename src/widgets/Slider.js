@@ -272,9 +272,9 @@ export default class Slider extends Container {
     paintDefault() {
         // no need to check track too. If button exist track should
         if(this.button) {
-            this.track.imgObj.texture
+            this.track.sprite.texture
                 = this.theme.textures.slider.track.enabled;
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.enabled;
         }
     }
@@ -282,29 +282,29 @@ export default class Slider extends Container {
     /** @inheritdoc */
     paintDisabled() {
         if(this.button) {
-            this.track.imgObj.texture
+            this.track.sprite.texture
                 = this.theme.textures.slider.track.disabled;
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.disabled;
         }
     }
 
     /** @inheritdoc */
     paintDown() {
-        // this.track.imgObj.texture.frame
+        // this.track.sprite.texture.frame
         //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.click;
         }
     }
 
     /** @inheritdoc */
     paintHover() {
-        // this.track.imgObj.texture.frame
+        // this.track.sprite.texture.frame
         //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.hover;
         }
     }
