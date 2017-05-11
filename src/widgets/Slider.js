@@ -136,6 +136,7 @@ export default class Slider extends Container {
         /**
          * Used internally to track if the mouse is dragging
          * @member {Boolean}
+         * @private
          */
         this._dragging = false;
 
