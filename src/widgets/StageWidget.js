@@ -23,7 +23,8 @@ export default class StageWidget extends BaseWidget {
 
     /**
      * Calculate bounds to remain at the user
-     * defined width and height of the widget
+     * defined width and height of the widget as it
+     * count the user defined size into the bounds.
      * @override
      */
     _calculateBounds() {

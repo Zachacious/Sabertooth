@@ -488,7 +488,7 @@ export default class BaseWidget extends PIXI.Container {
         cg.width = w;
         cg.height = h;
         cg.transform.position.set(pad.left, pad.top);
-        cg.renderable = false;
+        cg.renderable = false;// this seems to reset to true when size changes
     }
 
     /**

@@ -45,8 +45,7 @@ export default class Image extends BaseWidget {
 
      /**
       * The PIXI.Sprite used internally
-      * @method sprite
-      * @return {PIXI.Sprite}
+      * @member {PIXI.Sprite}
       */
     get sprite() {
         return this._sprite;
@@ -55,6 +54,20 @@ export default class Image extends BaseWidget {
     set sprite(val) { // eslint-disable-line require-jsdoc
         if(val instanceof PIXI.Sprite) {
             this._sprite = val;
+        }
+    }
+
+    /**
+     *The sprites texture
+     *@member {PIXI.Texture}
+     */
+    get texture() {
+        return this._sprite.texture;
+    }
+
+    set texture(val) { // eslint-disable-line require-jsdoc
+        if(val instanceof PIXI.Texture) {
+            this._sprite.texture = val;
         }
     }
 }

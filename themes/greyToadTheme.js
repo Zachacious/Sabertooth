@@ -13,6 +13,18 @@ greyToadTheme = {
             hover: 0x264e26,
             click: 0x3a723a,
         },
+        slider: {
+            track: {
+                enabled: 0x303030,
+                disabled: 0x2e2e2e,
+            },
+            button: {
+                enabled: 0x284328,
+                disabled: 0x303030,
+                hover: 0x264e26,
+                click: 0x3a723a,
+            },
+        },
     },
     text: {
         enabled: {

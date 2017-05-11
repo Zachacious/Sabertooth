@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Padding', ()=>{
-    let pad = new UI.Padding();
+    let pad = new ST.Padding();
     it('should be created with a default of 0', ()=>{
         expect(pad.left).to.equal(0);
         expect(pad.top).to.equal(0);

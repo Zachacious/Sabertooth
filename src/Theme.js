@@ -49,7 +49,7 @@ import Point from './Point';
          * Theme textures(frames for the base texture)
          * @member {Object}
          */
-        this.textures = Object.assign({}, this.frames);
+        this.textures = Object.assign(this.frames, {});
 
         // Creates the textures from the frames
         this.makeTexturesRecursive(this.textures);

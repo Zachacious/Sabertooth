@@ -1,8 +1,8 @@
 'use strict';
 
 describe('FixedLayout', ()=>{
-    let w0 = new UI.Widgets.Panel(null, {width: 400, height: 400});
-    let w1 = new UI.Widgets.Button(w0);
+    let w0 = new ST.Widgets.Panel(null, {width: 400, height: 400});
+    let w1 = new ST.Widgets.Button(w0);
     w1.position.set(12, 12);
 
     describe('#setChildPos()', ()=>{

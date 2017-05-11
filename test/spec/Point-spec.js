@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Point', ()=>{
-    let p = new UI.Point();
+    let p = new ST.Point();
     it('should create with default x and y of 0', ()=>{
         expect(p.x).to.equal(0);
         expect(p.y).to.equal(0);
