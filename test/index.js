@@ -1,9 +1,8 @@
 'use strict';
-// require('.././dist/UI.js');
 
-describe('UI', ()=>{
+describe('ST', ()=>{
     it('should exist as a global object', ()=>{
-        expect(UI).to.be.an('object');
+        expect(ST).to.be.an('object');
     });
     require('./spec');
 });

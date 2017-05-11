@@ -5,7 +5,7 @@ describe('GraphicsGen', ()=>{
         it('should return a Pixi.Graphics with a '
             + 'width of 80 and a height of 100', ()=>{
                 let rectGraphic =
-                    UI.GraphicsGen.rectangleGraphic(80, 100, 0x000000);
+                    ST.GraphicsGen.rectangleGraphic(80, 100, 0x000000);
 
                 expect(rectGraphic).to.be.an.instanceof(PIXI.Graphics);
                 expect(rectGraphic.width).to.equal(80);
@@ -17,7 +17,7 @@ describe('GraphicsGen', ()=>{
         it('should return a PIXI.Texture with a'
             + ' width of 100 and a height of 80', ()=>{
                 let rectTex =
-                    UI.GraphicsGen.rectangleTexture(100, 80, 0x000000);
+                    ST.GraphicsGen.rectangleTexture(100, 80, 0x000000);
 
                 expect(rectTex).to.be.an.instanceof(PIXI.Texture);
                 expect(rectTex.width).to.equal(100);
