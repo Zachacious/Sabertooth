@@ -3,20 +3,6 @@
 describe('BasePolicy', ()=>{
     let widget = new ST.Widgets.Button();
 
-    describe('#setWidgetWidth()', ()=>{
-        it('should set a widgets sizeProxys width', ()=>{
-            widget.hPolicy.setWidgetWidth(widget, 100);
-            expect(widget.sizeProxy._width).to.equal(100);
-        });
-    });
-
-    describe('#setWidgetHeight()', ()=>{
-        it('should set a widgets sizeProxys height', ()=>{
-            widget.hPolicy.setWidgetHeight(widget, 100);
-            expect(widget.sizeProxy._height).to.equal(100);
-        });
-    });
-
     describe('#validateWidth()', ()=>{
         it('should keep widgets width within min/max', ()=>{
             widget.min.width = 10;
