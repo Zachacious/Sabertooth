@@ -1,8 +1,8 @@
 'use strict';
 
 describe('BaseLayout', ()=>{
-    let widget0 = new UI.Widgets.Panel(null, {width: 100, height: 100});
-    let widget1 = new UI.Widgets.Button(widget0, {width: 20, height: 20});
+    let widget0 = new ST.Widgets.Panel(null, {width: 100, height: 100});
+    let widget1 = new ST.Widgets.Button(widget0, {width: 20, height: 20});
     widget1.position.set(20, 20);
 
     describe('#exec', ()=>{

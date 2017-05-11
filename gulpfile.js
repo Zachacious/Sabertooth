@@ -33,12 +33,12 @@ gulp.task('default', ['uglify', 'doc']);
 gulp.task('test', ['buildTest'], function() {
     return gulp
     .src('test/runner.html')
-    .pipe(mochaPhantomJS({reporter: 'spec', /* dump: './test/test.log',*/
-      phantomjs: {
-        useColors: true,
-        hooks: 'mocha-phantomjs-istanbul',
-        coverageFile: ' ./test/coverage/coverage.json',
-    }}));
+    .pipe(mochaPhantomJS({
+        reporter: 'spec',
+        phantomjs: {
+            useColors: true,
+        },
+        }));
 });
 
 // clean

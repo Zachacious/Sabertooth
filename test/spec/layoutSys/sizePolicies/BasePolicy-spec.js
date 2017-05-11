@@ -1,21 +1,7 @@
 'use strict';
 
 describe('BasePolicy', ()=>{
-    let widget = new UI.Widgets.Button();
-
-    describe('#setWidgetWidth()', ()=>{
-        it('should set a widgets sizeProxys width', ()=>{
-            widget.hPolicy.setWidgetWidth(widget, 100);
-            expect(widget.sizeProxy._width).to.equal(100);
-        });
-    });
-
-    describe('#setWidgetHeight()', ()=>{
-        it('should set a widgets sizeProxys height', ()=>{
-            widget.hPolicy.setWidgetHeight(widget, 100);
-            expect(widget.sizeProxy._height).to.equal(100);
-        });
-    });
+    let widget = new ST.Widgets.Button();
 
     describe('#validateWidth()', ()=>{
         it('should keep widgets width within min/max', ()=>{
@@ -52,31 +38,22 @@ describe('BasePolicy', ()=>{
 
                 expect(widget.hPolicy.totalChildrenFinished).to.equal(0);
                 expect(widget.hPolicy.totalChildrenFinishedSize).to.equal(500);
-
-                // test if spacing is included
-                // widget.layout = new UI.Layouts.HBoxLayout(widget);
-                // widget.hPolicy.totalChildrenFinishedSize = 100;
-                // widget.hPolicy.childPolicyFinished(400);
-                //
-                // expect(widget.hPolicy.totalChildrenFinishedSize).to.equal(504);
             });
     });
 
     describe('#exec()', ()=>{
-        let widget2 = new UI.Widgets.Button(widget);
+        let widget2 = new ST.Widgets.Button(widget);
 
         it('should add a one time event'
         + '( register size with childPolicyFinished ) and exec the '
         + 'HORIZONTAL size policy for each child '
-        + 'that is HORIZONTAL and an instanceof UI.Widgets.BaseWidget', ()=>{
+        + 'that is HORIZONTAL and an instanceof ST.Widgets.BaseWidget', ()=>{
             let spy = sinon.spy(widget2.hPolicy, 'exec');
             expect(widget2.hPolicy.listeners('finished', true)).to.be.false;
-            expect(widget2).to.be.an.instanceof(UI.Widgets.BaseWidget);
-            expect(widget.hPolicy.orientation).to.equal(UI.HORIZONTAL);
+            expect(widget2).to.be.an.instanceof(ST.Widgets.BaseWidget);
+            expect(widget.hPolicy.orientation).to.equal(ST.HORIZONTAL);
             widget.hPolicy.exec();
-            // below wont work because the one time listener executes before
-            // the above method is finished.
-            // expect(widget2.hPolicy.listeners('finished', true)).to.be.true;
+
             expect(spy.called).to.be.true;
             widget2.hPolicy.exec.restore();
         });
@@ -84,15 +61,13 @@ describe('BasePolicy', ()=>{
         it('should add a one time event'
         + '( register size with childPolicyFinished ) and exec the '
         + 'VERTICAL size policy for each child '
-        + 'that is VERTICAL and an instanceof UI.Widgets.BaseWidget', ()=>{
+        + 'that is VERTICAL and an instanceof ST.Widgets.BaseWidget', ()=>{
             let spy = sinon.spy(widget2.vPolicy, 'exec');
             expect(widget2.vPolicy.listeners('finished', true)).to.be.false;
-            expect(widget2).to.be.an.instanceof(UI.Widgets.BaseWidget);
-            expect(widget.vPolicy.orientation).to.equal(UI.VERTICAL);
+            expect(widget2).to.be.an.instanceof(ST.Widgets.BaseWidget);
+            expect(widget.vPolicy.orientation).to.equal(ST.VERTICAL);
             widget.vPolicy.exec();
-            // below wont work because the one time listener executes before
-            // the above method is finished.
-            // expect(widget2.hPolicy.listeners('finished', true)).to.be.true;
+
             expect(spy.called).to.be.true;
             widget2.vPolicy.exec.restore();
         });

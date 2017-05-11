@@ -54,6 +54,7 @@ export default class App extends EventEmitter {
       autoResize: true,
     };
 
+    // fill in missing options with defaults
     options = Object.assign(defaults, options);
 
     /**
@@ -137,9 +138,7 @@ export default class App extends EventEmitter {
    * Renders the root widget
    */
   update() {
-    if(this.root) {
       this.renderer.render(this.root);
-    }
   }
 
   /**
