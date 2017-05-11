@@ -4,8 +4,8 @@ describe('BoxLayout', ()=>{
     let w0 = new ST.Widgets.Panel(null, {width: 400, height: 400});
     w0.layout = new ST.Layouts.BoxLayout(w0, ST.VERTICAL);
     let w1 = new ST.Widgets.Button(w0, {width: 20, height: 20});
-    let w2 = new ST.Widgets.Button(w0, {width: 20, height: 20});
-    let w3 = new ST.Widgets.Button(w0, {width: 20, height: 20});
+    let w2 = new ST.Widgets.Button(w0, {width: 20, height: 20}); // eslint-disable-line
+    let w3 = new ST.Widgets.Button(w0, {width: 20, height: 20}); // eslint-disable-line
 
     describe('#initTotalChildrenSize()', ()=>{
         it('should calculate the total size of the children', ()=>{
