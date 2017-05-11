@@ -1,11 +1,11 @@
 'use strict';
 
 describe('BoxLayout', ()=>{
-    let w0 = new UI.Widgets.Panel(null, {width: 400, height: 400});
-    w0.layout = new UI.Layouts.BoxLayout(w0, UI.VERTICAL);
-    let w1 = new UI.Widgets.Button(w0, {width: 20, height: 20});
-    let w2 = new UI.Widgets.Button(w0, {width: 20, height: 20});
-    let w3 = new UI.Widgets.Button(w0, {width: 20, height: 20});
+    let w0 = new ST.Widgets.Panel(null, {width: 400, height: 400});
+    w0.layout = new ST.Layouts.BoxLayout(w0, ST.VERTICAL);
+    let w1 = new ST.Widgets.Button(w0, {width: 20, height: 20});
+    let w2 = new ST.Widgets.Button(w0, {width: 20, height: 20});
+    let w3 = new ST.Widgets.Button(w0, {width: 20, height: 20});
 
     describe('#initTotalChildrenSize()', ()=>{
         it('should calculate the total size of the children', ()=>{
