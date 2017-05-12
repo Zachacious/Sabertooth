@@ -8,12 +8,6 @@ import FixedPolicy
     from '../layoutSys/sizePolicies/FixedPolicy';
 import {HORIZONTAL, VERTICAL} from '.././const';
 
-/**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
 /* Add widget style to ST.Theme.defaults. This way the widget
 will always have a style even if the given theme doesn't have one
 specifically for it. All widgets that have themable elements
@@ -39,7 +33,7 @@ Theme.registerDefaultWidgetStyle('slider', {
 export default class Slider extends Container {
     /**
      * @param {ST.Widgets.BaseWidget} parent The widgets parent
-     * @param {Object} [options] @see ST.Widgets.BaseWidget
+     * @param {Object} [options] See {@link ST.Widgets.BaseWidget}
      * @param {Number} [options.orientation] Direction of slider
      */
     constructor(parent, options = {}) {
@@ -370,7 +364,7 @@ export default class Slider extends Container {
     }
 
     /**
-     * The direction of the slider
+     * The direction of the slider.(ST.HORIZONTAL or ST.VERTICAL)
      * @member {Number}
      */
     get orientation() {

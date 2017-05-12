@@ -2,7 +2,8 @@ import BoxLayout from './BoxLayout';
 import {VERTICAL} from '../.././const';
 
 /**
- * Vertical Box Layout - for convenience
+ * Arranges widgets vertically stacked on top of each other.
+ * (Same as box layout with orientation = ST.VERTICAL)
  * @memberof ST.Layouts
  * @extends ST.Layouts.BoxLayout
  */

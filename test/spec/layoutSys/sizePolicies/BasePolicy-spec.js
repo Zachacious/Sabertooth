@@ -3,32 +3,6 @@
 describe('BasePolicy', ()=>{
     let widget = new ST.Widgets.Button();
 
-    describe('#validateWidth()', ()=>{
-        it('should keep widgets width within min/max', ()=>{
-            widget.min.width = 10;
-            widget.max.width = 80;
-            widget.width = 100;
-            widget.hPolicy.validateWidth();
-            expect(widget.width).to.equal(80);
-            widget.width = 5;
-            widget.hPolicy.validateWidth();
-            expect(widget.width).to.equal(10);
-        });
-    });
-
-    describe('#validateHeight()', ()=>{
-        it('should keep widgets height within min/max', ()=>{
-            widget.min.height = 10;
-            widget.max.height = 80;
-            widget.height = 100;
-            widget.hPolicy.validateHeight();
-            expect(widget.height).to.equal(80);
-            widget.height = 5;
-            widget.hPolicy.validateHeight();
-            expect(widget.height).to.equal(10);
-        });
-    });
-
     describe('#childPolicyFinished()', ()=>{
         it('should add each childs size to totalChildrenFinishedSize and'
             + ' substract 1 from totalChildrenFinished', ()=>{

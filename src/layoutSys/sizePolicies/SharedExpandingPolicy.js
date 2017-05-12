@@ -43,12 +43,12 @@ export default class SharedExpandingPolicy extends ExpandingPolicy {
             parent.layout.orientation === VERTICAL) {
                 size = parent.width - pad;
                 w.width = size;
-                this.validateWidth(); // obey widget min and max size
+                w.validateWidth(); // obey widget min and max size
             } else {
                 size = availableSpace / remaining;
                 w.width = size;
                 // obey widget min and max size
-                let vWidth = this.validateWidth();
+                let vWidth = w.validateWidth();
                 if(vWidth === w.width) {
                     p.once('postIteration', this.consumeUnusedSpaceH, this);
                 }
@@ -78,12 +78,12 @@ export default class SharedExpandingPolicy extends ExpandingPolicy {
             parent.layout.orientation === HORIZONTAL) {
                 size = parent.height - pad;
                 w.height = size;
-                this.validateHeight(); // obey widget min and max size
+                w.validateHeight(); // obey widget min and max size
             } else {
                 size = availableSpace / remaining;
                 w.height = size;
                 // obey widget min and max size
-                let vHeight = this.validateHeight();
+                let vHeight = w.validateHeight();
                 if(vHeight === w.height) {
                      p.once('postIteration', this.consumeUnusedSpaceV, this);
                 }
@@ -112,7 +112,7 @@ export default class SharedExpandingPolicy extends ExpandingPolicy {
 
         // set the newly adjusted size
         w.width += relSize;
-        this.validateWidth(); // obey widget min and max size
+        w.validateWidth(); // obey widget min and max size
 
         // add used space back
         parent.hPolicy.usedSpace += relSize;
@@ -139,7 +139,7 @@ export default class SharedExpandingPolicy extends ExpandingPolicy {
 
         // set the newly adjusted size
         w.height += relSize;
-        this.validateHeight();// obey widget min and max size
+        w.validateHeight();// obey widget min and max size
 
         // add used space back
         parent.vPolicy.usedSpace += relSize;

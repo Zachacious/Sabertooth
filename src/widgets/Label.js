@@ -2,21 +2,15 @@ import * as PIXI from 'pixi.js';
 import BaseWidget from './BaseWidget';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * A simple text label
  * @memberof ST.Widgets
  * @extends ST.Widgets.BaseWidget
  */
 export default class Label extends BaseWidget {
     /**
-     * @param {ST.BaseWidget} parent - widgets parent
-     * @param {Object} [options = Object] - optional parameters
-     * @param {String} [options.text] - the text presented on the label
+     * @param {ST.BaseWidget} parent Widgets parent
+     * @param {Object} [options = Object] See {@link ST.Widgets.BaseWidget}
+     * @param {String} [options.text] The text presented on the label
      */
     constructor(parent, options = {}) {
         super(parent, options);

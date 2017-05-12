@@ -4,18 +4,6 @@ import StageWidget from './widgets/StageWidget';
 import EventEmitter from 'eventemitter3';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
- /**
-  * The EventEmitter namespace
-  * @external EventEmitter
-  * @see https://github.com/primus/eventemitter3
-  */
-
-/**
  * App will setup PIXI renderer and root widget automatically.
  * Just call App.update() from your render loop
  * @class
@@ -25,8 +13,8 @@ import EventEmitter from 'eventemitter3';
 export default class App extends EventEmitter {
   /**
    * @param {Object} options - Optional parameters
-   * @param {String} name - The apps name
-   * @param {ST.Theme} options.theme
+   * @param {String} [options.name] - The apps name
+   * @param {ST.Theme} [options.theme]
    * - Theme used by the app - by default creates
    * a new Theme with default settings.
    * @param {Boolean} [options.transparentBkg=false] - True makes
@@ -104,24 +92,28 @@ export default class App extends EventEmitter {
      */
     this.root = new StageWidget();
     this.root.padding.setAllTo(0);
-    this.root.width = window.innerWidth;
-    this.root.height = window.innerHeight;
 
     this.renderer.backgroundColor = this._theme.background;
 
     if(options.autoResize) {
-      // initial resize
-      this.renderer.resize(window.innerWidth, window.innerHeight);
-
-      this.on('resize', ()=>{
-          this.renderer.resize(window.innerWidth, window.innerHeight);
-      }, this);
+      this.resizeToWindow();
+    } else {
+      this.renderer.resize(options.width, options.height);
+      this.root.width = options.width;
+      this.root.height = options.height;
     }
 
-    this.on('resize', ()=>{
-      this.root.width = window.innerWidth;
-      this.root.height = window.innerHeight;
-    }, this);
+    /**
+     * Internal autoResize
+     * @private
+     */
+    this._autoResize = false;
+    this.autoResize = options.autoResize;
+
+    // this.on('resize', ()=>{
+    //   this.root.width = window.innerWidth;
+    //   this.root.height = window.innerHeight;
+    // }, this);
 
     // listen for window resize. emit signal
     window.addEventListener('resize', (e)=>{
@@ -132,6 +124,15 @@ export default class App extends EventEmitter {
      * Fires when the window is resized
      * @event ST.App#resize
      */
+  }
+
+  /**
+   * Resizes the renderer and root widget to match the browser size
+   */
+  resizeToWindow() {
+    this.renderer.resize(window.innerWidth, window.innerHeight);
+    this.root.width = window.innerWidth;
+    this.root.height = window.innerHeight;
   }
 
   /**
@@ -166,5 +167,29 @@ export default class App extends EventEmitter {
     this._theme = val;
     this.renderer.backgroundColor = this._theme.background;
     this.root.theme = this._theme;
+  }
+
+  /**
+   *If true the app will auto-size itself to fit the browser window
+   *@member {Boolean}
+   */
+  get autoResize() {
+    return this._autoResize;
+  }
+
+  set autoResize(val) { // eslint-disable-line require-jsdoc
+    const listeners = this.listeners('resize');
+
+    if(val) {
+      if(listeners.indexOf(this.resizeToWindow) === -1) {
+        // listener doesnt exist so add it
+        this.on('resize', this.resizeToWindow, this);
+      }
+    } else {
+      if(listeners.indexOf(this.resizeToWindow) !== -1) {
+        // listener exist so remove it
+        this.removeListener('resize', this.resizeToWindow);
+      }
+    }
   }
 }

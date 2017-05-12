@@ -2,12 +2,6 @@ import EventEmitter from 'eventemitter3';
 import GraphicsGen from './GraphicsGen';
 import Point from './Point';
 
-/**
- * The EventEmitter namespace
- * @external EventEmitter
- * @see https://github.com/primus/eventemitter3
- */
-
  /**
   * Themes represent colors and font properties used by the ui
   * @memberof ST
@@ -15,7 +9,7 @@ import Point from './Point';
   */
   export default class Theme extends EventEmitter {
     /**
-     * @param {Object} [options] theme object
+     * @param {Object} [options] Style sheet object
      */
       constructor(options = {}) {
         super();
@@ -41,7 +35,7 @@ import Point from './Point';
 
         /**
          * The base texture for all the themes textures
-         * @member {PIXI.baseTexture}
+         * @member {PIXI.BaseTexture}
          */
         this.baseTexture = this.makeTexture();
 
@@ -54,12 +48,15 @@ import Point from './Point';
         // Creates the textures from the frames
         this.makeTexturesRecursive(this.textures);
 
-        // App background color
+        /**
+         * Renderer background
+         * @member {Number}
+         */
         this.background = opts.background;
       }
 
       /**
-       * Returns the global graphic used for widget clipping
+       * Returns the global graphic used by all widgets for clipping
        * @static
        * @return {PIXI.Graphics}
        */

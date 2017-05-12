@@ -7,7 +7,7 @@ import EventEmitter from 'eventemitter3';
  * methods that return a relative position offset for the widget to
  * its parent.
  * @memberof ST
- * @extends EventEmitter
+ * @extends external:EventEmitter
  */
 export default class Alignment extends EventEmitter {
     /**

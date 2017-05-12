@@ -2,7 +2,8 @@ import BoxLayout from './BoxLayout';
 import {HORIZONTAL} from '../.././const';
 
 /**
- * Horizontal Box Layout - for convenience
+ * Arranges widgets horizontally stacked beside each other.
+ * (Same as box layout with orientation = ST.HORIZONTAL)
  * @memberof ST.Layouts
  * @extends ST.Layouts.BoxLayout
  */

@@ -1,7 +1,7 @@
 import BaseLayout from './BaseLayout';
 
 /**
- * Simple layout - makes no changes
+ * Arranges widgets according to their user defined position.
  * @memberof ST.Layouts
  * @extends BaseLayout
  */
@@ -13,16 +13,12 @@ export default class FixedLayout extends BaseLayout {
     constructor(hostWidget) {
         super(hostWidget);
 
-        // TODO check docs to see if this works
-        /**
-         * @override
-         */
         this.updateOnHostChanges = true;
     }
 
 
     /**
-     * Simply sets the widgets position with offset
+     * Sets the widgets position with offset
      * @param {ST.Widgets.BaseWidget} child - the child in question
      * @override
      */

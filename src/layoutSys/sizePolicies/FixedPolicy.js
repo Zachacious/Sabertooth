@@ -32,7 +32,7 @@ export default class FixedPolicy extends BasePolicy {
      * @override
      */
     sizeWidgetHorizontal() {
-        this.validateWidth(); // make obey widget.min and max
+        this._host.validateWidth(); // make obey widget.min and max
         this.emit('finished', this._host.width);
     }
 
@@ -41,7 +41,7 @@ export default class FixedPolicy extends BasePolicy {
      * @override
      */
     sizeWidgetVertical() {
-        this.validateHeight(); // make obey widget.min and max
+        this._host.validateHeight(); // make obey widget.min and max
         this.emit('finished', this._host.height);
     }
 }

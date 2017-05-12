@@ -85,33 +85,13 @@ export default class BasePolicy extends EventEmitter {
     }
 
     /**
-     * Makes sure the host widgets width stays between min and max
-     * @return {Number} the width
-     */
-    validateWidth() {
-        let w = this._host;
-        w.width = Math.min(Math.max(w.width, w.min.width), w.max.width);
-        return w.width;
-    }
-
-    /**
-     * Makes sure the host widgets height stays between min and max
-     * @return {Number} the height
-     */
-    validateHeight() {
-        let w = this._host;
-        w.height = Math.min(Math.max(w.height, w.min.height), w.max.height);
-        return w.height;
-    }
-
-    /**
-     * Sizes the widget if HORIZONTAL orientation
+     * Handles sizing the widget if HORIZONTAL orientation
      * @virtual
      */
     sizeWidgetHorizontal() {}
 
     /**
-     * Sizes the widget if VERTICAL orientation
+     * Handles sizing the widget if VERTICAL orientation
      * @virtual
      */
     sizeWidgetVertical() {}
@@ -120,6 +100,7 @@ export default class BasePolicy extends EventEmitter {
      * As each child widgets policy finishes we count them and
      * add their sizes to the collective
      * @param {number} size - Size of the child passed in
+     * @private
      */
     childPolicyFinished(size = 0) {
         this.totalChildrenFinishedSize += size + this.layoutSpacing;
@@ -130,6 +111,7 @@ export default class BasePolicy extends EventEmitter {
     /**
      * Execute the policy update - iterate over  and execute
      * children widgets policies.
+     * @private
      */
     exec() {
         this.emit('preIteration');

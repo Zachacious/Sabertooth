@@ -1,12 +1,6 @@
 import * as PIXI from 'pixi.js';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * Methods that generate Pixi.Graphics
  * @memberof ST
  */
