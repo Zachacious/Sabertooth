@@ -1,12 +1,6 @@
 import EventEmitter from 'eventemitter3';
 
 /**
- * The EventEmitter namespace
- * @external EventEmitter
- * @see https://github.com/primus/eventemitter3
- */
-
-/**
  * Hold position data.
  * Like PIXI.Point but with certain events
  * @memberof ST

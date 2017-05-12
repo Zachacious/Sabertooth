@@ -5,19 +5,19 @@ describe('FixedPolicy', ()=>{
 
     describe('#sizeWidgetHorizontal', ()=>{
         it('should validate the width of the widget', ()=>{
-            let spy = sinon.spy(widget.hPolicy, 'validateWidth');
+            let spy = sinon.spy(widget, 'validateWidth');
             widget.hPolicy.sizeWidgetHorizontal();
             expect(spy.called).to.be.true;
-            widget.hPolicy.validateWidth.restore();
+            widget.validateWidth.restore();
         });
     });
 
     describe('#sizeWidgetVertical', ()=>{
         it('should validate the height of the widget', ()=>{
-            let spy = sinon.spy(widget.vPolicy, 'validateHeight');
+            let spy = sinon.spy(widget, 'validateHeight');
             widget.vPolicy.sizeWidgetVertical();
             expect(spy.called).to.be.true;
-            widget.vPolicy.validateHeight.restore();
+            widget.validateHeight.restore();
         });
     });
 });

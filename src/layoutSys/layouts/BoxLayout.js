@@ -4,7 +4,7 @@ import {HORIZONTAL} from '../.././const';
 import BaseWidget from '../.././widgets/BaseWidget';
 
 /**
- * Lays out widgets in a straight line in one direction
+ * Arrange out widgets in a straight line in one direction
  * @memberof ST.Layouts
  * @extends ST.Layouts.BaseLayout
  */
@@ -81,6 +81,7 @@ export default class BoxLayout extends BaseLayout {
 
     /**
      * Calculates the total combined size of children
+     * @private
      */
     initTotalChildrenSize() {
         const children = this._host.children;
@@ -155,6 +156,7 @@ export default class BoxLayout extends BaseLayout {
 
     /**
      * Emits finished event
+     * @override
      */
     endIteration() {
         this.emit('finished');

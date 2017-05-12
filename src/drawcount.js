@@ -1,12 +1,6 @@
 import glCore from 'pixi-gl-core';
 import bitTwiddle from 'bit-twiddle';
 
-/**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
 let TICK = 0;
 let TEXTURE_TICK = 0;
 let settings = PIXI.settings;

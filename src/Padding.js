@@ -1,12 +1,6 @@
 import EventEmitter from 'eventemitter3';
 
 /**
- * The EventEmitter namespace
- * @external EventEmitter
- * @see https://github.com/primus/eventemitter3
- */
-
-/**
  * Padding componenet holds padding data for 4 sides
  * @memberof ST
  * @extends external:EventEmitter

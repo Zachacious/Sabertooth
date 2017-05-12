@@ -35,6 +35,32 @@ describe('BaseWidget', ()=>{
 
     });
 
+    describe('#validateWidth()', ()=>{
+        it('should keep widgets width within min/max', ()=>{
+            widget2.min.width = 10;
+            widget2.max.width = 80;
+            widget2.width = 100;
+            widget2.validateWidth();
+            expect(widget2.width).to.equal(80);
+            widget2.width = 5;
+            widget2.validateWidth();
+            expect(widget2.width).to.equal(10);
+        });
+    });
+
+    describe('#validateHeight()', ()=>{
+        it('should keep widgets height within min/max', ()=>{
+            widget2.min.height = 10;
+            widget2.max.height = 80;
+            widget2.height = 100;
+            widget2.validateHeight();
+            expect(widget2.height).to.equal(80);
+            widget2.height = 5;
+            widget2.validateHeight();
+            expect(widget2.height).to.equal(10);
+        });
+    });
+
     describe('#update()', ()=>{
 
     });
@@ -135,6 +161,8 @@ describe('BaseWidget', ()=>{
 
     describe('_updateClipGraphic()', ()=>{
         it('should set to size of widget - padding', ()=>{
+            widget2.max.width = 1000;
+            widget2.max.height = 1000;
             widget2.width = 400;
             widget2.height = 400;
             widget1.update(); // should call _updateClipGraphic()

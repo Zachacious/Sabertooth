@@ -9,15 +9,9 @@ import SITransform from './SITransform';
 import {HORIZONTAL, VERTICAL} from '.././const';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * The base class for all widgets
  * @memberof ST.Widgets
- * @extends external:PIXI#Container
+ * @extends external:Container
  * @abstract
  */
 export default class BaseWidget extends PIXI.Container {
@@ -289,6 +283,26 @@ export default class BaseWidget extends PIXI.Container {
     paintDisabled() {}
 
     /**
+     * Makes sure the widgets width stays between min and max
+     * @return {Number} the width
+     */
+    validateWidth() {
+        this.width
+            = Math.min(Math.max(this.width, this.min.width), this.max.width);
+        return this.width;
+    }
+
+    /**
+     * Makes sure the widgets height stays between min and max
+     * @return {Number} the height
+     */
+    validateHeight() {
+        this.height
+            = Math.min(Math.max(this.height, this.min.height), this.max.height);
+        return this.height;
+    }
+
+    /**
      *Used internally to prevent updates when changeing PROPERTIES
      *@private
      */
@@ -305,7 +319,8 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Executes sizepolicies and the layout
+     * Resizes children based on their size policies and arranges them
+     * according to the layout
      */
     update() {
         this._hPolicy.exec();
@@ -342,6 +357,7 @@ export default class BaseWidget extends PIXI.Container {
      * its ancestors untill one with either no parent or
      * one with a FixedLayout is found. This insures that all the affected
      * widgets get updated.
+     * @private
      */
     routeInvalidation() {
         let done = false;
@@ -364,6 +380,7 @@ export default class BaseWidget extends PIXI.Container {
      * Attempts to send update() upward to the highest invalid parent in an
      * effort to prevent updating any one widget twice in the same
      * loop iteration.
+     * @private
      */
     recursiveRouteUpdate() {
         let par = this;
@@ -461,6 +478,7 @@ export default class BaseWidget extends PIXI.Container {
     /**
      * Invalidates the widget if children have been added or removed.
      * @override
+     * @private
      */
     onChildrenChange() {
         this.layout.hostChildrenChanged();

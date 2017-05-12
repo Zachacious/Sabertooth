@@ -23,8 +23,29 @@ describe('App', ()=>{
 
     describe('#name', ()=>{
         it('should change the page title', ()=>{
-            app.name = 'GoodApp!';
-            expect(document.title).to.equal('GoodApp!');
+            app.name = 'SaberTooth Test';
+            expect(document.title).to.equal('SaberTooth Test');
+        });
+    });
+
+    describe('#autoResize', ()=>{
+        it('should add a listener to resize event if set to true and ' +
+            'one doesnt already exist', ()=>{
+                app.autoResize = true;
+                let listeners = app.listeners('resize');
+                expect(listeners.indexOf(app.resizeToWindow)).to.not.equal(-1);
+            });
+
+        it('should not add more than one listener', ()=>{
+            app.autoResize = true;
+            let listeners = app.listeners('resize');
+            expect(listeners.length).to.equal(1);
+        });
+
+        it('should remove the listener from resize if set to false', ()=>{
+            app.autoResize = false;
+            let listeners = app.listeners('resize');
+            expect(listeners.indexOf(app.resizeToWindow)).to.equal(-1);
         });
     });
 });

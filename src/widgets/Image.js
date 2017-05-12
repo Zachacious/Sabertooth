@@ -1,12 +1,6 @@
 import BaseWidget from './BaseWidget';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * Wraps PIXI.Sprite and allows images/ textures to become widgets
  * @extends ST.Widgets.BaseWidget
  * @memberof ST.Widgets
@@ -14,7 +8,7 @@ import BaseWidget from './BaseWidget';
 export default class Image extends BaseWidget {
     /**
      *@param {ST.Widgets.BaseWidget} parent Widgets parent
-     *@param {Object} [options = Object] @see ST.Widgets.BaseWidget
+     *@param {Object} [options = Object] See {@link ST.Widgets.BaseWidget}
      *@param {PIXI.Texture} [options.texture = null] The texture for the Image
      */
     constructor(parent, options = {}) {
