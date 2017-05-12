@@ -8,12 +8,6 @@ import FixedPolicy
     from '../layoutSys/sizePolicies/FixedPolicy';
 import {HORIZONTAL, VERTICAL} from '.././const';
 
-/**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
 /* Add widget style to ST.Theme.defaults. This way the widget
 will always have a style even if the given theme doesn't have one
 specifically for it. All widgets that have themable elements
@@ -39,7 +33,7 @@ Theme.registerDefaultWidgetStyle('slider', {
 export default class Slider extends Container {
     /**
      * @param {ST.Widgets.BaseWidget} parent The widgets parent
-     * @param {Object} [options] @see ST.Widgets.BaseWidget
+     * @param {Object} [options] See {@link ST.Widgets.BaseWidget}
      * @param {Number} [options.orientation] Direction of slider
      */
     constructor(parent, options = {}) {
@@ -136,6 +130,7 @@ export default class Slider extends Container {
         /**
          * Used internally to track if the mouse is dragging
          * @member {Boolean}
+         * @private
          */
         this._dragging = false;
 
@@ -271,9 +266,9 @@ export default class Slider extends Container {
     paintDefault() {
         // no need to check track too. If button exist track should
         if(this.button) {
-            this.track.imgObj.texture
+            this.track.sprite.texture
                 = this.theme.textures.slider.track.enabled;
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.enabled;
         }
     }
@@ -281,29 +276,29 @@ export default class Slider extends Container {
     /** @inheritdoc */
     paintDisabled() {
         if(this.button) {
-            this.track.imgObj.texture
+            this.track.sprite.texture
                 = this.theme.textures.slider.track.disabled;
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.disabled;
         }
     }
 
     /** @inheritdoc */
     paintDown() {
-        // this.track.imgObj.texture.frame
+        // this.track.sprite.texture.frame
         //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.click;
         }
     }
 
     /** @inheritdoc */
     paintHover() {
-        // this.track.imgObj.texture.frame
+        // this.track.sprite.texture.frame
         //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
-            this.button.imgObj.texture
+            this.button.sprite.texture
                 = this.theme.textures.slider.button.hover;
         }
     }
@@ -369,7 +364,7 @@ export default class Slider extends Container {
     }
 
     /**
-     * The direction of the slider
+     * The direction of the slider.(ST.HORIZONTAL or ST.VERTICAL)
      * @member {Number}
      */
     get orientation() {

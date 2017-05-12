@@ -4,8 +4,8 @@ import {HORIZONTAL} from '../.././const';
 /**
  * Expanding Policy causes children to expand in the given direction
  * filling the parent.
- * Note: This Policy doesn't respect siblings - best for widgets with
- * a sigle child.
+ * This Policy doesn't respect siblings - best for widgets with
+ * a sigle child, or for example the hPolicy of a widget in a vertical layout.
  * @memberof ST.SizePolicies
  * @extends ST.SizePolicies.BasePolicy
  */
@@ -54,7 +54,6 @@ export default class ExpandingPolicy extends BasePolicy {
      * Size widget after parent widget is finished.
      * When parent is finished we can size the widget and
      * know that parents size wont change afterward.
-     * @callback
      */
     parentReadyH() {
         const w = this._host;
@@ -62,7 +61,7 @@ export default class ExpandingPolicy extends BasePolicy {
         const pad = p.padding.left + p.padding.right;
 
         w.width = p.width - pad;
-        this.validateWidth(); // make it obey widet.min and max
+        w.validateWidth(); // make it obey widet.min and max
         this.emit('finished', w.width);
     }
 
@@ -70,7 +69,6 @@ export default class ExpandingPolicy extends BasePolicy {
      * Size widget after parent widget is finished.
      * When parent is finished we can size the widget and
      * know that parents size wont change afterward.
-     * @callback
      */
     parentReadyV() {
         const w = this._host;
@@ -78,7 +76,7 @@ export default class ExpandingPolicy extends BasePolicy {
         const pad = p.padding.top + p.padding.bottom;
 
         w.height = p.height - pad;
-        this.validateHeight(); // make it obey widet.min and max
+        w.validateHeight(); // make it obey widet.min and max
         this.emit('finished', w.height);
     }
 }

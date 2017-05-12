@@ -1,3 +1,27 @@
+/**
+ * The EventEmitter namespace
+ * @external EventEmitter
+ * @see https://github.com/primus/eventemitter3
+ */
+
+ /**
+  * The PIXI namespace
+  * @external PIXI
+  * @see http://pixijs.download/release/docs/index.html
+  */
+
+  /**
+   * PIXI.TransformStatic
+   * @external TransformStatic
+   * @see http://pixijs.download/release/docs/PIXI.TransformStatic.html
+   */
+
+   /**
+    * PIXI.Container
+    * @external Container
+    * @see http://pixijs.download/release/docs/PIXI.Container.html
+    */
+
 import App from './App';
 import {HORIZONTAL, VERTICAL} from './const';
 import GraphicsGen from './GraphicsGen';

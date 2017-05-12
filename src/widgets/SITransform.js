@@ -1,16 +1,10 @@
 import * as PIXI from 'pixi.js';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * Transform that makes a PIXI.Container size independent
  * from its parent. ( FOR INTERNAL USE ONLY! )
  * @memberof ST.Widgets
- * @extends external:PIXI#TransformStatic
+ * @extends external:TransformStatic
  */
 export default class SITransform extends PIXI.TransformStatic {
     /**

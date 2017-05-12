@@ -2,12 +2,6 @@ import Button from './Button';
 import Label from './Label';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * Button with a text label
  * @memberof ST.Widgets
  * @extends ST.Widgets.Button
@@ -15,7 +9,7 @@ import Label from './Label';
 export default class TextButton extends Button {
     /**
      * @param {ST.BaseWidget} parent The widgets parent
-     * @param {Object} [options] @see ST.Widgets.BaseWidget
+     * @param {Object} [options] See {@link ST.Widgets.BaseWidget}
      * @param {String} [options.text] The labels text
      */
     constructor(parent, options = {}) {
@@ -27,6 +21,11 @@ export default class TextButton extends Button {
 
         options = Object.assign(defaults, options);
 
+        /**
+         * The internal label
+         * @member {ST.Widgets.Label}
+         * @private
+         */
         this.label = new Label(this, options.text);
     }
 

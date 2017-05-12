@@ -1,12 +1,6 @@
 import BaseWidget from './BaseWidget';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * Container widget that keeps a fixed width and height. Probably should only
  * be used for full screen widgets such as the apps root widget.
  * @memberof ST.Widgets
@@ -15,7 +9,7 @@ import BaseWidget from './BaseWidget';
 export default class StageWidget extends BaseWidget {
     /**
      * @param {ST.Widgets.BaseWidget} parent The widgets parent
-     * @param {Object} [options] @see ST.Widgets.BaseWidget
+     * @param {Object} [options] See {@link ST.Widgets.BaseWidget}
      */
     constructor(parent, options = {}) {
         super(parent, options);
@@ -23,7 +17,9 @@ export default class StageWidget extends BaseWidget {
 
     /**
      * Calculate bounds to remain at the user
-     * defined width and height of the widget
+     * defined width and height of the widget as it
+     * count the user defined size into the bounds.
+     * @private
      * @override
      */
     _calculateBounds() {

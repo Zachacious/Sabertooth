@@ -51,6 +51,7 @@ export default class BaseLayout extends EventEmitter {
      *Override in layouts if they need to act upon the addition or
      *removal of children from the host widget.
      *@virtual
+     *@private
      */
     hostChildrenChanged() {}
 
@@ -58,6 +59,7 @@ export default class BaseLayout extends EventEmitter {
      * Overide in layouts - code that runs before the iteration
      * of child layouts
      * @virtual
+     * @private
      */
     beginIteration() {}
 
@@ -65,6 +67,7 @@ export default class BaseLayout extends EventEmitter {
      * Overide in layouts - code that runs after the iteration
      * of child layouts
      * @virtual
+     * @private
      */
     endIteration() {}
 
@@ -73,12 +76,14 @@ export default class BaseLayout extends EventEmitter {
      * each child widget.
      * @param {ST.Widgets.BaseWidget} child  the child widget in question
      * @virtual
+     * @private
      */
     setChildPos(child) {}
 
     /**
      * Execute the layout update - iterates over child widgets
      * and executes their layouts before positioning them.
+     * @private
      */
     exec() {
         this.beginIteration();

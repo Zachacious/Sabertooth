@@ -1,18 +1,18 @@
 'use strict';
 
 describe('SharedExpandingPolicy', ()=>{
-    let widget0 = new UI.Widgets.Panel(null, {width: 400, height: 400});
-    widget0.layout = new UI.Layouts.HBoxLayout(widget0);
+    let widget0 = new ST.Widgets.Panel(null, {width: 400, height: 400});
+    widget0.layout = new ST.Layouts.HBoxLayout(widget0);
 
-    let widget1 = new UI.Widgets.Button(widget0);
-    widget1.hPolicy = new UI.SizePolicies.SharedExpandingPolicy(widget1);
+    let widget1 = new ST.Widgets.Button(widget0);
+    widget1.hPolicy = new ST.SizePolicies.SharedExpandingPolicy(widget1);
     widget1.vPolicy
-    = new UI.SizePolicies.SharedExpandingPolicy(widget1, UI.VERTICAL);
+    = new ST.SizePolicies.SharedExpandingPolicy(widget1, ST.VERTICAL);
 
-    let widget2 = new UI.Widgets.Button(widget0);
-    widget2.hPolicy = new UI.SizePolicies.SharedExpandingPolicy(widget2);
+    let widget2 = new ST.Widgets.Button(widget0);
+    widget2.hPolicy = new ST.SizePolicies.SharedExpandingPolicy(widget2);
     widget2.vPolicy
-    = new UI.SizePolicies.SharedExpandingPolicy(widget2, UI.VERTICAL);
+    = new ST.SizePolicies.SharedExpandingPolicy(widget2, ST.VERTICAL);
 
     describe('#parentReadyH', ()=>{
         it('should size the widgets equal size if all have shared policy', ()=>{
@@ -22,10 +22,10 @@ describe('SharedExpandingPolicy', ()=>{
         });
 
         it('should handle widgets that arent of shared policy', ()=>{
-            let nullwidget = new UI.Widgets.Panel();
+            let nullwidget = new ST.Widgets.Panel();
             let widget3
-            = new UI.Widgets.Button(widget0, {width: 100, height: 100});
-            widget3.hPolicy = new UI.SizePolicies.FixedPolicy(widget3);
+            = new ST.Widgets.Button(widget0, {width: 100, height: 100});
+            widget3.hPolicy = new ST.SizePolicies.FixedPolicy(widget3);
             widget0.hPolicy.exec();
             expect(widget1.width).to.equal(142);
             expect(widget2.width).to.equal(142);
@@ -46,5 +46,13 @@ describe('SharedExpandingPolicy', ()=>{
                 same as above test.
              */
         });
+    });
+
+    describe('#consumeUnusedSpaceH()', ()=>{
+        // TODO
+    });
+
+    describe('#consumeUnusedSpaceV()', ()=>{
+        // TODO
     });
 });

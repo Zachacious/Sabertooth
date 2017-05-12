@@ -2,12 +2,6 @@ import Panel from './Panel';
 import Alignment from '../layoutSys/Alignment';
 import Theme from '.././Theme';
 
-/**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
 /* Add widget style to ST.Theme.defaults. This way the widget
 will always have a style even if the given theme doesn't have one
 specifically for it. All widgets that have themable elements
@@ -27,7 +21,7 @@ Theme.registerDefaultWidgetStyle('button', {
 export default class Button extends Panel {
     /**
      * @param {ST.Widgets.BaseWidget} parent The widgets parent
-     * @param {Object} [options = Object] @see ST.Widgets.BaseWidget
+     * @param {Object} [options = Object] See {@link ST.Widgets.BaseWidget}
      */
     constructor(parent, options = {}) {
         super(parent, options);

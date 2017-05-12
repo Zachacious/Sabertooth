@@ -1,12 +1,6 @@
 import BaseWidget from './BaseWidget';
 
 /**
- * The PIXI namespace
- * @external PIXI
- * @see http://pixijs.download/release/docs/index.html
- */
-
-/**
  * Wraps PIXI.Sprite and allows images/ textures to become widgets
  * @extends ST.Widgets.BaseWidget
  * @memberof ST.Widgets
@@ -14,7 +8,7 @@ import BaseWidget from './BaseWidget';
 export default class Image extends BaseWidget {
     /**
      *@param {ST.Widgets.BaseWidget} parent Widgets parent
-     *@param {Object} [options = Object] @see ST.Widgets.BaseWidget
+     *@param {Object} [options = Object] See {@link ST.Widgets.BaseWidget}
      *@param {PIXI.Texture} [options.texture = null] The texture for the Image
      */
     constructor(parent, options = {}) {
@@ -45,8 +39,7 @@ export default class Image extends BaseWidget {
 
      /**
       * The PIXI.Sprite used internally
-      * @method sprite
-      * @return {PIXI.Sprite}
+      * @member {PIXI.Sprite}
       */
     get sprite() {
         return this._sprite;
@@ -55,6 +48,20 @@ export default class Image extends BaseWidget {
     set sprite(val) { // eslint-disable-line require-jsdoc
         if(val instanceof PIXI.Sprite) {
             this._sprite = val;
+        }
+    }
+
+    /**
+     *The sprites texture
+     *@member {PIXI.Texture}
+     */
+    get texture() {
+        return this._sprite.texture;
+    }
+
+    set texture(val) { // eslint-disable-line require-jsdoc
+        if(val instanceof PIXI.Texture) {
+            this._sprite.texture = val;
         }
     }
 }
