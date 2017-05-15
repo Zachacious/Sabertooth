@@ -64,8 +64,8 @@ This project was designed for those wanting a hardware accelerated alternative t
 ### Get Started
 
 #### The easiest way to get started with Sabertooth is to download the builds directly.
-* [Sabertooth.js](../master/dist/Sabertooth.js)
-* [Sabertooth.min.js](../master/dist/Sabertooth.min.js)
+* [Sabertooth.js](../master/dist/sabertooth.js)
+* [Sabertooth.min.js](../master/dist/sabertooth.min.js)
 
 **To use:**
 ```html
@@ -156,7 +156,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ### Authors
 * **Zach Moore** *- initial work -* [@Zachacious](https://github.com/Zachacious)
 
-See also the list of [contributors](../master/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/AbydosDigital/Sabertooth/graphs/contributors) who participated in this project.
 
 ### License
 This project is licensed under the **ISC** license. See [LICENSE.md](../master/LICENSE.md) for more details.
