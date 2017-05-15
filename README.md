@@ -5,7 +5,7 @@ Sabertooth is inspired by QT, uses [PIXI.js](https://github.com/pixijs/pixi.js) 
 
 >**WARNING:** This project is in alpha and may experience breaking changes from one version to the next until all the core features are implimented and the first major version is released.
 
-* [Contributing Guidelines](../blob/master/CONTRIBUTING)
+* [Contributing Guidelines](../master/CONTRIBUTING.md)
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
 [![Build Status](https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/SaberTooth)
@@ -19,7 +19,7 @@ This project was designed for those wanting a hardware accelerated alternative t
 
 ### Features
 
-###### Current:
+**Current:**
 * App - Handles creating PIXI.js canvas and root widget.
 * Size Policies:
     * Fixed - Sets user defined size
@@ -44,7 +44,7 @@ This project was designed for those wanting a hardware accelerated alternative t
 * Padding for widgets
 * Themes created from styles sheets
 
-###### Coming soon:
+**Coming soon:**
 * Scrollable view
 * Drag n' drop
 * QT style actions
@@ -63,11 +63,11 @@ This project was designed for those wanting a hardware accelerated alternative t
 
 ### Get Started
 
-###### The easiest way to get started with Sabertooth is to download the builds directly.
-* [Sabertooth.js](../blob/master/dist/Sabertooth.js)
-* [Sabertooth.min.js](../blob/master/dist/Sabertooth.min.js)
+#### The easiest way to get started with Sabertooth is to download the builds directly.
+* [Sabertooth.js](../master/dist/Sabertooth.js)
+* [Sabertooth.min.js](../master/dist/Sabertooth.min.js)
 
-To use:
+**To use:**
 ```html
 <script src="Sabertooth.js"></script>
 <script>
@@ -96,11 +96,11 @@ To use:
 </script>
 ```
 
-###### Install with npm:
+#### Install with npm:
 ```
  $> npm install Sabertooth
 ```
-To use:
+**To use:**
 ```javascript
 import * as ST from 'Sabertooth'; // for es6 modules
 
@@ -128,12 +128,12 @@ let main = ()=>{
 main(); // Begin the main application loop
 ```
 
-###### Test
+#### Test
 ```
 gulp test
 ```
 
-###### To build locally:
+#### To build locally:
 * Fork Sabertooth
 * Clone
 * CD to the project directory
@@ -141,14 +141,14 @@ gulp test
 ```
 npm install
 ```
-* Build:
+Build:
 ```
 gulp
 ```
 
 ### Contributing
 
-Please read [CONTRIBUTING.md](../blob/master/CONTRIBUTING) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](../master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AbydosDigital/SaberTooth/tags).
@@ -156,10 +156,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ### Authors
 * **Zach Moore** *- initial work -* [@Zachacious](https://github.com/Zachacious)
 
-See also the list of [contributors](../blob/master/contributors) who participated in this project.
+See also the list of [contributors](../master/contributors) who participated in this project.
 
 ### License
-This project is licensed under the **ISC** license. See [LICENSE.md](../blob/master/LICENSE.md) for more details.
+This project is licensed under the **ISC** license. See [LICENSE.md](../master/LICENSE.md) for more details.
 
 ### Acknowledgements
 Special thanks to:
