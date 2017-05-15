@@ -159,7 +159,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 See also the list of [contributors](https://github.com/AbydosDigital/Sabertooth/graphs/contributors) who participated in this project.
 
 ### License
-This project is licensed under the **ISC** license. See [LICENSE.md](LICENSE.md) for more details.
+This project is licensed under the **ISC** license. See [LICENSE.md](LICENSE) for more details.
 
 ### Acknowledgements
 Special thanks to:
