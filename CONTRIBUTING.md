@@ -2,7 +2,7 @@
 
 ### You're awesome!:blush:
 
->Thank you for considering contributing to Sabertooth. Big commitments aren't required. Even small things like grammatical errors in the [docs](https://abydosdigital.github.io/Sabertooth/) really add up. Sabertooth is in its infancy and will need your help to reach its potential. Every contribution is valued and greatly appreciated.
+Thank you for considering contributing to Sabertooth. Big commitments aren't required. Even small things like grammatical errors in the [docs](https://abydosdigital.github.io/Sabertooth/) really add up. Sabertooth is in its infancy and will need your help to reach its potential. Every contribution is valued and greatly appreciated.
 
 >Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
 
@@ -15,17 +15,17 @@ Please note that this project is released with a [Contributor Code of Conduct](c
 
 ### Issue Tracker
 
-> It's ok to post question on the issue tracker.
+It's ok to post question on the issue tracker.
 
-> Simple fixes, like documentation, don't require that an issue be opened. Simply send the pull request. If you are unsure about it or don't have time to fix it yourself, go ahead and open the issue.
+Simple fixes, like documentation, don't require that an issue be opened. Simply send the pull request. If you are unsure about it or don't have time to fix it yourself, go ahead and open the issue.
 
-> Bugs, enhancements or feature request should be properly labeled. Please remember that not everyone is as experienced and knowledgeable as you. Be thorough in your explanation so that your issue has the best chance of being solved in a timely manner.
+Bugs, enhancements or feature request should be properly labeled. Please remember that not everyone is as experienced and knowledgeable as you. Be thorough in your explanation so that your issue has the best chance of being solved in a timely manner.
 
 ### Pull Request
 
 > When woking on large features or bug fixes it's best to split the work(break it down) into different branches/ pull request. This simplifies the process of reviewing and merging.
 
-> Requirements for acceptance:
+Requirements for acceptance:
 * If it solves an issue it must reference the issue in the title
 * New features or methods must have at least basic corresponding test.
 * New classes and methods must have documentation(JSDoc comments).
@@ -37,20 +37,20 @@ No worries, we'd love to help you!:thumbsup:
 
 > Unsure where to begin contributing to Sabertooth? You can start by looking through the issue tracker for something simple or maybe read through the [docs](https://abydosdigital.github.io/Sabertooth/) to see if anything needs improvement.
 
->If you're new to Github check out these friendly tutorials:
+If you're new to Github check out these friendly tutorials:
 * [makeapullrequest.com](http://makeapullrequest.com/)
 * [firsttimersonly.com](http://www.firsttimersonly.com/)
 * [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
 
->At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner at first :smile_cat:
+At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner at first :smile_cat:
 
->If a maintainer asks you to "rebase" your PR, they're saying that a lot of code has changed, and that you need to update your branch so it's easier to merge.
+If a maintainer asks you to "rebase" your PR, they're saying that a lot of code has changed, and that you need to update your branch so it's easier to merge.
 
 # Getting started
 
 ### Follow these instructions and you'll be on your way in no time.:smile:
 
->1. Create your own fork of the code
+1. Create your own fork of the code
 2. Create a new branch for the fix or feature
 3. Do the changes in your fork
 4. If you like the change and think the project could use it:
@@ -60,7 +60,7 @@ No worries, we'd love to help you!:thumbsup:
 
 ### Small contributions
 
->As a rule of thumb, changes are obvious fixes if they do not introduce any new functionality or creative thinking. As long as the change does not affect functionality, some likely examples include the following:
+As a rule of thumb, changes are obvious fixes if they do not introduce any new functionality or creative thinking. As long as the change does not affect functionality, some likely examples include the following:
 * Spelling / grammar fixes
 * Typo correction, white space and formatting changes
 * Comment clean up
@@ -71,9 +71,9 @@ No worries, we'd love to help you!:thumbsup:
 
 # How to report a bug
 
-> When filing an issue, make sure to answer these five questions:
+When filing an issue, make sure to answer these five questions:
 
->1. What version of Sabertooth are you using?
+1. What version of Sabertooth are you using?
 2. What operating system and processor architecture are you using?
 3. What did you do?
 4. What did you expect to see?
