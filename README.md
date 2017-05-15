@@ -5,7 +5,7 @@ Sabertooth is inspired by QT, uses [PIXI.js](https://github.com/pixijs/pixi.js) 
 
 >**WARNING:** This project is in alpha and may experience breaking changes from one version to the next until all the core features are implimented and the first major version is released.
 
-* [Contributing Guidelines](../master/CONTRIBUTING.md)
+* [Contributing Guidelines](CONTRIBUTING.md)
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
 [![Build Status](https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/SaberTooth)
@@ -64,8 +64,8 @@ This project was designed for those wanting a hardware accelerated alternative t
 ### Get Started
 
 #### The easiest way to get started with Sabertooth is to download the builds directly.
-* [Sabertooth.js](../master/dist/sabertooth.js)
-* [Sabertooth.min.js](../master/dist/sabertooth.min.js)
+* [Sabertooth.js](dist/sabertooth.js)
+* [Sabertooth.min.js](dist/sabertooth.min.js)
 
 **To use:**
 ```html
@@ -148,7 +148,7 @@ gulp
 
 ### Contributing
 
-Please read [CONTRIBUTING.md](../master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/AbydosDigital/SaberTooth/tags).
@@ -159,7 +159,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 See also the list of [contributors](https://github.com/AbydosDigital/Sabertooth/graphs/contributors) who participated in this project.
 
 ### License
-This project is licensed under the **ISC** license. See [LICENSE.md](../master/LICENSE.md) for more details.
+This project is licensed under the **ISC** license. See [LICENSE.md](LICENSE.md) for more details.
 
 ### Acknowledgements
 Special thanks to:
