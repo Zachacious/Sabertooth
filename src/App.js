@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+// import {autoDetectRenderer} from 'pixi.js/lib/core';
 import Theme from './Theme';
 import StageWidget from './widgets/StageWidget';
 import EventEmitter from 'eventemitter3';
@@ -67,7 +68,7 @@ export default class App extends EventEmitter {
      * Points to the correct PIXI renderer. Webgl if possible
      * @member {PIXI.WebglRenderer | PIXI.CanvasRenderer}
      */
-    this.renderer = PIXI.autoDetectRenderer(options.width, options.height,
+    this.renderer = autoDetectRenderer(options.width, options.height,
       renderOptions);
 
     // Add webgl canvas to the doc. Set padding and margins to 0

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-
+// import {Graphics} from 'pixi.js/lib/core';
 /**
  * Methods that generate Pixi.Graphics
  * @memberof ST
@@ -15,7 +15,7 @@ export default class GraphicsGen {
      * @return {PIXI.Graphics}
      */
     static rectangleGraphic(width, height, color) {
-        let graphic = new PIXI.Graphics();
+        let graphic = new Graphics();
         graphic.beginFill(color);
         graphic.drawRect(0, 0, width, height);
         graphic.endFill();

@@ -1352,6 +1352,8 @@
             
                 <li data-name="ST.Widgets.Slider#value"><a href="ST.Widgets.Slider.html#value">value</a></li>
             
+                <li data-name="ST.Widgets.Slider#valueCB"><a href="ST.Widgets.Slider.html#valueCB">valueCB</a></li>
+            
                 <li data-name="ST.Widgets.Slider#vPolicy"><a href="ST.Widgets.Slider.html#vPolicy">vPolicy</a></li>
             
                 <li data-name="ST.Widgets.Slider#width"><a href="ST.Widgets.Slider.html#width">width</a></li>
@@ -1681,8 +1683,143 @@
 
 
     <section>
-        <article class="readme"><p><a target="_blank" href="https://travis-ci.org/AbydosDigital/SaberTooth"><img src="https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master" alt="Build Status"></a>
-<a target="_blank" href="http://inch-ci.org/github/AbydosDigital/SaberTooth"><img src="http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master" alt="Inline docs"></a></p></article>
+        <article class="readme"><h1>Sabertooth</h1><h3>A hardware accelerated user interface framework for JavaScript.</h3><p>Sabertooth is inspired by QT, uses <a target="_blank" href="https://github.com/pixijs/pixi.js">PIXI.js</a> under-the-hood and renders in webGL with canvas fallback.</p>
+<blockquote>
+<p><strong>WARNING:</strong> This project is in alpha and may experience breaking changes from one version to the next until all the core features are implimented and the first major version is released.</p>
+</blockquote>
+<ul>
+<li><a href="CONTRIBUTING.md">Contributing Guidelines</a></li>
+<li><a target="_blank" href="https://abydosdigital.github.io/Sabertooth/">Documentation</a></li>
+</ul>
+<p><a target="_blank" href="https://travis-ci.org/AbydosDigital/SaberTooth"><img src="https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master" alt="Build Status"></a>
+<a target="_blank" href="http://inch-ci.org/github/AbydosDigital/SaberTooth"><img src="http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master" alt="Inline docs"></a>
+<a target="_blank" href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
+<hr>
+<h3>Why?</h3><p>This project was designed for those wanting a hardware accelerated alternative to DOM based user interface frameworks. Widgets have alpha, tint, blending modes, filters(shaders), and they can be animated. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets. No knowledge of webGL required.</p>
+<h3>Features in summary</h3><p><strong>Current:</strong></p>
+<ul>
+<li>App - Handles creating PIXI.js canvas and root widget.</li>
+<li>Size Policies:<ul>
+<li>Fixed - Sets user defined size</li>
+<li>Expanding - Expands into the parent(more efficient for some situations).</li>
+<li>Shared Expanding - Expands into parent but shares space with siblings.</li>
+</ul>
+</li>
+<li>Layouts:<ul>
+<li>Fixed - Sets user defined position</li>
+<li>VBox - Stacks widgets vertically on top of each other</li>
+<li>HBox - Places widgets inline side by side</li>
+</ul>
+</li>
+<li>Alignments for layouts:<ul>
+<li>Horizontal: left, center, right</li>
+<li>Vertical: top, middle, bottom</li>
+</ul>
+</li>
+<li>Widgets:<ul>
+<li>Panel</li>
+<li>Label</li>
+<li>Button</li>
+<li>TextButton</li>
+<li>Slider</li>
+<li>Stage widget (root widget)</li>
+<li>Container</li>
+<li>Image</li>
+</ul>
+</li>
+<li>Padding for widgets</li>
+<li>Themes created from styles sheets</li>
+</ul>
+<p><strong>Coming soon:</strong></p>
+<ul>
+<li>Scrollable view</li>
+<li>Drag n' drop</li>
+<li>QT style actions</li>
+<li>Menus</li>
+<li>Keyboard shortcuts for actions</li>
+<li>Undo ( with commands the way QT does it)</li>
+<li>Text Edit</li>
+<li>Check box</li>
+<li>List</li>
+<li>Trees</li>
+<li>MVC</li>
+<li>Tabs</li>
+<li>Dialog</li>
+<li>Progress bar</li>
+<li>...</li>
+</ul>
+<h3>Get Started</h3><h4>The easiest way to get started with Sabertooth is to download the builds directly.</h4><ul>
+<li><a href="dist/sabertooth.js">Sabertooth.js</a></li>
+<li><a href="dist/sabertooth.min.js">Sabertooth.min.js</a></li>
+</ul>
+<p><strong>To use:</strong></p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;Sabertooth.js&quot;>&lt;/script>
+&lt;script>
+    let app = new ST.App(/*options*/);
+
+    let tb = new ST.Widgets.TextButton(app.root, {
+        text: 'My Button',
+        x: 100,
+        y: 100,
+        width: 200,
+        height: 30,
+    });
+
+    // Set a click callback
+    tb.on('click', ()=>{
+        console.log('My Button Was Clicked!');
+    });
+
+    //main loop
+    let main = ()=>{
+        app.update(); // Update UI logic
+        requestAnimationFrame(main); // Loop
+    }
+
+    main(); // Begin the main application loop
+&lt;/script></code></pre><h4>Install with npm:</h4><pre class="prettyprint source"><code> $> npm install Sabertooth</code></pre><p><strong>To use:</strong></p>
+<pre class="prettyprint source lang-javascript"><code>import * as ST from 'Sabertooth'; // for es6 modules
+
+let app = new ST.App(/*options*/);
+
+let tb = new ST.Widgets.TextButton(app.root, {
+    text: 'My Button',
+    x: 100,
+    y: 100,
+    width: 200,
+    height: 30,
+});
+
+// Set a click callback
+tb.on('click', ()=>{
+    console.log('My Button Was Clicked!');
+});
+
+//main loop
+let main = ()=>{
+    app.update(); // Update UI logic
+    requestAnimationFrame(main); // Loop
+}
+
+main(); // Begin the main application loop</code></pre><h4>Test</h4><pre class="prettyprint source"><code>gulp test</code></pre><h4>To build locally:</h4><ul>
+<li>Fork Sabertooth</li>
+<li>Clone</li>
+<li>CD to the project directory</li>
+<li>Install dependencies:<pre class="prettyprint source"><code>npm install</code></pre>Build:<pre class="prettyprint source"><code>gulp</code></pre></li>
+</ul>
+<h3>Contributing</h3><p>Please read <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
+<h3>Versioning</h3><p>We use <a target="_blank" href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a target="_blank" href="https://github.com/AbydosDigital/SaberTooth/tags">tags on this repository</a>.</p>
+<h3>Authors</h3><ul>
+<li><strong>Zach Moore</strong> <em>- initial work -</em> <a target="_blank" href="https://github.com/Zachacious">@Zachacious</a></li>
+</ul>
+<p>See also the list of <a target="_blank" href="https://github.com/AbydosDigital/Sabertooth/graphs/contributors">contributors</a> who participated in this project.</p>
+<h3>License</h3><p>This project is licensed under the <strong>ISC</strong> license. See <a href="LICENSE">LICENSE.md</a> for more details.</p>
+<h3>Acknowledgements</h3><p>Special thanks to:</p>
+<ul>
+<li><a target="_blank" href="http://www.goodboydigital.com/">GoodBoyDigital</a> - <a target="_blank" href="http://www.pixijs.com/">Pixi.js</a></li>
+<li><a target="_blank" href="https://github.com/primus">Primus</a> - <a target="_blank" href="https://github.com/primus/eventemitter3">EventEmitter3</a></li>
+</ul>
+<h3>Questions?</h3><p>Please contact AbydosDigital@gmail.com with any further questions you may have.</p></article>
     </section>
 
 
@@ -1693,7 +1830,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri May 12 2017 12:58:51 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 15 2017 23:39:04 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

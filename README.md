@@ -17,7 +17,7 @@ Sabertooth is inspired by QT, uses [PIXI.js](https://github.com/pixijs/pixi.js) 
 
 This project was designed for those wanting a hardware accelerated alternative to DOM based user interface frameworks. Widgets have alpha, tint, blending modes, filters(shaders), and they can be animated. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets. No knowledge of webGL required.
 
-### Features
+### Features in summary
 
 **Current:**
 * App - Handles creating PIXI.js canvas and root widget.
