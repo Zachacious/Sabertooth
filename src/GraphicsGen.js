@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-
+// import {Graphics} from 'pixi.js/lib/core';
 /**
  * Methods that generate Pixi.Graphics
  * @memberof ST

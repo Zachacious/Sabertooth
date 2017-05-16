@@ -1,6 +1,6 @@
 {
   "name": "sabertooth",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A WebGL UI framework for desktop, mobile and web apps",
   "main": "./lib/index.js",
   "scripts": {
@@ -46,7 +46,7 @@
     "gulp-mocha-phantomjs": "^0.12.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.4.1",
-    "gulp-uglify": "^2.0.1",
+    "gulp-uglify": "^2.1.2",
     "jaguarjs-jsdoc": "^1.0.2",
     "jsdoc": "^3.4.3",
     "mocha": "^3.3.0",
