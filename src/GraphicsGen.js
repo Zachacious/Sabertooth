@@ -15,7 +15,7 @@ export default class GraphicsGen {
      * @return {PIXI.Graphics}
      */
     static rectangleGraphic(width, height, color) {
-        let graphic = new Graphics();
+        let graphic = new PIXI.Graphics();
         graphic.beginFill(color);
         graphic.drawRect(0, 0, width, height);
         graphic.endFill();
