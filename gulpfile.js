@@ -91,7 +91,7 @@ gulp.task('buildTest', ()=>{
 gulp.task('build', ['copyThemes'], function() {
     return browserify({
         entries: ['./src/index.js'],
-        debug: true, /* !gulp.env.production,*/
+        debug: false, /* !gulp.env.production,*/
         insertGlobals: true,
     })
     .transform(babelify.configure({presets: ['es2015']}))
@@ -117,9 +117,35 @@ gulp.task('npmbuild', ['copyThemes'], function() {
 gulp.task('uglify', ['build'], ()=> {
   return gulp.src([BUILD_OUTPUT + '/' + NAME + '.js'])
   .pipe(buffer())
-  .pipe(sourcemaps.init({loadMaps: true}))
-  .pipe(uglify())
-  .pipe(sourcemaps.write(BUILD_OUTPUT))
+  // .pipe(sourcemaps.init())
+  .pipe(uglify({
+      compress: {
+        passes: 10,
+        sequences: true,
+        dead_code: true,
+        conditionals: true,
+        booleans: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        drop_console: true,
+        unsafe: true,
+        unsafe_proto: true,
+        evaluate: true,
+        loops: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        collapse_vars: true,
+        reduce_vars: true,
+    },
+     output: {
+       beautify: false,
+       semicolons: false,
+       quote_style: 1,
+     },
+     mangle: true}))
+  // .pipe(sourcemaps.write(BUILD_OUTPUT))
   .pipe(rename(NAME + '.min.js'))
   .pipe(gulp.dest(BUILD_OUTPUT));
 });

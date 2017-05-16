@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+// import {autoDetectRenderer} from 'pixi.js/lib/core';
 import Theme from './Theme';
 import StageWidget from './widgets/StageWidget';
 import EventEmitter from 'eventemitter3';
