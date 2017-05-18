@@ -36,7 +36,7 @@ describe('Slider', ()=>{
     describe('#value', ()=>{
         it('should set the buttons pos when set', ()=>{
             sl.value = 0.5;
-            const actual = 100;
+            const actual = 90;
             expect(sl.button.x).to.equal(actual);
         });
 
