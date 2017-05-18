@@ -3,7 +3,7 @@
 /*
 TODO:
 test things that should happen when events are fired.
-eg. when padding changes _updateClipGraphic should be called.
+eg. when padding changes _updateClipRect should be called.
  */
 
 describe('BaseWidget', ()=>{
@@ -85,7 +85,8 @@ describe('BaseWidget', ()=>{
                 expect(widget2.valid).to.be.true;
         });
 
-        it('should invalidate the first parent with a fixed size policy', ()=>{
+        it('should invalidate the first parent with a layout that has '
+            + 'updateOnHostChanges = true', ()=>{
             widget2.routeInvalidation();
             expect(widget0.valid).to.be.true;
             expect(widget1.valid).to.be.false;
@@ -130,21 +131,37 @@ describe('BaseWidget', ()=>{
     });
 
     describe('#addChild', ()=>{
-        it('should add its clipGraphic to each PIXI.Container '
-            + 'child added', ()=>{
+        it('should add its clipRect to mask each PIXI.Container '
+            + 'child added if child.layout.updateOnHostChanges = true', ()=>{
                 let pc = new PIXI.Container();
                 widget2.addChild(pc);
-                expect(pc.mask).to.equal(widget2.clipGraphic);
+                expect(pc.mask).to.equal(widget2.clipRect);
         });
+
+        it('should let childs mask = null for PIXI.Containers '
+            + 'if child.layout.updateOnHostChanges = false', ()=>{
+                let pc = new PIXI.Container();
+                pc.layout = new ST.Layouts.VBoxLayout(pc);
+                widget2.addChild(pc);
+                expect(pc.mask).to.equal(null);
+            });
 
         it('should add its theme to each BaseWidget child added', ()=>{
             expect(widget2.theme).to.equal(widget1.theme);
         });
 
-        it('should add its clipGraphic to each BaseWidget child addeds'
-            + ' size proxy', ()=>{
-            expect(widget2.sizeProxy.mask).to.equal(widget1.clipGraphic);
+        it('should add its clipRect to mask each BaseWidget child addeds'
+            + ' size proxy if child.layout.updateOnHostChanges = true', ()=>{
+            expect(widget2.sizeProxy.mask).to.equal(widget1.clipRect);
         });
+
+        it('should let childs mask = null for widgets '
+            + 'if child.layout.updateOnHostChanges = false', ()=>{
+                let w = new ST.Widgets.Button();
+                w.layout = new ST.Layouts.VBoxLayout(w);
+                widget2.addChild(w);
+                expect(w.mask).to.equal(null);
+            });
     });
 
     describe('#addChildAt()', ()=>{
@@ -159,24 +176,20 @@ describe('BaseWidget', ()=>{
 
     });
 
-    describe('_updateClipGraphic()', ()=>{
+    describe('_updateClipRect()', ()=>{
         it('should set to size of widget - padding', ()=>{
             widget2.max.width = 1000;
             widget2.max.height = 1000;
             widget2.width = 400;
             widget2.height = 400;
-            widget1.update(); // should call _updateClipGraphic()
-            expect(widget2.clipGraphic.width).to.equal(392);
-            expect(widget2.clipGraphic.height).to.equal(392);
+            widget1.update(); // should call _updateClipRect()
+            expect(widget2.clipRect.width).to.equal(392);
+            expect(widget2.clipRect.height).to.equal(392);
         });
 
         it('should set the pos to the top left padding values', ()=>{
-            expect(widget2.clipGraphic.x).to.equal(4);
-            expect(widget2.clipGraphic.y).to.equal(4);
-        });
-
-        it('should set renderable to false', ()=>{
-            expect(widget2.clipGraphic.renderable).to.be.false;
+            expect(widget2.clipRect.x).to.equal(4);
+            expect(widget2.clipRect.y).to.equal(4);
         });
     });
 
@@ -202,6 +215,21 @@ describe('BaseWidget', ()=>{
             expect(widget0.disabled).to.be.false;
             expect(widget1.disabled).to.be.false;
             expect(widget2.disabled).to.be.false;
+        });
+    });
+
+    describe('#layout', ()=>{
+        it('should set mask to null if '
+            + 'widget.layout.updateOnHostChanges = false', ()=>{
+                widget1.layout = new ST.Layouts.VBoxLayout(widget1);
+                widget1.layout = new ST.Layouts.FixedLayout(widget1);
+                expect(widget1.mask).to.be.null;
+        });
+
+        it('should set mask to parents clipRect if'
+            + 'widget.layout.updateOnHostChanges = true', ()=>{
+                widget1.layout = new ST.Layouts.VBoxLayout(widget1);
+                expect(widget1.mask).to.equal(widget0.clipRect);
         });
     });
 });
