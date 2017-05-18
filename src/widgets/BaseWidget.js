@@ -181,16 +181,13 @@ export default class BaseWidget extends PIXI.Container {
         this._disabled = false;
 
         /**
-         * PIXI.Graphics used to mask the widgets contents -
+         * PIXI.Rectangle used to mask the widgets contents -
          * usually applies to children
-         * @member {PIXI.Graphics}
+         * @member {PIXI.Rectangle}
          * @private
          */
-        this._clipGraphic = Theme.clipGraphic.clone();
-        this.addChild(this._clipGraphic);
-        this._clipGraphic.boundsPadding = 0;
-        this._updateClipGraphic();
-        this._clipGraphic.renderable = false;
+        this._clipRect = new PIXI.Rectangle();
+        this._updateClipRect();
 
         // if no theme is set at this point set default
         if(!this._theme) {
@@ -369,7 +366,7 @@ export default class BaseWidget extends PIXI.Container {
             if(!par) {
                 child.invalidate();
                 done = true;
-            } else if(par.layout instanceof FixedLayout) {
+            } else if(par.layout.updateOnHostChanges) {
                 par.invalidate();
                 done = true;
             }
@@ -441,13 +438,21 @@ export default class BaseWidget extends PIXI.Container {
     addChild(child) {
         super.addChild(child);
         if(child instanceof PIXI.Container) {
-            // set child to be masked by its parent(this widget)
-            child.mask = this._clipGraphic;
+            if(child.layout.updateOnHostChanges) {
+                // set child to be masked by its parent(this widget)
+                child.mask = this._clipRect;
+            } else {
+                child.mask = null;
+            }
         }
         if(child instanceof BaseWidget) {
             child.theme = this.theme;
             if(child.sizeProxy) {
-                child.sizeProxy.mask = this._clipGraphic;
+                if(child.layout.updateOnHostChanges) {
+                    child.sizeProxy.mask = this._clipRect;
+                } else {
+                    child.sizeProxy.mask = null;
+                }
             }
         }
     }
@@ -463,13 +468,21 @@ export default class BaseWidget extends PIXI.Container {
     addChildAt(child, index) {
         super.addChildAt(child, index);
         if(child instanceof PIXI.Container) {
-            // set child to be masked by its parent(this widget)
-            child.mask = this._clipGraphic;
+            if(child.layout.updateOnHostChanges) {
+                // set child to be masked by its parent(this widget)
+                child.mask = this._clipRect;
+            } else {
+                child.mask = null;
+            }
         }
         if(child instanceof BaseWidget) {
             child.theme = this.theme;
             if(child.sizeProxy) {
-                child.sizeProxy.mask = this._clipGraphic;
+                if(child.layout.updateOnHostChanges) {
+                    child.sizeProxy.mask = this._clipRect;
+                } else {
+                    child.sizeProxy.mask = null;
+                }
             }
         }
     }
@@ -495,18 +508,16 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * Update the clipgraphics size to match the widgets size - padding.
+     * Update the clipRects size to match the widgets size - padding.
      * @private
      */
-    _updateClipGraphic() {
+    _updateClipRect() {
         const pad = this.padding;
-        const w = this.width - (pad.left + pad.right);
-        const h = this.height - (pad.top + pad.bottom);
-        const cg = this._clipGraphic;
-        cg.width = w;
-        cg.height = h;
-        cg.transform.position.set(pad.left, pad.top);
-        cg.renderable = false;// this seems to reset to true when size changes
+        const cr = this._clipRect;
+        cr.width = this.width - (pad.left + pad.right);
+        cr.height = this.height - (pad.top + pad.bottom);
+        cr.x = pad.left;
+        cr.y = pad.top;
     }
 
     /**
@@ -537,15 +548,15 @@ export default class BaseWidget extends PIXI.Container {
     }
 
     /**
-     * The clipGraphic is used to mask this widgets children
+     * The clipRect is used to mask this widgets children
      * @member {PIXI.Graphics}
      */
-    get clipGraphic() {
-        return this._clipGraphic;
+    get clipRect() {
+        return this._clipRect;
     }
 
-    set clipGraphic(cg) { // eslint-disable-line require-jsdoc
-        this._clipGraphic = cg;
+    set clipRect(val) { // eslint-disable-line require-jsdoc
+        this._clipRect = val;
     }
 
     /**
@@ -631,6 +642,12 @@ export default class BaseWidget extends PIXI.Container {
 
     set layout(val) { // eslint-disable-line require-jsdoc
         this._layout = val;
+
+        if(this._layout.updateOnHostChanges) {
+            this.mask = this.parent.clipRect;
+        } else {
+            this.mask = null;
+        }
         if(!this.bypassInvalidation) this.routeInvalidation();
         this.emit('layoutChanged', val);
     }

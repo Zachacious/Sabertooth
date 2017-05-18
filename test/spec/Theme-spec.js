@@ -74,12 +74,12 @@ describe('Theme', ()=>{
         });
     });
 
-    describe('#getClipGraphic() (STATIC)', ()=>{
-        it('should return the global clipGraphic', ()=>{
-            expect(ST.Theme.getClipGraphic()).to.be.an
-                .instanceof(PIXI.Graphics);
-        });
-    });
+    // describe('#getClipGraphic() (STATIC)', ()=>{
+    //     it('should return the global clipGraphic', ()=>{
+    //         expect(ST.Theme.getClipGraphic()).to.be.an
+    //             .instanceof(PIXI.Graphics);
+    //     });
+    // });
 
     describe('#registerDefaultWidgetStyle() (STATIC)', ()=>{
         it('should add the given style to theme.defaults(global)', ()=>{
