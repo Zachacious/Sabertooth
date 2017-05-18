@@ -106,7 +106,7 @@ export default class BaseLayout extends EventEmitter {
         update is complete
          */
         w.validate(); // make sure updates stop on next loop
-        w._updateClipRect(); // because things have changed
+        w._updateClipGraphic(); // because things have changed
 
         w.emit('updated');
 

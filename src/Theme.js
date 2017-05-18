@@ -55,14 +55,14 @@ import Point from './Point';
         this.background = opts.background;
       }
 
-    //   /**
-    //    * Returns the global graphic used by all widgets for clipping
-    //    * @static
-    //    * @return {PIXI.Graphics}
-    //    */
-    //   static getClipGraphic() {
-    //     return Theme.clipGraphic;
-    //   }
+      /**
+       * Returns the global graphic used by all widgets for clipping
+       * @static
+       * @return {PIXI.Graphics}
+       */
+      static getClipGraphic() {
+        return Theme.clipGraphic;
+      }
 
       /**
        * Adds the given styles to the global Theme.defaults.
@@ -181,5 +181,4 @@ import Point from './Point';
   };
 
 // Global clip graphic
-  // Theme.clipGraphic = new PIXI.Rectangle();
-  // GraphicsGen.rectangleGraphic(1, 1, 0x000000);
+  Theme.clipGraphic = GraphicsGen.rectangleGraphic(1, 1, 0x000000);
