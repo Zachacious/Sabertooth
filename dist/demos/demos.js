@@ -30,6 +30,7 @@ let DemoApp = function(theme) {
     ST.hackSpriteRendererDrawCounter(this.renderer.plugins.sprite);
 
     this.createDebugPanel();
+    this.createSliderPanel();
 };
 
 // Inherit from ST.App
@@ -86,4 +87,25 @@ DemoApp.prototype.createDebugPanel = function() {
     // set the draw count label to the right of 'Draw Count: '
     this.dpDrawCountLabel
         = new ST.Widgets.Label(this.dpDrawCountSet, {text: '0'});
+};
+
+DemoApp.prototype.createSliderPanel = function() {
+    this.slPanel = new ST.Widgets.Panel(this.root, {
+        width: 400,
+        height: 100,
+        x: 200,
+        y: 200,
+    });
+    this.slPanel.layout = new ST.Layouts.VBoxLayout(this.slPanel, ST.VERTICAL);
+
+    this.sl1 = new ST.Widgets.Slider(this.slPanel, {
+        width: 300,
+        height: 30,
+    });
+    this.sl1.hPolicy
+        = new ST.SizePolicies.ExpandingPolicy(this.sl1);
+
+    this.img = new ST.Widgets.Image(this.slPanel, {
+        texture: this.theme.textures.button.hover,
+    });
 };

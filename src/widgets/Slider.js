@@ -85,7 +85,7 @@ export default class Slider extends Container {
          * The track that the button slides on
          * @member {ST.Widgets.Image}
          */
-        this.track = new Image(this, this.theme.texture);
+        this.track = new Image(this, {texture: this.theme.texture});
         this.track.interactive = true;
 
         /**
@@ -107,7 +107,8 @@ export default class Slider extends Container {
          * The button that rides the track
          * @type {ST.Widgets.Image}
          */
-        this.button = new Image(this, this.theme.texture, {
+        this.button = new Image(this, {
+            texture: this.theme.texture,
             width: 20,
             height: 20,
         });
@@ -266,9 +267,9 @@ export default class Slider extends Container {
     paintDefault() {
         // no need to check track too. If button exist track should
         if(this.button) {
-            this.track.sprite.texture
+            this.track.texture
                 = this.theme.textures.slider.track.enabled;
-            this.button.sprite.texture
+            this.button.texture
                 = this.theme.textures.slider.button.enabled;
         }
     }
@@ -276,9 +277,9 @@ export default class Slider extends Container {
     /** @inheritdoc */
     paintDisabled() {
         if(this.button) {
-            this.track.sprite.texture
+            this.track.texture
                 = this.theme.textures.slider.track.disabled;
-            this.button.sprite.texture
+            this.button.texture
                 = this.theme.textures.slider.button.disabled;
         }
     }
@@ -288,7 +289,7 @@ export default class Slider extends Container {
         // this.track.sprite.texture.frame
         //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
-            this.button.sprite.texture
+            this.button.texture
                 = this.theme.textures.slider.button.click;
         }
     }
@@ -298,7 +299,7 @@ export default class Slider extends Container {
         // this.track.sprite.texture.frame
         //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
-            this.button.sprite.texture
+            this.button.texture
                 = this.theme.textures.slider.button.hover;
         }
     }
