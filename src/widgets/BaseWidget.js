@@ -471,16 +471,34 @@ export default class BaseWidget extends PIXI.Container {
      */
     addChildAt(child, index) {
         super.addChildAt(child, index);
-        if(child instanceof PIXI.Container) {
-            // set child to be masked by its parent(this widget)
-            child.mask = this._clipGraphic;
-        }
+
+        // attempt to optimize masking
         if(child instanceof BaseWidget) {
-            child.theme = this.theme;
-            if(child.sizeProxy) {
+            child.theme = this.theme; // take parents theme
+            if(this.layout.updateOnHostChanges) {
+                child.mask = this._clipGraphic;
                 child.sizeProxy.mask = this._clipGraphic;
+            } else if(child.hPolicy.updateOnHostChanges
+                    || child.vPolicy.updateOnHostChanges) {
+                child.mask = this._clipGraphic;
+                child.sizeProxy.mask = this._clipGraphic;
+            } else {
+                child.mask = null;
+                child.sizeProxy.mask = null;
             }
+        } else {
+            child.mask = null;
         }
+        // if(child instanceof PIXI.Container) {
+        //     // set child to be masked by its parent(this widget)
+        //     child.mask = this._clipGraphic;
+        // }
+        // if(child instanceof BaseWidget) {
+        //     child.theme = this.theme;
+        //     if(child.sizeProxy) {
+        //         child.sizeProxy.mask = this._clipGraphic;
+        //     }
+        // }
     }
 
 
