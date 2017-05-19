@@ -30,6 +30,7 @@ import Point from './Point';
 import Size from './Size';
 import Theme from './Theme';
 import {hackSpriteRendererDrawCounter} from './drawcount';
+import {settings} from './Settings';
 
 import * as Widgets from './widgets';
 
@@ -52,6 +53,7 @@ export {
     Theme,
     App,
     hackSpriteRendererDrawCounter,
+    settings,
 };
 
 global.ST = exports; // eslint-disable-line

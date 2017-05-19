@@ -37,7 +37,7 @@ export default class App extends EventEmitter {
       transparentBkg: false,
       antialiasing: false,
       forceFXAA: false,
-      resolution: 1,
+      resolution: window.devicePixelRatio,
       width: 800,
       height: 600,
       autoResize: true,
