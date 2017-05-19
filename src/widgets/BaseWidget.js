@@ -647,9 +647,11 @@ export default class BaseWidget extends PIXI.Container {
                 this._interactiveState = this.interactive; // store state
                 this.interactive = false; // disable interactive
                 this.paintDisabled();
+                this.cacheAsBitmap = true;
             } else { // widget has changed to enabled
                 this.interactive = this._interactiveState; // restore state
                 this.paintDefault();
+                this.cacheAsBitmap = false;
             }
         }
 
