@@ -26,7 +26,7 @@ export default class TextButton extends Button {
          * @member {ST.Widgets.Label}
          * @private
          */
-        this.label = new Label(this, options.text);
+        this.label = new Label(this, {text: options.text});
     }
 
     /**

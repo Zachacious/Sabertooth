@@ -21,6 +21,9 @@ export default class Label extends BaseWidget {
 
         options = Object.assign(defaults, options);
 
+        // this is mostly un-needed for labels
+        this.interactive = false;
+
         /**
          * Internal PIXI.Text object
          * @member {PIXI.Text}

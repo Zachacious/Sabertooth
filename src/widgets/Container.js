@@ -13,6 +13,8 @@ export default class Container extends Panel {
      */
     constructor(parent, options = {}) {
         super(parent, options);
+        // Containers have nothing to interact with
+        this.interactive = false;
         this.sizeProxy.renderable = false;
         this.padding.setAllTo(0);
     }

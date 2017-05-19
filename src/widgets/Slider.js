@@ -62,6 +62,8 @@ export default class Slider extends Container {
 
         options = Object.assign(defaults, options);
 
+        this.interactive = false;
+
         /**
          * Holds orientation internally
          * @member {Number}
