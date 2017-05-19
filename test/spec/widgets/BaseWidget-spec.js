@@ -260,4 +260,11 @@ describe('BaseWidget', ()=>{
             expect(pc.mask).to.be.null;
         });
     });
+
+    describe('#getFocusedWidget', ()=>{
+        it('should return the widget currently in focus', ()=>{
+            widget1.focus();
+            expect(ST.Widgets.BaseWidget.getFocusedWidget()).to.equal(widget1);
+        });
+    });
 });

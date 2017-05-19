@@ -205,6 +205,11 @@ export default class BaseWidget extends PIXI.Container {
         this.on('pointerout', this.paintDefault);
         this.on('pointerup', this.paintHover);
 
+        // Set focus when clicked
+        this.on('pointerdown', ()=>{
+            this.focus();
+        });
+
         // add this widget to the given parent widget, if any.
         if(parent) {
             parent.addChild(this);
@@ -257,6 +262,16 @@ export default class BaseWidget extends PIXI.Container {
            * Fires when widget is updated
            * @event ST.Widgets.BaseWidget#updated
            */
+
+          /**
+           * Fires when the widget loses focus
+           * @event ST.Widgets.BaseWidget#lostFocus
+           */
+
+            /**
+            * Fires when the widget gains focus
+            * @event ST.Widgets.BaseWidget#gainedFocus
+            */
     }
 
     /**
@@ -282,6 +297,55 @@ export default class BaseWidget extends PIXI.Container {
      * @virtual
      */
     paintDisabled() {}
+
+    /**
+     * Retreive the widget currently in focus
+     * @static
+     * @return {ST.Widgets.BaseWidget}
+     */
+    static getFocusedWidget() {
+        return BaseWidget.currentFocus;
+    }
+
+    /**
+     * Brings the given widget into focus
+     * @param {ST.Widgets.BaseWidget} widget The widget to focus
+     * @static
+     */
+    static focusWidget(widget) {
+        if(widget === BaseWidget.currentFocus) {
+            return;
+        }
+
+        if(BaseWidget.currentFocus) {
+            BaseWidget.currentFocus.emit('lostFocus');
+        }
+
+        BaseWidget.currentFocus = widget;
+        widget.emit('gainedFocus');
+    }
+
+    /**
+     * Force this widget to take focus
+     */
+    focus() {
+        BaseWidget.focusWidget(this);
+    }
+
+    /**
+     * Returns true if this widget is the one currently in focus
+     * @return {Boolean}
+     */
+    hasFocus() {
+        return this === BaseWidget.currentFocus;
+    }
+
+    /**
+     * To be overridden by widget subclasses that need code that only run
+     * when that widget is in focus. (Method called once per loop if in focus)
+     * @virtual
+     */
+    onHasFocus() {}
 
     /**
      * Makes sure the widgets width stays between min and max
@@ -811,3 +875,6 @@ export default class BaseWidget extends PIXI.Container {
         this.emit('sizeChanged', this.width, this.height);
     }
 }
+
+// global- holds the currently focus widget
+BaseWidget.currentFocus = null;

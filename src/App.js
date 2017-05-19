@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 // import {autoDetectRenderer} from 'pixi.js/lib/core';
 import Theme from './Theme';
 import StageWidget from './widgets/StageWidget';
+import BaseWidget from './widgets/BaseWidget';
 import EventEmitter from 'eventemitter3';
 
 /**
@@ -140,6 +141,11 @@ export default class App extends EventEmitter {
    * Renders the root widget
    */
   update() {
+      let focus = BaseWidget.getFocusedWidget();
+      if(focus) {
+          focus.onHasFocus();
+      }
+
       this.renderer.render(this.root);
   }
 
