@@ -15,9 +15,6 @@ export default class FixedPolicy extends BasePolicy {
     constructor(hostWidget, orientation = HORIZONTAL) {
         super(hostWidget, orientation);
 
-        /**
-         * @override
-         */
         this.updateOnHostChanges = true;
 
         /**

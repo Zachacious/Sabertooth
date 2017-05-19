@@ -91,8 +91,8 @@ gulp.task('buildTest', ()=>{
 gulp.task('build', ['copyThemes'], function() {
     return browserify({
         entries: ['./src/index.js'],
-        debug: false, /* !gulp.env.production,*/
-        insertGlobals: true,
+        debug: true, /* !gulp.env.production,*/
+        // insertGlobals: true,
     })
     .transform(babelify.configure({presets: ['es2015']}))
     .bundle()

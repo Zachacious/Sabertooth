@@ -17,6 +17,9 @@ export default class ExpandingPolicy extends BasePolicy {
      */
     constructor(hostWidget, orientation = HORIZONTAL) {
         super(hostWidget, orientation);
+
+        this.updateOnHostChanges = false;
+
         /**
          * Fires after size is set
          * @event ST.SizePolicies.ExpandingPolicy#finished

@@ -39,6 +39,9 @@ jspm_packages/
 # Lib dir used for npm
 lib/
 
+# Dist folder
+dist/
+
 # Typescript v1 declaration files
 typings/
 
