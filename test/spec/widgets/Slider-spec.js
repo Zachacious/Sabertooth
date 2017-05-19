@@ -51,7 +51,7 @@ describe('Slider', ()=>{
 
         it('should set the min and max heights when set', ()=>{
             expect(sl.min.height).to.equal(sl.button.height);
-            expect(sl.min.width).to.equal(30);
+            expect(sl.min.width).to.equal(sl.button.width*2);
             expect(sl.max.height).to.equal(sl.button.height);
             expect(sl.max.width).to.equal(10000);
         });
