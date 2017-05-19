@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: layoutSys/sizePolicies/ExpandingPolicy.js</title>
+    <title>Class: Settings</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -1652,102 +1652,261 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="layoutSys_sizePolicies_ExpandingPolicy.js.html">Source: layoutSys/sizePolicies/ExpandingPolicy.js</h1>
+        <h1 class="page-title" data-filename="ST.Settings.html">Class: Settings</h1>
         
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>import BasePolicy from './BasePolicy';
-import {HORIZONTAL} from '../.././const';
+<header>
+    <h2>
+    Settings
+    </h2>
+    
+        <div class="class-description"><p>Stores settings and default values used by the app and widgets.
+Exports a settings object that adds the settings to itself?
+Access like: ST.setting.slider.button.height</p></div>
+    
+</header>  
 
-/**
- * Expanding Policy causes children to expand in the given direction
- * filling the parent.
- * This Policy doesn't respect siblings - best for widgets with
- * a sigle child, or for example the hPolicy of a widget in a vertical layout.
- * @memberof ST.SizePolicies
- * @extends ST.SizePolicies.BasePolicy
- */
-export default class ExpandingPolicy extends BasePolicy {
-    /**
-     * @param {ST.Widgets.BaseWidget} hostWidget
-     * The widget this policy belongs to
-     * @param {number} [orientation=HORIZONTAL] The orientation of the policy
-     */
-    constructor(hostWidget, orientation = HORIZONTAL) {
-        super(hostWidget, orientation);
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Settings">
+            
+            new ST.Settings<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Settings.js.html">Settings.js</a>, <a href="Settings.js.html#line8">line 8</a>
+        </div>
+        
+    </div>
 
-        this.updateOnHostChanges = false;
+    
+</dt>
+<dd>
+    
+    
 
-        /**
-         * Fires after size is set
-         * @event ST.SizePolicies.ExpandingPolicy#finished
-         * @param {Number} size the size of the widget
-         */
-    }
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
 
-    /**
-     * Make connection so that the widget
-     * only gets sized after the parent is sized.
-     * @override
-     */
-    sizeWidgetHorizontal() {
-        // connect slot each iteration because they are use once
-        // this prevents problems when host widget changes parent
-        if(this._host.parent) {
-            this._host.parent.hPolicy.once('finished',
-                this.parentReadyH, this);
-        }
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-    /**
-     * Make connection so that the widget
-     * only gets sized after the parent is sized.
-     * @override
-     */
-    sizeWidgetVertical() {
-        if(this._host.parent) {
-            this._host.parent.vPolicy.once('finished',
-                this.parentReadyV, this);
-        }
-    }
+    
+    
 
-    /**
-     * Size widget after parent widget is finished.
-     * When parent is finished we can size the widget and
-     * know that parents size wont change afterward.
-     */
-    parentReadyH() {
-        const w = this._host;
-        const p = this._host.parent;
-        const pad = p.padding.left + p.padding.right;
+    
 
-        w.width = p.width - pad;
-        w.validateWidth(); // make it obey widet.min and max
-        this.emit('finished', w.width);
-    }
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
-    /**
-     * Size widget after parent widget is finished.
-     * When parent is finished we can size the widget and
-     * know that parents size wont change afterward.
-     */
-    parentReadyV() {
-        const w = this._host;
-        const p = this._host.parent;
-        const pad = p.padding.top + p.padding.bottom;
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="add">
+            
+            add<span class="signature">(name, settings)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="Settings.js.html">Settings.js</a>, <a href="Settings.js.html#line19">line 19</a>
+        </div>
+        
+    </div>
 
-        w.height = p.height - pad;
-        w.validateHeight(); // make it obey widet.min and max
-        this.emit('finished', w.height);
-    }
-}
-</code></pre>
-        </article>
-    </section>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Adds settings to the global object;</p>
+    </div>
+    
 
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>Name of the settings</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>settings</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>Settings to Adds</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
 
 
 
@@ -1756,7 +1915,7 @@ export default class ExpandingPolicy extends BasePolicy {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu May 18 2017 20:59:47 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu May 18 2017 20:59:47 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

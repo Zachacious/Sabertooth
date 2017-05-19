@@ -72,7 +72,6 @@ import Point from './Point';
        */
       static registerDefaultWidgetStyle(name, styles) {
         if(!name || !styles) {
-          console.log('returned');
           return;
         }
         Theme.defaults.widgets[name] = styles;
