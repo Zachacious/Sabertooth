@@ -28,6 +28,7 @@ let DemoApp = function(theme) {
     // hack the sprite renderer to get a draw count since PIXI.js no longer
     // supports draw counts.
     ST.hackSpriteRendererDrawCounter(this.renderer.plugins.sprite);
+    this.root.layout = new ST.Layouts.VBoxLayout(this.root);
 
     this.createDebugPanel();
     this.createSliderPanel();
@@ -96,7 +97,7 @@ DemoApp.prototype.createSliderPanel = function() {
         x: 200,
         y: 200,
     });
-    this.slPanel.layout = new ST.Layouts.VBoxLayout(this.slPanel, ST.VERTICAL);
+    this.slPanel.layout = new ST.Layouts.VBoxLayout(this.slPanel);
 
     this.sl1 = new ST.Widgets.Slider(this.slPanel, {
         width: 300,
@@ -105,7 +106,9 @@ DemoApp.prototype.createSliderPanel = function() {
     this.sl1.hPolicy
         = new ST.SizePolicies.ExpandingPolicy(this.sl1);
 
-    this.img = new ST.Widgets.Image(this.slPanel, {
-        texture: this.theme.textures.button.hover,
+    this.b1 = new ST.Widgets.TextButton(this.slPanel, {
+        text: 'Button 1',
+        width: 100,
+        height: 30,
     });
 };

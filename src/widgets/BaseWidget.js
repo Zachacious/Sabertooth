@@ -199,11 +199,11 @@ export default class BaseWidget extends PIXI.Container {
 
         // Connect mouse events with methods that change
         // the widgets texture
-        this.on('mousecancel', this.paintDefault);
-        this.on('mousedown', this.paintDown);
-        this.on('mouseover', this.paintHover);
-        this.on('mouseout', this.paintDefault);
-        this.on('mouseup', this.paintHover);
+        this.on('pointercancel', this.paintDefault);
+        this.on('pointerdown', this.paintDown);
+        this.on('pointerover', this.paintHover);
+        this.on('pointerout', this.paintDefault);
+        this.on('pointerup', this.paintHover);
 
         // add this widget to the given parent widget, if any.
         if(parent) {
