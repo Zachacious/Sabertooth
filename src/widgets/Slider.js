@@ -169,24 +169,30 @@ export default class Slider extends Container {
                       && pos.x < usableWidth) {
                     this.button.x = pos.x - this.btnHalfWidth;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.x > usableWidth) {
                     this.button.x = usableWidth - this.btnHalfWidth;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.x < this.btnHalfWidth) {
                     this.button.x = 0;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 }
             } else { // vertical
                   if (pos.y > this.btnHalfHeight
                       && pos.y < usableHeight) {
                     this.button.y = pos.y - this.btnHalfHeight;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.y > usableHeight) {
                     this.button.y = usableHeight - this.btnHalfHeight;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.y < this.btnHalfHeight) {
                     this.button.y = 0;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 }
               }
               this.button.bypassInvalidation = false;
@@ -207,6 +213,7 @@ export default class Slider extends Container {
                 }
                 this.button.x = pos.x;
                 this.button.applyPosition();
+                this.value; // get and set value internally;
                 this.button.bypassInvalidation = false;
             } else {
                 this.button.bypassInvalidation = true;
@@ -215,6 +222,7 @@ export default class Slider extends Container {
                 }
                 this.button.y = pos.y;
                 this.button.applyPosition();
+                this.value; // get and set value internally;
                 this.button.bypassInvalidation = false;
             }
             this.emit('changed');
@@ -286,8 +294,6 @@ export default class Slider extends Container {
 
     /** @inheritdoc */
     paintDown() {
-        // this.track.sprite.texture.frame
-        //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
             this.button.texture
                 = this.theme.textures.slider.button.click;
@@ -296,8 +302,6 @@ export default class Slider extends Container {
 
     /** @inheritdoc */
     paintHover() {
-        // this.track.sprite.texture.frame
-        //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
             this.button.texture
                 = this.theme.textures.slider.button.hover;
