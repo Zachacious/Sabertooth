@@ -1,18 +1,19 @@
 # Sabertooth
 
 ### A hardware accelerated user interface framework for JavaScript.
-Sabertooth is inspired by QT, uses super-fast [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and therefor most of those properties, such as tint, alpha, blending modes and filters(shaders) apply. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.
+Sabertooth is inspired by [QT](https://www.qt.io/), uses super-fast [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and therefor most of those properties, such as tint, alpha, blending modes and filters(shaders) apply. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.
 
 This project aims to be a full-fledged user interface framework for games, editors and other creative projects. A limited set of widgets and layouts are implemented and it may undergo some big changes before the first major release. See examples and stay up-to-date on what classes are available by viewing the docs.
 
+* [Roadmap](ROADMAP.md)
 * [Contributing Guidelines](CONTRIBUTING.md)
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
 [![Build Status](https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/SaberTooth)
 [![Inline docs](http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master)](http://inch-ci.org/github/AbydosDigital/SaberTooth)
 ***
-### Goal
-Imagine designing a complex user interface within a designer app and exporting it to your game/app with only a few lines of code to get it up and running. That's the goal, but this is a long-term project and only your support will get us there. Please consider sending a pull request or make a donation via PATREON.
+<!-- ### Goal
+Imagine designing a complex user interface within a designer app and exporting it to your game/app with only a few lines of code to get it up and running. That's the goal, but this is a long-term project and only your support will get us there. Please consider sending a pull request or make a donation via PATREON. -->
 
 ### Get Started
 
