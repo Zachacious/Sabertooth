@@ -6,3 +6,4 @@ require('./GraphicsGen-spec');
 require('./App-spec');
 require('./widgets');
 require('./layoutSys');
+require('./Settings-spec');
