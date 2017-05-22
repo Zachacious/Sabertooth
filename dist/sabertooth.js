@@ -39606,7 +39606,6 @@ var App = function (_EventEmitter) {
   _createClass(App, [{
     key: 'resizeToWindow',
     value: function resizeToWindow() {
-      alert('made it');
       this.renderer.resize(window.innerWidth, window.innerHeight);
       this.root.width = window.innerWidth;
       this.root.height = window.innerHeight;
