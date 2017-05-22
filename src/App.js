@@ -42,6 +42,7 @@ export default class App extends EventEmitter {
       width: 800,
       height: 600,
       autoResize: true,
+      forceWebgl: false,
     };
 
     // fill in missing options with defaults
@@ -62,17 +63,27 @@ export default class App extends EventEmitter {
       forceFXAA: options.forceFXAA,
       antialias: options.antialiasing,
       transparent: options.transparent,
+      autoResize: true,
       roundPixels: true,
     };
 
     /**
-     * Points to the correct PIXI renderer. Webgl if possible
+     * Points to the correct PIXI renderer. Webgl if possible or if
+     * forced.
      * @member {PIXI.WebglRenderer | PIXI.CanvasRenderer}
      */
-    this.renderer = PIXI.autoDetectRenderer(options.width, options.height,
-      renderOptions);
+    if(!options.forceWebgl) {
+      this.renderer = PIXI.autoDetectRenderer(options.width, options.height,
+        renderOptions);
+    } else {
+        renderOptions.width = options.width;
+        renderOptions.height = options.height;
+        this.renderer = new PIXI.WebGLRenderer(renderOptions);
+    }
+
 
     // Add webgl canvas to the doc. Set padding and margins to 0
+    this.renderer.view.screencanvas = true;
     document.body.appendChild(this.renderer.view);
     let newStyle = document.createElement('style');
     let style = '* {padding: 0; margin: 0}';
@@ -112,13 +123,12 @@ export default class App extends EventEmitter {
     this._autoResize = false;
     this.autoResize = options.autoResize;
 
-    // this.on('resize', ()=>{
-    //   this.root.width = window.innerWidth;
-    //   this.root.height = window.innerHeight;
-    // }, this);
-
     // listen for window resize. emit signal
     window.addEventListener('resize', (e)=>{
+      this.emit('resize');
+    });
+    // listen for orientation changes. emit signal.(mobile only)
+    window.addEventListener('orientationchange', (e)=>{
       this.emit('resize');
     });
 
@@ -185,6 +195,7 @@ export default class App extends EventEmitter {
   }
 
   set autoResize(val) { // eslint-disable-line require-jsdoc
+    this._autoResize = val;
     const listeners = this.listeners('resize');
 
     if(val) {

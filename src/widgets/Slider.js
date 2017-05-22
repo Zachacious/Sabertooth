@@ -29,12 +29,11 @@ Theme.registerDefaultWidgetStyle('slider', {
 /* Add configurable settings to the global settings instance. Any
 Widget that needs configurable hard defaults for various things, like
 an objects default size, should use this so that the user can configure
-them without editing source code. (Also makes it easier to debug during
-widget development)*/
+them without editing source code.*/
 settings.add('slider', {
     track: {
         shortSize: 5,
-        padding: 5,
+        hitAreaPadding: 5,
     },
     button: {
         width: 20,
@@ -120,7 +119,7 @@ export default class Slider extends Container {
          * @member {Number}
          * @default 5
          */
-        this.trackHitPadding = settings.slider.track.padding;
+        this.trackHitPadding = settings.slider.track.hitAreaPadding;
 
         /**
          * The button that rides the track

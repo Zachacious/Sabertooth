@@ -11,18 +11,20 @@ One could also install & use SaberTooth via npm.
 (npm install sabertooth --save-dev)
  */
 
-'use strict';
+// Cocoon canvas+ doesn't like use strict ???
+// 'use strict';
 
 // SaberTooth should be loaded in index.html before this file.
 // Themes should be loaded in index.html before this file.
 
 // Create a subclass of ST.App
-let DemoApp = function(theme) {
+var DemoApp = function(theme) { //eslint-disable-line
     // call parent constructor
     ST.App.call(this, {
         name: 'Demos',
         theme: theme, // must be loaded before this file
         autoResize: true,
+        forceWebgl: true,
     });
 
     // hack the sprite renderer to get a draw count since PIXI.js no longer
@@ -43,7 +45,7 @@ DemoApp.prototype.constructor = DemoApp;
 
 // Begins the main application loop
 DemoApp.prototype.begin = function() {
-    let _this = this;
+    var _this = this; //eslint-disable-line
 
     this.main = function() {
         // reset the draw count for the next frame
