@@ -1768,74 +1768,21 @@
 
 
     <section>
-        <article class="readme"><h1>Sabertooth</h1><h3>A hardware accelerated user interface framework for JavaScript.</h3><p>Sabertooth is inspired by QT, uses <a target="_blank" href="https://github.com/pixijs/pixi.js">PIXI.js</a> under-the-hood and renders in webGL with canvas fallback.</p>
-<blockquote>
-<p><strong>WARNING:</strong> This project is in alpha and may experience breaking changes from one version to the next until all the core features are implimented and the first major version is released.</p>
-</blockquote>
+        <article class="readme"><h1>Sabertooth</h1><h3>A hardware accelerated user interface framework for JavaScript.</h3><p>Sabertooth is inspired by <a target="_blank" href="https://www.qt.io/">QT</a>, uses super-fast <a target="_blank" href="https://github.com/pixijs/pixi.js">PIXI.js</a> under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and therefor most of those properties, such as tint, alpha, blending modes and filters(shaders) apply. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.</p>
+<p>This project aims to be a full-fledged user interface framework for games, editors and other creative projects. A limited set of widgets and layouts are implemented and it may undergo some big changes before the first major release. See examples and stay up-to-date on what classes are available by viewing the docs.</p>
 <ul>
+<li><a href="ROADMAP.md">Roadmap</a></li>
 <li><a href="CONTRIBUTING.md">Contributing Guidelines</a></li>
 <li><a target="_blank" href="https://abydosdigital.github.io/Sabertooth/">Documentation</a></li>
 </ul>
-<p><a target="_blank" href="https://travis-ci.org/AbydosDigital/SaberTooth"><img src="https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master" alt="Build Status"></a>
-<a target="_blank" href="http://inch-ci.org/github/AbydosDigital/SaberTooth"><img src="http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master" alt="Inline docs"></a>
-<a target="_blank" href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
+<p><a target="_blank" href="https://travis-ci.org/AbydosDigital/Sabertooth"><img src="https://travis-ci.org/AbydosDigital/Sabertooth.svg?branch=master" alt="Build Status"></a>
+<a target="_blank" href="http://inch-ci.org/github/AbydosDigital/SaberTooth"><img src="http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master" alt="Inline docs"></a></p>
 <hr>
-<h3>Why?</h3><p>This project was designed for those wanting a hardware accelerated alternative to DOM based user interface frameworks. Widgets have alpha, tint, blending modes, filters(shaders), and they can be animated. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets. No knowledge of webGL required.</p>
-<h3>Features in summary</h3><p><strong>Current:</strong></p>
-<ul>
-<li>App - Handles creating PIXI.js canvas and root widget.</li>
-<li>Size Policies:<ul>
-<li>Fixed - Sets user defined size</li>
-<li>Expanding - Expands into the parent(more efficient for some situations).</li>
-<li>Shared Expanding - Expands into parent but shares space with siblings.</li>
-</ul>
-</li>
-<li>Layouts:<ul>
-<li>Fixed - Sets user defined position</li>
-<li>VBox - Stacks widgets vertically on top of each other</li>
-<li>HBox - Places widgets inline side by side</li>
-</ul>
-</li>
-<li>Alignments for layouts:<ul>
-<li>Horizontal: left, center, right</li>
-<li>Vertical: top, middle, bottom</li>
-</ul>
-</li>
-<li>Widgets:<ul>
-<li>Panel</li>
-<li>Label</li>
-<li>Button</li>
-<li>TextButton</li>
-<li>Slider</li>
-<li>Stage widget (root widget)</li>
-<li>Container</li>
-<li>Image</li>
-</ul>
-</li>
-<li>Padding for widgets</li>
-<li>Themes created from styles sheets</li>
-</ul>
-<p><strong>Coming soon:</strong></p>
-<ul>
-<li>Scrollable view</li>
-<li>Drag n' drop</li>
-<li>QT style actions</li>
-<li>Menus</li>
-<li>Keyboard shortcuts for actions</li>
-<li>Undo ( with commands the way QT does it)</li>
-<li>Text Edit</li>
-<li>Check box</li>
-<li>List</li>
-<li>Trees</li>
-<li>MVC</li>
-<li>Tabs</li>
-<li>Dialog</li>
-<li>Progress bar</li>
-<li>...</li>
-</ul>
+<!-- ### Goal
+Imagine designing a complex user interface within a designer app and exporting it to your game/app with only a few lines of code to get it up and running. That's the goal, but this is a long-term project and only your support will get us there. Please consider sending a pull request or make a donation via PATREON. -->
 <h3>Get Started</h3><h4>The easiest way to get started with Sabertooth is to download the builds directly.</h4><ul>
-<li><a href="dist/sabertooth.js">Sabertooth.js</a></li>
-<li><a href="dist/sabertooth.min.js">Sabertooth.min.js</a></li>
+<li><a target="_blank" href="https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.js">Sabertooth.js</a></li>
+<li><a target="_blank" href="https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.min.js">Sabertooth.min.js</a></li>
 </ul>
 <p><strong>To use:</strong></p>
 <pre class="prettyprint source lang-html"><code>&lt;script src=&quot;Sabertooth.js&quot;>&lt;/script>
@@ -1856,14 +1803,14 @@
     });
 
     //main loop
-    let main = ()=>{
+    let main = function () {
         app.update(); // Update UI logic
         requestAnimationFrame(main); // Loop
     }
 
     main(); // Begin the main application loop
 &lt;/script></code></pre><h4>Install with npm:</h4><pre class="prettyprint source"><code> $> npm install Sabertooth</code></pre><p><strong>To use:</strong></p>
-<pre class="prettyprint source lang-javascript"><code>import * as ST from 'Sabertooth'; // for es6 modules
+<pre class="prettyprint source lang-javascript"><code>import * as ST from 'sabertooth'; // for es6 modules
 
 let app = new ST.App(/*options*/);
 
@@ -1881,7 +1828,7 @@ tb.on('click', ()=>{
 });
 
 //main loop
-let main = ()=>{
+let main = function () {
     app.update(); // Update UI logic
     requestAnimationFrame(main); // Loop
 }
@@ -1904,7 +1851,7 @@ main(); // Begin the main application loop</code></pre><h4>Test</h4><pre class="
 <li><a target="_blank" href="http://www.goodboydigital.com/">GoodBoyDigital</a> - <a target="_blank" href="http://www.pixijs.com/">Pixi.js</a></li>
 <li><a target="_blank" href="https://github.com/primus">Primus</a> - <a target="_blank" href="https://github.com/primus/eventemitter3">EventEmitter3</a></li>
 </ul>
-<h3>Questions?</h3><p>Please contact AbydosDigital@gmail.com with any further questions you may have.</p></article>
+<h3>Questions?</h3><p>Please contact AbydosDigital@gmail.com with any further questions.</p></article>
     </section>
 
 
@@ -1915,7 +1862,7 @@ main(); // Begin the main application loop</code></pre><h4>Test</h4><pre class="
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 22 2017 00:23:26 GMT-0500 (Central Daylight Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Mon May 22 2017 16:20:13 GMT-0500 (Central Daylight Time)
         </footer>
     </div>
 </div>

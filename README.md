@@ -9,7 +9,7 @@ This project aims to be a full-fledged user interface framework for games, edito
 * [Contributing Guidelines](CONTRIBUTING.md)
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
-[![Build Status](https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/SaberTooth)
+[![Build Status](https://travis-ci.org/AbydosDigital/Sabertooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/Sabertooth)
 [![Inline docs](http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master)](http://inch-ci.org/github/AbydosDigital/SaberTooth)
 ***
 <!-- ### Goal
