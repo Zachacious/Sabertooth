@@ -11,23 +11,26 @@ One could also install & use SaberTooth via npm.
 (npm install sabertooth --save-dev)
  */
 
-'use strict';
+// Cocoon canvas+ doesn't like use strict ???
+// 'use strict';
 
 // SaberTooth should be loaded in index.html before this file.
 // Themes should be loaded in index.html before this file.
 
 // Create a subclass of ST.App
-let DemoApp = function(theme) {
+var DemoApp = function(theme) { //eslint-disable-line
     // call parent constructor
     ST.App.call(this, {
         name: 'Demos',
         theme: theme, // must be loaded before this file
         autoResize: true,
+        forceWebgl: true,
     });
 
     // hack the sprite renderer to get a draw count since PIXI.js no longer
     // supports draw counts.
     ST.hackSpriteRendererDrawCounter(this.renderer.plugins.sprite);
+    this.root.layout = new ST.Layouts.VBoxLayout(this.root);
 
     this.createDebugPanel();
     this.createSliderPanel();
@@ -42,7 +45,7 @@ DemoApp.prototype.constructor = DemoApp;
 
 // Begins the main application loop
 DemoApp.prototype.begin = function() {
-    let _this = this;
+    var _this = this; //eslint-disable-line
 
     this.main = function() {
         // reset the draw count for the next frame
@@ -96,7 +99,7 @@ DemoApp.prototype.createSliderPanel = function() {
         x: 200,
         y: 200,
     });
-    this.slPanel.layout = new ST.Layouts.VBoxLayout(this.slPanel, ST.VERTICAL);
+    this.slPanel.layout = new ST.Layouts.VBoxLayout(this.slPanel);
 
     this.sl1 = new ST.Widgets.Slider(this.slPanel, {
         width: 300,
@@ -105,7 +108,9 @@ DemoApp.prototype.createSliderPanel = function() {
     this.sl1.hPolicy
         = new ST.SizePolicies.ExpandingPolicy(this.sl1);
 
-    this.img = new ST.Widgets.Image(this.slPanel, {
-        texture: this.theme.textures.button.hover,
+    this.b1 = new ST.Widgets.TextButton(this.slPanel, {
+        text: 'Button 1',
+        width: 100,
+        height: 30,
     });
 };

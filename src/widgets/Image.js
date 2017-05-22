@@ -21,6 +21,9 @@ export default class Image extends BaseWidget {
         // fill in missing options with defaults
         options = Object.assign(defaults, options);
 
+        // Images could be interactive but most will not
+        this.interactive = false;
+
         /**
          * Holds the sprite internally
          * @member {PIXI.Sprite}

@@ -1,71 +1,25 @@
 # Sabertooth
 
 ### A hardware accelerated user interface framework for JavaScript.
-Sabertooth is inspired by QT, uses [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback.
+Sabertooth is inspired by [QT](https://www.qt.io/), uses super-fast [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and therefor most of those properties, such as tint, alpha, blending modes and filters(shaders) apply. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.
 
->**WARNING:** This project is in alpha and may experience breaking changes from one version to the next until all the core features are implimented and the first major version is released.
+This project aims to be a full-fledged user interface framework for games, editors and other creative projects. A limited set of widgets and layouts are implemented and it may undergo some big changes before the first major release. See examples and stay up-to-date on what classes are available by viewing the docs.
 
+* [Roadmap](ROADMAP.md)
 * [Contributing Guidelines](CONTRIBUTING.md)
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
 [![Build Status](https://travis-ci.org/AbydosDigital/SaberTooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/SaberTooth)
 [![Inline docs](http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master)](http://inch-ci.org/github/AbydosDigital/SaberTooth)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 ***
-
-### Why?
-
-This project was designed for those wanting a hardware accelerated alternative to DOM based user interface frameworks. Widgets have alpha, tint, blending modes, filters(shaders), and they can be animated. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets. No knowledge of webGL required.
-
-### Features in summary
-
-**Current:**
-* App - Handles creating PIXI.js canvas and root widget.
-* Size Policies:
-    * Fixed - Sets user defined size
-    * Expanding - Expands into the parent(more efficient for some situations).
-    * Shared Expanding - Expands into parent but shares space with siblings.
-* Layouts:
-    * Fixed - Sets user defined position
-    * VBox - Stacks widgets vertically on top of each other
-    * HBox - Places widgets inline side by side
-* Alignments for layouts:
-    * Horizontal: left, center, right
-    * Vertical: top, middle, bottom
-* Widgets:
-    * Panel
-    * Label
-    * Button
-    * TextButton
-    * Slider
-    * Stage widget (root widget)
-    * Container
-    * Image
-* Padding for widgets
-* Themes created from styles sheets
-
-**Coming soon:**
-* Scrollable view
-* Drag n' drop
-* QT style actions
-* Menus
-* Keyboard shortcuts for actions
-* Undo ( with commands the way QT does it)
-* Text Edit
-* Check box
-* List
-* Trees
-* MVC
-* Tabs
-* Dialog
-* Progress bar
-* ...
+<!-- ### Goal
+Imagine designing a complex user interface within a designer app and exporting it to your game/app with only a few lines of code to get it up and running. That's the goal, but this is a long-term project and only your support will get us there. Please consider sending a pull request or make a donation via PATREON. -->
 
 ### Get Started
 
 #### The easiest way to get started with Sabertooth is to download the builds directly.
-* [Sabertooth.js](dist/sabertooth.js)
-* [Sabertooth.min.js](dist/sabertooth.min.js)
+* [Sabertooth.js](https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.js)
+* [Sabertooth.min.js](https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.min.js)
 
 **To use:**
 ```html
@@ -87,7 +41,7 @@ This project was designed for those wanting a hardware accelerated alternative t
     });
 
     //main loop
-    let main = ()=>{
+    let main = function () {
         app.update(); // Update UI logic
         requestAnimationFrame(main); // Loop
     }
@@ -102,7 +56,7 @@ This project was designed for those wanting a hardware accelerated alternative t
 ```
 **To use:**
 ```javascript
-import * as ST from 'Sabertooth'; // for es6 modules
+import * as ST from 'sabertooth'; // for es6 modules
 
 let app = new ST.App(/*options*/);
 
@@ -120,7 +74,7 @@ tb.on('click', ()=>{
 });
 
 //main loop
-let main = ()=>{
+let main = function () {
     app.update(); // Update UI logic
     requestAnimationFrame(main); // Loop
 }
@@ -168,4 +122,4 @@ Special thanks to:
 
 ### Questions?
 
-Please contact AbydosDigital@gmail.com with any further questions you may have.
+Please contact AbydosDigital@gmail.com with any further questions.

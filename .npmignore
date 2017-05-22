@@ -21,6 +21,9 @@ dist/
 # ignore scripts
 scripts/
 
+# other
+www/
+
 # Logs
 logs
 *.log

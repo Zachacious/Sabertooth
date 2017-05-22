@@ -25,6 +25,10 @@ export default class Panel extends BaseWidget {
     constructor(parent, options) {
         super(parent, options);
 
+        // Most panels will be static, so interactivity is not needed
+        // Remember to set true for subclasses that are.
+        this.interactive = false;
+
         /**
          * Internal background sprite
          * @member {PIXI.Sprite}

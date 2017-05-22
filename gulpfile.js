@@ -24,7 +24,7 @@ const LIB_PATH = './lib';
 const LINT_PATH = DOC_PATH;
 const BUILD_OUTPUT = './dist';
 const DEMOS_OUTPUT = BUILD_OUTPUT + '/demos';
-const THEME_PATH = './themes';
+const THEME_PATH = './styleSheets';
 
 // Default task. This will be run when no task is passed in arguments to gulp
 gulp.task('default', ['uglify', 'doc']);
@@ -61,9 +61,9 @@ gulp.task('copyDemos', ['clean', 'lint'], function() {
 });
 
 // Copy themes to dist
-gulp.task('copyThemes', ['copyDemos'], function() {
+gulp.task('copyStyles', ['copyDemos'], function() {
     return gulp.src(THEME_PATH + '/**/*')
-    .pipe(gulp.dest(BUILD_OUTPUT + '/themes'));
+    .pipe(gulp.dest(BUILD_OUTPUT + '/styleSheets'));
 });
 
 // jsdoc
@@ -88,11 +88,11 @@ gulp.task('buildTest', ()=>{
 
 // Convert ES6 code in all js files in src/js folder and copy to
 // dist folder
-gulp.task('build', ['copyThemes'], function() {
+gulp.task('build', ['copyStyles'], function() {
     return browserify({
         entries: ['./src/index.js'],
         debug: false, /* !gulp.env.production,*/
-        insertGlobals: true,
+        // insertGlobals: true,
     })
     .transform(babelify.configure({presets: ['es2015']}))
     .bundle()
@@ -103,7 +103,7 @@ gulp.task('build', ['copyThemes'], function() {
 
 // Convert ES6 code in all js files in src/js folder and copy to
 // dist folder
-gulp.task('npmbuild', ['copyThemes'], function() {
+gulp.task('npmbuild', ['copyStyles'], function() {
     return gulp.src(SRC_FILES)
       .pipe(sourcemaps.init())
         .pipe(babel({
@@ -149,6 +149,20 @@ gulp.task('uglify', ['build'], ()=> {
   .pipe(rename(NAME + '.min.js'))
   .pipe(gulp.dest(BUILD_OUTPUT));
 });
+
+gulp.task('cleanWWW', function(cb) {
+  return del(['www'], cb);
+});
+
+gulp.task('precocoon', ['cleanWWW'], function() {
+  gulp.src('./src/demos/**/*')
+  .pipe(gulp.dest('./www/'));
+  gulp.src('./styleSheets/**/*')
+  .pipe(gulp.dest('./www/'));
+  gulp.src('./dist/sabertooth.min.js')
+  .pipe(gulp.dest('./www/'));
+});
+
 
 // Start a test server with doc root at dist folder and
 // listening to 9001 port. Home page = http://localhost:9001

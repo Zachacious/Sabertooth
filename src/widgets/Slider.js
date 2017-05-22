@@ -7,6 +7,7 @@ import ExpandingPolicy
 import FixedPolicy
     from '../layoutSys/sizePolicies/FixedPolicy';
 import {HORIZONTAL, VERTICAL} from '.././const';
+import {settings} from '../Settings';
 
 /* Add widget style to ST.Theme.defaults. This way the widget
 will always have a style even if the given theme doesn't have one
@@ -22,6 +23,21 @@ Theme.registerDefaultWidgetStyle('slider', {
         disabled: 0x303030,
         hover: 0x264e26,
         click: 0x3a723a,
+    },
+});
+
+/* Add configurable settings to the global settings instance. Any
+Widget that needs configurable hard defaults for various things, like
+an objects default size, should use this so that the user can configure
+them without editing source code.*/
+settings.add('slider', {
+    track: {
+        shortSize: 5,
+        hitAreaPadding: 5,
+    },
+    button: {
+        width: 20,
+        height: 20,
     },
 });
 
@@ -44,6 +60,8 @@ export default class Slider extends Container {
         };
 
         options = Object.assign(defaults, options);
+
+        this.interactive = false;
 
         /**
          * Holds orientation internally
@@ -101,7 +119,7 @@ export default class Slider extends Container {
          * @member {Number}
          * @default 5
          */
-        this.trackHitPadding = 5;
+        this.trackHitPadding = settings.slider.track.hitAreaPadding;
 
         /**
          * The button that rides the track
@@ -109,8 +127,8 @@ export default class Slider extends Container {
          */
         this.button = new Image(this, {
             texture: this.theme.texture,
-            width: 20,
-            height: 20,
+            width: settings.slider.button.width,
+            height: settings.slider.button.height,
         });
         this.button.interactive = true;
 
@@ -169,24 +187,30 @@ export default class Slider extends Container {
                       && pos.x < usableWidth) {
                     this.button.x = pos.x - this.btnHalfWidth;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.x > usableWidth) {
                     this.button.x = usableWidth - this.btnHalfWidth;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.x < this.btnHalfWidth) {
                     this.button.x = 0;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 }
             } else { // vertical
                   if (pos.y > this.btnHalfHeight
                       && pos.y < usableHeight) {
                     this.button.y = pos.y - this.btnHalfHeight;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.y > usableHeight) {
                     this.button.y = usableHeight - this.btnHalfHeight;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 } else if(pos.y < this.btnHalfHeight) {
                     this.button.y = 0;
                     this.button.applyPosition();
+                    this.value; // get and set value internally;
                 }
               }
               this.button.bypassInvalidation = false;
@@ -207,6 +231,7 @@ export default class Slider extends Container {
                 }
                 this.button.x = pos.x;
                 this.button.applyPosition();
+                this.value; // get and set value internally;
                 this.button.bypassInvalidation = false;
             } else {
                 this.button.bypassInvalidation = true;
@@ -215,6 +240,7 @@ export default class Slider extends Container {
                 }
                 this.button.y = pos.y;
                 this.button.applyPosition();
+                this.value; // get and set value internally;
                 this.button.bypassInvalidation = false;
             }
             this.emit('changed');
@@ -286,8 +312,6 @@ export default class Slider extends Container {
 
     /** @inheritdoc */
     paintDown() {
-        // this.track.sprite.texture.frame
-        //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
             this.button.texture
                 = this.theme.textures.slider.button.click;
@@ -296,8 +320,6 @@ export default class Slider extends Container {
 
     /** @inheritdoc */
     paintHover() {
-        // this.track.sprite.texture.frame
-        //     = this.theme.frames.slider.track.disabled;
         if(this.button) {
             this.button.texture
                 = this.theme.textures.slider.button.hover;
@@ -377,12 +399,12 @@ export default class Slider extends Container {
             this._orientation = val;
 
             this.min.height = this.button.height;
-            this.min.width = 30;
+            this.min.width = this.button.width * 2;
             this.max.height = this.min.height;
             this.max.width = 10000;
 
             this.track.width = this.width;
-            this.track.height = 5;
+            this.track.height = settings.slider.track.shortSize;
 
             this.layout.alignment.hAlign = Alignment.left;
             this.layout.alignment.vAlign = Alignment.middle;
@@ -393,12 +415,12 @@ export default class Slider extends Container {
         } else if(val === VERTICAL) {
             this._orientation = val;
 
-            this.min.height = 30;
+            this.min.height = this.button.height * 2;
             this.min.width = this.button.width;
             this.max.height = 10000;
             this.max.width = this.min.width;
 
-            this.track.width = 5;
+            this.track.width = settings.slider.track.shortSize;
             this.track.height = this.height;
 
             this.layout.alignment.hAlign = Alignment.center;

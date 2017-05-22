@@ -13,6 +13,8 @@ export default class StageWidget extends BaseWidget {
      */
     constructor(parent, options = {}) {
         super(parent, options);
+        // Nothing to interact with
+        this.interactive = false;
     }
 
     /**

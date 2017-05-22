@@ -1,7 +1,7 @@
 {
   "name": "sabertooth",
-  "version": "0.1.9",
-  "description": "A WebGL UI framework for desktop, mobile and web apps",
+  "version": "0.2.0",
+  "description": "A WebGL UI framework built on pixi.js and inspired by QT",
   "main": "./lib/index.js",
   "scripts": {
     "test": "gulp test"
@@ -52,7 +52,7 @@
     "mocha": "^3.3.0",
     "mocha-phantomjs": "^4.1.0",
     "phantomjs": "^1.9.7-15",
-    "pixi.js": "^4.5.2",
+    "pixi.js": "^4.5.1",
     "sinon": "^2.2.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

@@ -7,17 +7,17 @@ eg. when padding changes _updateClipGraphic should be called.
  */
 
 describe('BaseWidget', ()=>{
-    let widget0 = new ST.Widgets.BaseWidget();
-    let widget1 = new ST.Widgets.BaseWidget(widget0);
-    let widget2 = new ST.Widgets.BaseWidget(widget1);
+    let widget0 = new ST.Widgets.Panel();
+    let widget1 = new ST.Widgets.Panel(widget0);
+    let widget2 = new ST.Widgets.Panel(widget1);
 
     beforeEach(()=>{
         widget1.layout
             = new ST.Layouts.FixedLayout(widget1);
         widget2.hPolicy
-            = new ST.Layouts.FixedLayout(widget2);
+            = new ST.SizePolicies.FixedPolicy(widget2);
         widget0.hPolicy
-            = new ST.Layouts.FixedLayout(widget0);
+            = new ST.SizePolicies.FixedPolicy(widget0);
         widget1.validate();
         widget0.validate();
         widget2.validate();
@@ -77,7 +77,7 @@ describe('BaseWidget', ()=>{
         it('should invalidate the highest parent', ()=>{
             widget1.layout
                 = new ST.Layouts.HBoxLayout(widget1);
-            widget2.hPolicy
+            widget2.layout
                 = new ST.Layouts.HBoxLayout(widget2);
                 widget2.routeInvalidation();
                 expect(widget0.valid).to.be.false;
@@ -130,21 +130,43 @@ describe('BaseWidget', ()=>{
     });
 
     describe('#addChild', ()=>{
-        it('should add its clipGraphic to each PIXI.Container '
-            + 'child added', ()=>{
+        it('should set each PIXI.Containers mask to null', ()=>{
                 let pc = new PIXI.Container();
                 widget2.addChild(pc);
-                expect(pc.mask).to.equal(widget2.clipGraphic);
+                expect(pc.mask).to.be.null;
         });
 
         it('should add its theme to each BaseWidget child added', ()=>{
             expect(widget2.theme).to.equal(widget1.theme);
         });
 
-        it('should add its clipGraphic to each BaseWidget child addeds'
-            + ' size proxy', ()=>{
+        it('should set mask to null if child has updateOnHostChanges = false '
+            + 'for both size policies', ()=>{
+                // should set to parent
+            widget1.layout = new ST.Layouts.VBoxLayout(widget1);
+            widget2.hPolicy
+            = new ST.SizePolicies.FixedPolicy(widget2);
+
+            expect(widget2.sizeProxy.mask).to.equal(widget1.clipGraphic);
+
+            widget2.hPolicy
+            = new ST.SizePolicies.ExpandingPolicy(widget2, ST.HORIZONTAL);
+            widget2.vPolicy
+            = new ST.SizePolicies.ExpandingPolicy(widget2, ST.VERTICAL);
+
+            expect(widget2.sizeProxy.mask).to.be.null;
+        });
+
+    it('should mask children if its layout has updateOnHostChanges = true',
+        ()=>{
+            widget1.layout = new ST.Layouts.FixedLayout(widget1);
             expect(widget2.sizeProxy.mask).to.equal(widget1.clipGraphic);
         });
+
+        // it('should add its clipGraphic to each BaseWidget child addeds'
+        //     + ' size proxy', ()=>{
+        //     expect(widget2.sizeProxy.mask).to.equal(widget1.clipGraphic);
+        // });
     });
 
     describe('#addChildAt()', ()=>{
@@ -161,6 +183,8 @@ describe('BaseWidget', ()=>{
 
     describe('_updateClipGraphic()', ()=>{
         it('should set to size of widget - padding', ()=>{
+            widget2.vPolicy
+            = new ST.SizePolicies.FixedPolicy(widget2);
             widget2.max.width = 1000;
             widget2.max.height = 1000;
             widget2.width = 400;
@@ -202,6 +226,45 @@ describe('BaseWidget', ()=>{
             expect(widget0.disabled).to.be.false;
             expect(widget1.disabled).to.be.false;
             expect(widget2.disabled).to.be.false;
+        });
+    });
+
+    describe('#_evaluateMask()', ()=>{
+        it('should mask all children if layout.updateOnHostChanges = true',
+        ()=>{
+            widget0.layout = new ST.Layouts.FixedLayout(widget0);
+            expect(widget1.mask).to.equal(widget0.clipGraphic);
+        });
+
+        it('should mask child if either policy has updateOnHostChanges true'
+        + ' and the parents layout has updateOnHostChanges false', ()=>{
+            widget0.layout = new ST.Layouts.VBoxLayout(widget0, ST.VERTICAL);
+            widget1.hPolicy = new ST.SizePolicies.FixedPolicy(widget1);
+            expect(widget1.mask).to.equal(widget0.clipGraphic);
+        });
+
+        it('should set mask to null if layout has updateOnHostChanges false '
+        + 'and childs policies have updateOnHostChanges false', ()=>{
+            widget0.layout = new ST.Layouts.VBoxLayout(widget0, ST.VERTICAL);
+            widget1.hPolicy
+            = new ST.SizePolicies.ExpandingPolicy(widget1, ST.HORIZONTAL);
+            widget1.vPolicy
+            = new ST.SizePolicies.ExpandingPolicy(widget1, ST.VERTICAL);
+            expect(widget1.mask).to.be.null;
+        });
+
+        it('should set mask to null if child is not a widget', ()=>{
+            let pc = new PIXI.Container();
+            widget0.addChild(pc);
+            widget0._evaluateMask();
+            expect(pc.mask).to.be.null;
+        });
+    });
+
+    describe('#getFocusedWidget', ()=>{
+        it('should return the widget currently in focus', ()=>{
+            widget1.focus();
+            expect(ST.Widgets.BaseWidget.getFocusedWidget()).to.equal(widget1);
         });
     });
 });
