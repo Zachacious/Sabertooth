@@ -3,52 +3,52 @@
 
 ~ *All of the below is subject to change because of natural project evolution and depending on who's willing to work on what and when* ~
 
-** v0.3.0 **
+**v0.3.0**
 * Make UI's skinnable
 * Bitmap labels
 
-** v0.4.0 **
+**v0.4.0**
 * Keyboard input system
 * Scrollable viewports
 
-** v0.5.0 **
+**v0.5.0**
 * List View
 * Tree View
 
-** v0.6.0 **
+**v0.6.0**
 * Progress bar
 * Spring
 * Divider
 * Checkbox
 * RadioButton
 
-** v0.7.0 **
+**v0.7.0**
 * TabView
 * Toolbars
 
-** v0.8.0 **
+**v0.8.0**
 * Menus
 
-** v0.9.0 **
+**v0.9.0**
 * Text input
 
-** v1.0.0: **
+**v1.0.0:**
 * Simplify api names -- ST.Widgets.Button = ST.Button
 
-** v1.1.0 **
+**v1.1.0**
 * TitleBar
 * Windows
 
-** v1.2.0 **
+**v1.2.0**
 * Undo
 
-** v1.3.0 **
+**v1.3.0**
 * Actions
 
-** v1.4.0 **
+**v1.4.0**
 * Full working demos for mobile(Cocoonjs), web, and desktop(Electron)
 
-** v2.0.0 **
+**v2.0.0**
 * Designer App
 
 ---

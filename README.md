@@ -17,13 +17,13 @@ Imagine designing a complex user interface within a designer app and exporting i
 
 ### Get Started
 
-#### The easiest way to get started with Sabertooth is to download the builds directly.
-* [Sabertooth.js](https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.js)
-* [Sabertooth.min.js](https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.min.js)
+#### The easiest way to get started with Sabertooth is to [download](https://github.com/AbydosDigital/Sabertooth/releases) the latest release.
+<!-- * [Sabertooth.js](https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.js)
+* [Sabertooth.min.js](https://github.com/AbydosDigital/Sabertooth/releases/download/v0.1.9-alpha/sabertooth.min.js) -->
 
-**To use:**
+**Example:**
 ```html
-<script src="Sabertooth.js"></script>
+<script src="Sabertooth.min.js"></script>
 <script>
     let app = new ST.App(/*options*/);
 
@@ -54,7 +54,7 @@ Imagine designing a complex user interface within a designer app and exporting i
 ```
  $> npm install Sabertooth
 ```
-**To use:**
+**Example:**
 ```javascript
 import * as ST from 'sabertooth'; // for es6 modules
 
