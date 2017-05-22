@@ -94,9 +94,11 @@ gulp.task('build', ['copyStyles'], function() {
         debug: false, /* !gulp.env.production,*/
         // insertGlobals: true,
     })
+    // .pipe(sourcemaps.init())
     .transform(babelify.configure({presets: ['es2015']}))
     .bundle()
     .pipe(source(NAME + '.js'))
+    // .pipe(sourcemaps.write(BUILD_OUTPUT))
     .pipe(gulp.dest(BUILD_OUTPUT))
     ;
 });
@@ -116,8 +118,8 @@ gulp.task('npmbuild', ['copyStyles'], function() {
 // uglify
 gulp.task('uglify', ['build'], ()=> {
   return gulp.src([BUILD_OUTPUT + '/' + NAME + '.js'])
+  .pipe(sourcemaps.init())
   .pipe(buffer())
-  // .pipe(sourcemaps.init())
   .pipe(uglify({
       compress: {
         passes: 10,
@@ -145,8 +147,8 @@ gulp.task('uglify', ['build'], ()=> {
        quote_style: 1,
      },
      mangle: true}))
-  // .pipe(sourcemaps.write(BUILD_OUTPUT))
   .pipe(rename(NAME + '.min.js'))
+   .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest(BUILD_OUTPUT));
 });
 
