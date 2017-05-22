@@ -1,7 +1,7 @@
 {
   "name": "sabertooth",
-  "version": "0.1.9",
-  "description": "A WebGL UI framework for desktop, mobile and web apps",
+  "version": "0.2.0",
+  "description": "A WebGL UI framework built on pixi.js and inspired by QT",
   "main": "./lib/index.js",
   "scripts": {
     "test": "gulp test"

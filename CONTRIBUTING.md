@@ -6,20 +6,12 @@ Thank you for considering contributing to Sabertooth. Big commitments aren't req
 
 >Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
 
-Keep an open mind! Improving documentation, bug triaging, or writing tutorials are all examples of helpful contributions that mean less work for you.
-
 > Sabertooth is an open source project and we love to receive contributions from our community — you! There are numerous ways to contribute, from writing tutorials or blog posts, improving the [documentation](https://abydosdigital.github.io/Sabertooth/), submitting bug reports and feature requests or writing code which can be incorporated into Sabertooth itself.
+
+See the [ROADMAP](ROADMAP.md) to view the current state of features and to see some of the things we're trying to accomplish.
 
 ### Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](code-of-conduct.md). By participating in this project you agree to abide by its terms.
-
-### Issue Tracker
-
-It's ok to post question on the issue tracker.
-
-Simple fixes, like documentation, don't require that an issue be opened. Simply send the pull request. If you are unsure about it or don't have time to fix it yourself, go ahead and open the issue.
-
-Bugs, enhancements or feature request should be properly labeled. Please remember that not everyone is as experienced and knowledgeable as you. Be thorough in your explanation so that your issue has the best chance of being solved in a timely manner.
 
 ### Pull Request
 
@@ -30,7 +22,9 @@ Requirements for acceptance:
 * New features or methods must have at least basic corresponding test.
 * New classes and methods must have documentation(JSDoc comments).
 * It must match the coding style of the rest of the project and must pass the linter.
-* It must pass the travis-ci build and test(usually).
+* It must pass the travis-ci build and test.
+
+> PR's should be merged with the dev branch unless otherwise stated.
 
 # Your First Contribution
 No worries, we'd love to help you!:thumbsup:
@@ -55,8 +49,11 @@ If a maintainer asks you to "rebase" your PR, they're saying that a lot of code 
 3. Do the changes in your fork
 4. If you like the change and think the project could use it:
     * Be sure you have followed the code style for the project.
-    * Send a pull request describing the changes you've made.
+    * Send a pull request to the dev branch describing the changes you've made.
 
+### Large contributions
+
+Big changes need to fit with the direction of the project. There could be potential issues you didn't think of or maybe someone is already working on that particular feature. It's probably best to make an issue for your proposal first so that we can determine the best way to proceed.
 
 ### Small contributions
 
@@ -81,8 +78,6 @@ When filing an issue, make sure to answer these five questions:
 
 # How to suggest a feature or enhancement
 
-Sabertooth is an alternative user interface framework for javascript inspired by QT that uses widgets built on [PIXI.js](https://github.com/pixijs/pixi.js) and is rendered with webGL(with canvas fallback). The ability to create custom widgets and styling are the cornerstone of this project.
-
 ### Features
 
 >Feature request should only be opened for things that add new functionality to the project.
@@ -94,4 +89,4 @@ To suggest a feature, open an issue and try to explain thoroughly why it should 
 
 # Questions
 
-Feel free to direct any further question you may have to AbydosDigital@gmail.com.
+Feel free to direct any further questions to AbydosDigital@gmail.com.
