@@ -5,6 +5,18 @@ import {HORIZONTAL, VERTICAL} from '../.././const';
  * Expands widgets into their parent while sharing space with their siblings.
  * @memberof ST.SizePolicies
  * @extends ST.SizePolicies.ExpandingPolicy
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * widget.hPolicy = new ST.SizePolicies
+ *  .SharedExpandingPolicy(widget, ST.HORIZONTAL);
+ *
+ * widget.vPolicy = new ST.SizePolicies
+ *  .SharedExpandingPolicy(widget, ST.VERTICAL);
  */
 export default class SharedExpandingPolicy extends ExpandingPolicy {
     /**

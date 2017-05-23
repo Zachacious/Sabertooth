@@ -9,7 +9,8 @@ import SITransform from './SITransform';
 import {HORIZONTAL, VERTICAL} from '.././const';
 
 /**
- * The base class for all widgets
+ * Sabertooth widgets are extensions of the PIXI.Container class. You can set
+ * tint, alpha, blend modes, and filters on them just like pixi containers.
  * @memberof ST.Widgets
  * @extends external:Container
  * @abstract

@@ -4,6 +4,14 @@ import BaseLayout from './BaseLayout';
  * Arranges widgets according to their user defined position.
  * @memberof ST.Layouts
  * @extends BaseLayout
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * widget.layout = new ST.Layouts.FixedLayout(widget);
  */
 export default class FixedLayout extends BaseLayout {
     /**

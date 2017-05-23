@@ -5,6 +5,13 @@ import Label from './Label';
  * Button with a text label
  * @memberof ST.Widgets
  * @extends ST.Widgets.Button
+ *
+ * @example
+ * let widget = new ST.Widgets.TextButton(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ *  text: 'My Text Button',
+ * });
  */
 export default class TextButton extends Button {
     /**
