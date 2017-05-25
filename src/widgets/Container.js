@@ -5,6 +5,12 @@ import Panel from './Panel';
  * widgets without having a background.
  * @extends ST.Widgets.Panel
  * @memberof ST.Widgets
+ *
+ * @example
+ * let widget = new ST.Widgets.Container(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
  */
 export default class Container extends Panel {
     /**

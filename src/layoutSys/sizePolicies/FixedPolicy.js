@@ -5,6 +5,15 @@ import BasePolicy from './BasePolicy';
  * Sets the user defined size
  * @memberof ST.SizePolicies
  * @extends ST.SizePolicies.BasePolicy
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * widget.hPolicy = new ST.SizePolicies.FixedPolicy(widget, ST.HORIZONTAL);
+ * widget.vPolicy = new ST.SizePolicies.FixedPolicy(widget, ST.VERTICAL);
  */
 export default class FixedPolicy extends BasePolicy {
     /**

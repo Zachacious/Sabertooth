@@ -8,6 +8,16 @@ import {HORIZONTAL} from '../.././const';
  * a sigle child, or for example the hPolicy of a widget in a vertical layout.
  * @memberof ST.SizePolicies
  * @extends ST.SizePolicies.BasePolicy
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * // will fill the entire parent regardless of sibling widgets
+ * widget.hPolicy = new ST.SizePolicies.ExpandingPolicy(widget, ST.HORIZONTAL);
+ * widget.vPolicy = new ST.SizePolicies.ExpandingPolicy(widget, ST.VERTICAL);
  */
 export default class ExpandingPolicy extends BasePolicy {
     /**

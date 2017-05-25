@@ -1,9 +1,9 @@
 # Sabertooth
 
 ### A hardware accelerated user interface framework for JavaScript.
-Sabertooth is inspired by [QT](https://www.qt.io/), uses super-fast [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and therefor most of those properties, such as tint, alpha, blending modes and filters(shaders) apply. Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.
+Sabertooth is inspired by [QT](https://www.qt.io/), uses super-fast [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and have most of those properties, such as tint, alpha, blending modes and filters(shaders). Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.
 
-This project aims to be a full-fledged user interface framework for games, editors and other creative projects. A limited set of widgets and layouts are implemented and it may undergo some big changes before the first major release. See examples and stay up-to-date on what classes are available by viewing the docs.
+This project aims to be a full-fledged user interface framework for games, editors and other creative projects. A limited set of widgets and layouts are implemented and it may undergo some big changes before the first major release. See examples and stay up-to-date on what classes are available by viewing the docs and following [@Zachacious](https://twitter.com/Zachacious) on twitter.
 
 * [Roadmap](ROADMAP.md)
 * [Contributing Guidelines](CONTRIBUTING.md)

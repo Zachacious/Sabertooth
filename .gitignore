@@ -65,3 +65,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# release protocol
+ReleaseProtocol.txt

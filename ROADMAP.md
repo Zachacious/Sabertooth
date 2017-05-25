@@ -1,6 +1,8 @@
 # Sabertooth  Project Roadmap
  This is meant to be a rough outline of where we're at and the journey ahead. Feel free to add your own ideas or updates:smile:
 
+ Follow [@Zachacious](https://twitter.com/Zachacious) on twitter to stay up-to-date on the latest.
+
 ~ *All of the below is subject to change because of natural project evolution and depending on who's willing to work on what and when* ~
 
 **v0.3.0**
@@ -49,6 +51,7 @@
 * Full working demos for mobile(Cocoonjs), web, and desktop(Electron)
 
 **v2.0.0**
+* Animations
 * Designer App
 
 ---
@@ -109,3 +112,4 @@
 * Keyboard Input:white_circle:
 * Designer App:white_circle: - Design and create widget layouts visually
 * Demo Project(s):white_circle: - To test desktop and mobile fully
+* Animations:white_circle: - For transitions

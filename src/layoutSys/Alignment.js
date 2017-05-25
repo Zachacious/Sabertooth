@@ -8,6 +8,17 @@ import EventEmitter from 'eventemitter3';
  * its parent.
  * @memberof ST
  * @extends external:EventEmitter
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * widget.layout = new ST.Layouts.VBoxLayout(widget);
+ *
+ * widget.layout.alignment.hAlign = ST.Alignment.right;
+ * widget.layout.alignment.vAlign = ST.Alignment.middle;
  */
 export default class Alignment extends EventEmitter {
     /**
