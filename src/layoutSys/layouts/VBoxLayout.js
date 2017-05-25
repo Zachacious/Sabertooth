@@ -6,6 +6,14 @@ import {VERTICAL} from '../.././const';
  * (Same as box layout with orientation = ST.VERTICAL)
  * @memberof ST.Layouts
  * @extends ST.Layouts.BoxLayout
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * widget.layout = new ST.Layouts.VBoxLayout(widget);
  */
 export default class VBoxLayout extends BoxLayout {
     /**

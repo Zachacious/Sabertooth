@@ -16,6 +16,12 @@ Theme.registerDefaultWidgetStyle('panel', {
  * Panels are simple rectangle widgets that contain other widgets.
  * @memberof ST.Widgets
  * @extends ST.Widgets.BaseWidget
+ *
+ * @example
+ * let widget = new ST.Widgets.Panel(myApp.root, {
+ *  width: 400,
+ *  height: 400,
+ * });
  */
 export default class Panel extends BaseWidget {
     /**
