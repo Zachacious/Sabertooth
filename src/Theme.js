@@ -3,9 +3,29 @@ import GraphicsGen from './GraphicsGen';
 import Point from './Point';
 
  /**
-  * Themes represent colors and font properties used by the ui
+  * Themes represent colors and font properties used by the ui.
+  * @see The example style sheets for reference
   * @memberof ST
   * @extends external:EventEmitter
+  *
+  * @example
+  * // set only on color for panel
+  * let myStyle = {
+  *     widgets:{
+  *         panel: {
+  *             enabled: 0xffffff,
+  *         },
+  *     },
+  * };
+  *
+  * // Will use default styles except for panel.enabled
+  * let thm = new ST.Theme(myStyle);
+  *
+  * // will change the theme for everything parented to root
+  * app.theme = thm;
+  *
+  * // will change theme only for this widget
+  * widget.theme = thm;
   */
   export default class Theme extends EventEmitter {
     /**

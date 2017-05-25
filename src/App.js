@@ -11,6 +11,22 @@ import EventEmitter from 'eventemitter3';
  * @class
  * @memberof ST
  * @extends external:EventEmitter
+ *
+ * @example
+ * let myApp = new ST.App({
+ *  name: 'My Demo App',
+ *  antialiasing: true,
+ * });
+ *
+ * let w = new ST.Widgets.Button(myApp.root, {width: 100, height: 30});
+ *
+ * let main = function() {
+ *  myApp.update();
+ *  requestAnimationFrame(main);
+ * };
+ *
+ * //call main which will initiate the loop
+ * main();
  */
 export default class App extends EventEmitter {
   /**

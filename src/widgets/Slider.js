@@ -45,6 +45,24 @@ settings.add('slider', {
  * A button on a track used to manipulate a variable
  * @extends ST.Widgets.Container
  * @memberof ST.Widgets
+ *
+ * @example
+ * let widget = new ST.Widgets.Slider(myApp.root, {
+ *  width: 300,
+ *  height: 30,
+ *  orientation: ST.Horizontal
+ * });
+ *
+ * widget.minValue = 40;
+ * widget.maxValue = 200;
+ *
+ * // Callback that transforms the return value of the slider.
+ * // Great for rounding the value for example.
+ * widget.valueCB = (val)=>{
+ *  return value--;
+ * };
+ *
+ * console.log(slider.value);
  */
 export default class Slider extends Container {
     /**

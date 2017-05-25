@@ -5,6 +5,9 @@ import BaseWidget from './BaseWidget';
  * A simple text label
  * @memberof ST.Widgets
  * @extends ST.Widgets.BaseWidget
+ *
+ * @example
+ * let widget = new ST.Widgets.Label(myApp.root, {text: 'My Text'});
  */
 export default class Label extends BaseWidget {
     /**

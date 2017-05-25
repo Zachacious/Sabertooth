@@ -7,6 +7,14 @@ import BaseWidget from '../.././widgets/BaseWidget';
  * Arrange out widgets in a straight line in one direction
  * @memberof ST.Layouts
  * @extends ST.Layouts.BaseLayout
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
+ *
+ * widget.layout = new ST.Layouts.BoxLayout(widget, ST.HORIZONTAL);
  */
 export default class BoxLayout extends BaseLayout {
     /**

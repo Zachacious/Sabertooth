@@ -17,6 +17,12 @@ Theme.registerDefaultWidgetStyle('button', {
  * A simple button widget that is the base class for other button types.
  * @extends ST.Widgets.Panel
  * @memberof ST.Widgets
+ *
+ * @example
+ * let widget = new ST.Widgets.Button(myApp.root, {
+ *  width: 100,
+ *  height: 30,
+ * });
  */
 export default class Button extends Panel {
     /**

@@ -5,6 +5,12 @@ import BaseWidget from './BaseWidget';
  * be used for full screen widgets such as the apps root widget.
  * @memberof ST.Widgets
  * @extends ST.Widgets.BaseWidget
+ *
+ * @example
+ * let widget = new ST.Widgets.StageWidget(myApp.root, {
+ *  width: 100,
+ *  height: 300,
+ * });
  */
 export default class StageWidget extends BaseWidget {
     /**

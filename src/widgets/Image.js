@@ -4,6 +4,11 @@ import BaseWidget from './BaseWidget';
  * Wraps PIXI.Sprite and allows images/ textures to become widgets
  * @extends ST.Widgets.BaseWidget
  * @memberof ST.Widgets
+ *
+ * @example
+ * // load texture with PIXI first, then...
+ *
+ * let widget = new ST.Widgets.Image(myApp.root, {texture: myTexture});
  */
 export default class Image extends BaseWidget {
     /**
