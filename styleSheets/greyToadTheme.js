@@ -1,5 +1,5 @@
 greyToadTheme = {
-    background: 0x222222,
+    background: 0x333333,
     widgets: {
         panel: {
             enabled: 0x2b2b2b,

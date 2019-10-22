@@ -113,4 +113,16 @@ DemoApp.prototype.createSliderPanel = function() {
         width: 100,
         height: 30,
     });
+
+    this.b2 = new ST.Widgets.TextButton(this.slPanel, {
+        text: 'Another Button',
+        width: 100,
+        height: 30,
+    });
+
+    this.b3 = new ST.Widgets.TextButton(this.slPanel, {
+        text: 'Button Three',
+        width: 100,
+        height: 100,
+    });
 };
