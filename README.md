@@ -1,12 +1,14 @@
-# Sabertooth
+This was a fun project to build and experiment with. **It is not to be taken seriously.** A QT style UI in JS and WebGL would be too slow and bulky. 
 
-### A hardware accelerated user interface framework for JavaScript.
+My goal was to learn about QT's layout system, create a JS framework from scratch and setup continuous integration and automated testing with travis-ci.
+
+---
+
+## Sabertooth
+
+### A hardware accelerated UI framework for JavaScript.
 Sabertooth is inspired by [QT](https://www.qt.io/), uses super-fast [PIXI.js](https://github.com/pixijs/pixi.js) under-the-hood and renders in webGL with canvas fallback. Widgets are extensions of PIXI.Container and have most of those properties, such as tint, alpha, blending modes and filters(shaders). Custom widgets and custom styling are easily accomplished by sub-classing existing widgets and modifying or creating new style sheets.
 
-This project aims to be a full-fledged user interface framework for games, editors and other creative projects. A limited set of widgets and layouts are implemented and it may undergo some big changes before the first major release. See examples and stay up-to-date on what classes are available by viewing the docs and following [@Zachacious](https://twitter.com/Zachacious) on twitter.
-
-* [Roadmap](ROADMAP.md)
-* [Contributing Guidelines](CONTRIBUTING.md)
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
 [![Build Status](https://travis-ci.org/AbydosDigital/Sabertooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/Sabertooth)
