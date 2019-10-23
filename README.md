@@ -11,8 +11,12 @@ Sabertooth is inspired by [QT](https://www.qt.io/), uses super-fast [PIXI.js](ht
 
 * [Documentation](https://abydosdigital.github.io/Sabertooth/)
 
+(travis ci fails because the project has not been maintained and dependencies are out of date)
 [![Build Status](https://travis-ci.org/AbydosDigital/Sabertooth.svg?branch=master)](https://travis-ci.org/AbydosDigital/Sabertooth)
 [![Inline docs](http://inch-ci.org/github/AbydosDigital/SaberTooth.svg?branch=master)](http://inch-ci.org/github/AbydosDigital/SaberTooth)
+
+![Alt text](/screenshot.jpg?raw=true "Optional Title")
+
 ***
 <!-- ### Goal
 Imagine designing a complex user interface within a designer app and exporting it to your game/app with only a few lines of code to get it up and running. That's the goal, but this is a long-term project and only your support will get us there. Please consider sending a pull request or make a donation via PATREON. -->
